@@ -21,4 +21,6 @@ const zoom = (matrix, zoomFactor) => {
   return result;
 };
 
-printMatrix(zoom([[1, 2], [3, 4]], 4))
+printMatrix(zoom([[1, 2], [3, 4]], 2))
+printMatrix(zoom([[7, 8, 9]], 3))
+printMatrix(zoom([[1], [2]], 3))
