@@ -1,0 +1,952 @@
+{
+  "snapshots": [
+    {
+      "state": {
+        "bars": [
+          {
+            "id": 0,
+            "value": 3
+          },
+          {
+            "id": 1,
+            "value": 1
+          },
+          {
+            "id": 2,
+            "value": 4
+          },
+          {
+            "id": 3,
+            "value": 1
+          },
+          {
+            "id": 4,
+            "value": 5
+          }
+        ],
+        "pivotId": null,
+        "pivotValue": null,
+        "partitionRange": null,
+        "i": null,
+        "j": null,
+        "sortedIds": [],
+        "callStack": [],
+        "phase": "idle"
+      },
+      "label": "init"
+    },
+    {
+      "state": {
+        "bars": [
+          {
+            "id": 0,
+            "value": 3
+          },
+          {
+            "id": 1,
+            "value": 1
+          },
+          {
+            "id": 2,
+            "value": 4
+          },
+          {
+            "id": 3,
+            "value": 1
+          },
+          {
+            "id": 4,
+            "value": 5
+          }
+        ],
+        "pivotId": null,
+        "pivotValue": null,
+        "partitionRange": null,
+        "i": null,
+        "j": null,
+        "sortedIds": [],
+        "callStack": [
+          [
+            0,
+            4
+          ]
+        ],
+        "phase": "idle"
+      },
+      "label": "init ▸ range [0..4]"
+    },
+    {
+      "state": {
+        "bars": [
+          {
+            "id": 0,
+            "value": 3
+          },
+          {
+            "id": 1,
+            "value": 1
+          },
+          {
+            "id": 2,
+            "value": 4
+          },
+          {
+            "id": 3,
+            "value": 1
+          },
+          {
+            "id": 4,
+            "value": 5
+          }
+        ],
+        "pivotId": null,
+        "pivotValue": null,
+        "partitionRange": [
+          0,
+          4
+        ],
+        "i": -1,
+        "j": 0,
+        "sortedIds": [],
+        "callStack": [],
+        "phase": "start-partition"
+      },
+      "label": "partition [0..4]"
+    },
+    {
+      "state": {
+        "bars": [
+          {
+            "id": 0,
+            "value": 3
+          },
+          {
+            "id": 1,
+            "value": 1
+          },
+          {
+            "id": 2,
+            "value": 4
+          },
+          {
+            "id": 3,
+            "value": 1
+          },
+          {
+            "id": 4,
+            "value": 5
+          }
+        ],
+        "pivotId": 4,
+        "pivotValue": 5,
+        "partitionRange": [
+          0,
+          4
+        ],
+        "i": -1,
+        "j": 0,
+        "sortedIds": [],
+        "callStack": [],
+        "phase": "pick-pivot"
+      },
+      "label": "pivot = 5 at 4"
+    },
+    {
+      "state": {
+        "bars": [
+          {
+            "id": 0,
+            "value": 3
+          },
+          {
+            "id": 1,
+            "value": 1
+          },
+          {
+            "id": 2,
+            "value": 4
+          },
+          {
+            "id": 3,
+            "value": 1
+          },
+          {
+            "id": 4,
+            "value": 5
+          }
+        ],
+        "pivotId": 4,
+        "pivotValue": 5,
+        "partitionRange": [
+          0,
+          4
+        ],
+        "i": -1,
+        "j": 0,
+        "sortedIds": [],
+        "callStack": [],
+        "phase": "compare"
+      },
+      "label": "compare 3 vs pivot 5"
+    },
+    {
+      "state": {
+        "bars": [
+          {
+            "id": 0,
+            "value": 3
+          },
+          {
+            "id": 1,
+            "value": 1
+          },
+          {
+            "id": 2,
+            "value": 4
+          },
+          {
+            "id": 3,
+            "value": 1
+          },
+          {
+            "id": 4,
+            "value": 5
+          }
+        ],
+        "pivotId": 4,
+        "pivotValue": 5,
+        "partitionRange": [
+          0,
+          4
+        ],
+        "i": 0,
+        "j": 1,
+        "sortedIds": [],
+        "callStack": [],
+        "phase": "compare"
+      },
+      "label": "compare 1 vs pivot 5"
+    },
+    {
+      "state": {
+        "bars": [
+          {
+            "id": 0,
+            "value": 3
+          },
+          {
+            "id": 1,
+            "value": 1
+          },
+          {
+            "id": 2,
+            "value": 4
+          },
+          {
+            "id": 3,
+            "value": 1
+          },
+          {
+            "id": 4,
+            "value": 5
+          }
+        ],
+        "pivotId": 4,
+        "pivotValue": 5,
+        "partitionRange": [
+          0,
+          4
+        ],
+        "i": 1,
+        "j": 2,
+        "sortedIds": [],
+        "callStack": [],
+        "phase": "compare"
+      },
+      "label": "compare 4 vs pivot 5"
+    },
+    {
+      "state": {
+        "bars": [
+          {
+            "id": 0,
+            "value": 3
+          },
+          {
+            "id": 1,
+            "value": 1
+          },
+          {
+            "id": 2,
+            "value": 4
+          },
+          {
+            "id": 3,
+            "value": 1
+          },
+          {
+            "id": 4,
+            "value": 5
+          }
+        ],
+        "pivotId": 4,
+        "pivotValue": 5,
+        "partitionRange": [
+          0,
+          4
+        ],
+        "i": 2,
+        "j": 3,
+        "sortedIds": [],
+        "callStack": [],
+        "phase": "compare"
+      },
+      "label": "compare 1 vs pivot 5"
+    },
+    {
+      "state": {
+        "bars": [
+          {
+            "id": 0,
+            "value": 3
+          },
+          {
+            "id": 1,
+            "value": 1
+          },
+          {
+            "id": 2,
+            "value": 4
+          },
+          {
+            "id": 3,
+            "value": 1
+          },
+          {
+            "id": 4,
+            "value": 5
+          }
+        ],
+        "pivotId": null,
+        "pivotValue": null,
+        "partitionRange": null,
+        "i": null,
+        "j": null,
+        "sortedIds": [
+          4
+        ],
+        "callStack": [],
+        "phase": "pivot-placed"
+      },
+      "label": "pivot 5 placed at 4"
+    },
+    {
+      "state": {
+        "bars": [
+          {
+            "id": 0,
+            "value": 3
+          },
+          {
+            "id": 1,
+            "value": 1
+          },
+          {
+            "id": 2,
+            "value": 4
+          },
+          {
+            "id": 3,
+            "value": 1
+          },
+          {
+            "id": 4,
+            "value": 5
+          }
+        ],
+        "pivotId": null,
+        "pivotValue": null,
+        "partitionRange": null,
+        "i": null,
+        "j": null,
+        "sortedIds": [
+          4
+        ],
+        "callStack": [
+          [
+            0,
+            3
+          ]
+        ],
+        "phase": "recurse"
+      },
+      "label": "recurse ▸ push [0..3] + ∅"
+    },
+    {
+      "state": {
+        "bars": [
+          {
+            "id": 0,
+            "value": 3
+          },
+          {
+            "id": 1,
+            "value": 1
+          },
+          {
+            "id": 2,
+            "value": 4
+          },
+          {
+            "id": 3,
+            "value": 1
+          },
+          {
+            "id": 4,
+            "value": 5
+          }
+        ],
+        "pivotId": null,
+        "pivotValue": null,
+        "partitionRange": [
+          0,
+          3
+        ],
+        "i": -1,
+        "j": 0,
+        "sortedIds": [
+          4
+        ],
+        "callStack": [],
+        "phase": "start-partition"
+      },
+      "label": "partition [0..3]"
+    },
+    {
+      "state": {
+        "bars": [
+          {
+            "id": 0,
+            "value": 3
+          },
+          {
+            "id": 1,
+            "value": 1
+          },
+          {
+            "id": 2,
+            "value": 4
+          },
+          {
+            "id": 3,
+            "value": 1
+          },
+          {
+            "id": 4,
+            "value": 5
+          }
+        ],
+        "pivotId": 3,
+        "pivotValue": 1,
+        "partitionRange": [
+          0,
+          3
+        ],
+        "i": -1,
+        "j": 0,
+        "sortedIds": [
+          4
+        ],
+        "callStack": [],
+        "phase": "pick-pivot"
+      },
+      "label": "pivot = 1 at 3"
+    },
+    {
+      "state": {
+        "bars": [
+          {
+            "id": 0,
+            "value": 3
+          },
+          {
+            "id": 1,
+            "value": 1
+          },
+          {
+            "id": 2,
+            "value": 4
+          },
+          {
+            "id": 3,
+            "value": 1
+          },
+          {
+            "id": 4,
+            "value": 5
+          }
+        ],
+        "pivotId": 3,
+        "pivotValue": 1,
+        "partitionRange": [
+          0,
+          3
+        ],
+        "i": -1,
+        "j": 0,
+        "sortedIds": [
+          4
+        ],
+        "callStack": [],
+        "phase": "compare"
+      },
+      "label": "compare 3 vs pivot 1"
+    },
+    {
+      "state": {
+        "bars": [
+          {
+            "id": 0,
+            "value": 3
+          },
+          {
+            "id": 1,
+            "value": 1
+          },
+          {
+            "id": 2,
+            "value": 4
+          },
+          {
+            "id": 3,
+            "value": 1
+          },
+          {
+            "id": 4,
+            "value": 5
+          }
+        ],
+        "pivotId": 3,
+        "pivotValue": 1,
+        "partitionRange": [
+          0,
+          3
+        ],
+        "i": -1,
+        "j": 1,
+        "sortedIds": [
+          4
+        ],
+        "callStack": [],
+        "phase": "compare"
+      },
+      "label": "compare 1 vs pivot 1"
+    },
+    {
+      "state": {
+        "bars": [
+          {
+            "id": 0,
+            "value": 3
+          },
+          {
+            "id": 1,
+            "value": 1
+          },
+          {
+            "id": 2,
+            "value": 4
+          },
+          {
+            "id": 3,
+            "value": 1
+          },
+          {
+            "id": 4,
+            "value": 5
+          }
+        ],
+        "pivotId": 3,
+        "pivotValue": 1,
+        "partitionRange": [
+          0,
+          3
+        ],
+        "i": -1,
+        "j": 2,
+        "sortedIds": [
+          4
+        ],
+        "callStack": [],
+        "phase": "compare"
+      },
+      "label": "compare 4 vs pivot 1"
+    },
+    {
+      "state": {
+        "bars": [
+          {
+            "id": 3,
+            "value": 1
+          },
+          {
+            "id": 1,
+            "value": 1
+          },
+          {
+            "id": 2,
+            "value": 4
+          },
+          {
+            "id": 0,
+            "value": 3
+          },
+          {
+            "id": 4,
+            "value": 5
+          }
+        ],
+        "pivotId": null,
+        "pivotValue": null,
+        "partitionRange": null,
+        "i": null,
+        "j": null,
+        "sortedIds": [
+          4,
+          3
+        ],
+        "callStack": [],
+        "phase": "pivot-placed"
+      },
+      "label": "pivot 1 placed at 0"
+    },
+    {
+      "state": {
+        "bars": [
+          {
+            "id": 3,
+            "value": 1
+          },
+          {
+            "id": 1,
+            "value": 1
+          },
+          {
+            "id": 2,
+            "value": 4
+          },
+          {
+            "id": 0,
+            "value": 3
+          },
+          {
+            "id": 4,
+            "value": 5
+          }
+        ],
+        "pivotId": null,
+        "pivotValue": null,
+        "partitionRange": null,
+        "i": null,
+        "j": null,
+        "sortedIds": [
+          4,
+          3
+        ],
+        "callStack": [
+          [
+            1,
+            3
+          ]
+        ],
+        "phase": "recurse"
+      },
+      "label": "recurse ▸ push ∅ + [1..3]"
+    },
+    {
+      "state": {
+        "bars": [
+          {
+            "id": 3,
+            "value": 1
+          },
+          {
+            "id": 1,
+            "value": 1
+          },
+          {
+            "id": 2,
+            "value": 4
+          },
+          {
+            "id": 0,
+            "value": 3
+          },
+          {
+            "id": 4,
+            "value": 5
+          }
+        ],
+        "pivotId": null,
+        "pivotValue": null,
+        "partitionRange": [
+          1,
+          3
+        ],
+        "i": 0,
+        "j": 1,
+        "sortedIds": [
+          4,
+          3
+        ],
+        "callStack": [],
+        "phase": "start-partition"
+      },
+      "label": "partition [1..3]"
+    },
+    {
+      "state": {
+        "bars": [
+          {
+            "id": 3,
+            "value": 1
+          },
+          {
+            "id": 1,
+            "value": 1
+          },
+          {
+            "id": 2,
+            "value": 4
+          },
+          {
+            "id": 0,
+            "value": 3
+          },
+          {
+            "id": 4,
+            "value": 5
+          }
+        ],
+        "pivotId": 0,
+        "pivotValue": 3,
+        "partitionRange": [
+          1,
+          3
+        ],
+        "i": 0,
+        "j": 1,
+        "sortedIds": [
+          4,
+          3
+        ],
+        "callStack": [],
+        "phase": "pick-pivot"
+      },
+      "label": "pivot = 3 at 3"
+    },
+    {
+      "state": {
+        "bars": [
+          {
+            "id": 3,
+            "value": 1
+          },
+          {
+            "id": 1,
+            "value": 1
+          },
+          {
+            "id": 2,
+            "value": 4
+          },
+          {
+            "id": 0,
+            "value": 3
+          },
+          {
+            "id": 4,
+            "value": 5
+          }
+        ],
+        "pivotId": 0,
+        "pivotValue": 3,
+        "partitionRange": [
+          1,
+          3
+        ],
+        "i": 0,
+        "j": 1,
+        "sortedIds": [
+          4,
+          3
+        ],
+        "callStack": [],
+        "phase": "compare"
+      },
+      "label": "compare 1 vs pivot 3"
+    },
+    {
+      "state": {
+        "bars": [
+          {
+            "id": 3,
+            "value": 1
+          },
+          {
+            "id": 1,
+            "value": 1
+          },
+          {
+            "id": 2,
+            "value": 4
+          },
+          {
+            "id": 0,
+            "value": 3
+          },
+          {
+            "id": 4,
+            "value": 5
+          }
+        ],
+        "pivotId": 0,
+        "pivotValue": 3,
+        "partitionRange": [
+          1,
+          3
+        ],
+        "i": 1,
+        "j": 2,
+        "sortedIds": [
+          4,
+          3
+        ],
+        "callStack": [],
+        "phase": "compare"
+      },
+      "label": "compare 4 vs pivot 3"
+    },
+    {
+      "state": {
+        "bars": [
+          {
+            "id": 3,
+            "value": 1
+          },
+          {
+            "id": 1,
+            "value": 1
+          },
+          {
+            "id": 0,
+            "value": 3
+          },
+          {
+            "id": 2,
+            "value": 4
+          },
+          {
+            "id": 4,
+            "value": 5
+          }
+        ],
+        "pivotId": null,
+        "pivotValue": null,
+        "partitionRange": null,
+        "i": null,
+        "j": null,
+        "sortedIds": [
+          4,
+          3,
+          0
+        ],
+        "callStack": [],
+        "phase": "pivot-placed"
+      },
+      "label": "pivot 3 placed at 2"
+    },
+    {
+      "state": {
+        "bars": [
+          {
+            "id": 3,
+            "value": 1
+          },
+          {
+            "id": 1,
+            "value": 1
+          },
+          {
+            "id": 0,
+            "value": 3
+          },
+          {
+            "id": 2,
+            "value": 4
+          },
+          {
+            "id": 4,
+            "value": 5
+          }
+        ],
+        "pivotId": null,
+        "pivotValue": null,
+        "partitionRange": null,
+        "i": null,
+        "j": null,
+        "sortedIds": [
+          4,
+          3,
+          0,
+          1,
+          2
+        ],
+        "callStack": [],
+        "phase": "recurse"
+      },
+      "label": "recurse ▸ push ∅ + ∅"
+    },
+    {
+      "state": {
+        "bars": [
+          {
+            "id": 3,
+            "value": 1
+          },
+          {
+            "id": 1,
+            "value": 1
+          },
+          {
+            "id": 0,
+            "value": 3
+          },
+          {
+            "id": 2,
+            "value": 4
+          },
+          {
+            "id": 4,
+            "value": 5
+          }
+        ],
+        "pivotId": null,
+        "pivotValue": null,
+        "partitionRange": null,
+        "i": null,
+        "j": null,
+        "sortedIds": [
+          4,
+          3,
+          0,
+          1,
+          2
+        ],
+        "callStack": [],
+        "phase": "done"
+      },
+      "label": "sorted"
+    }
+  ]
+}

@@ -399,3 +399,18 @@ select:hover {
   background: var(--accent);
   box-shadow: inset 0 -6px 0 rgba(0, 0, 0, 0.15), 0 0 14px var(--accent);
 }
+
+.bar--sorted {
+  background: var(--bar-sorted);
+  box-shadow: inset 0 -6px 0 rgba(0, 0, 0, 0.15), 0 0 8px rgba(80, 250, 123, 0.4);
+}
+
+.bar--pivot {
+  background: var(--accent);
+  box-shadow: inset 0 -6px 0 rgba(0, 0, 0, 0.2), 0 0 14px var(--accent);
+}
+
+.bar--scan {
+  background: var(--bar-compare);
+  box-shadow: inset 0 -6px 0 rgba(0, 0, 0, 0.2), 0 0 10px var(--bar-compare);
+}
