@@ -1,0 +1,36 @@
+---
+import "../styles/global.css";
+import { challenges } from "../lib/challenges";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>code challenges</title>
+  </head>
+  <body>
+    <main class="layout">
+      <header class="header">
+        <div class="header__brand">code<span>::</span>challenges</div>
+        <p class="muted" style="margin: 0.5rem 0 0 0; font-size: 1.1rem;">
+          ▸ weekly challenges, visualized step-by-step.
+        </p>
+      </header>
+
+      <div>
+        <div class="subtitle">▸ available challenges</div>
+        <ul class="challenge-list">
+          {challenges.map((c) => (
+            <li class="challenge-list__item">
+              <a href={`/challenges/${c.slug}`}>
+                <h2>{c.title}</h2>
+                <p>{c.description}</p>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </main>
+  </body>
+</html>

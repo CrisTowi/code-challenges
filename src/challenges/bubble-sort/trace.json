@@ -1,0 +1,573 @@
+{
+  "snapshots": [
+    {
+      "state": {
+        "bars": [
+          {
+            "id": 0,
+            "value": 3
+          },
+          {
+            "id": 1,
+            "value": 1
+          },
+          {
+            "id": 2,
+            "value": 4
+          },
+          {
+            "id": 3,
+            "value": 1
+          },
+          {
+            "id": 4,
+            "value": 5
+          }
+        ],
+        "i": 0,
+        "j": 0,
+        "comparing": null,
+        "swapped": false
+      },
+      "label": "init"
+    },
+    {
+      "state": {
+        "bars": [
+          {
+            "id": 0,
+            "value": 3
+          },
+          {
+            "id": 1,
+            "value": 1
+          },
+          {
+            "id": 2,
+            "value": 4
+          },
+          {
+            "id": 3,
+            "value": 1
+          },
+          {
+            "id": 4,
+            "value": 5
+          }
+        ],
+        "i": 0,
+        "j": 0,
+        "comparing": null,
+        "swapped": false
+      },
+      "label": "pass 1 ▸ start"
+    },
+    {
+      "state": {
+        "bars": [
+          {
+            "id": 0,
+            "value": 3
+          },
+          {
+            "id": 1,
+            "value": 1
+          },
+          {
+            "id": 2,
+            "value": 4
+          },
+          {
+            "id": 3,
+            "value": 1
+          },
+          {
+            "id": 4,
+            "value": 5
+          }
+        ],
+        "i": 0,
+        "j": 0,
+        "comparing": [
+          0,
+          1
+        ],
+        "swapped": false
+      },
+      "label": "compare"
+    },
+    {
+      "state": {
+        "bars": [
+          {
+            "id": 1,
+            "value": 1
+          },
+          {
+            "id": 0,
+            "value": 3
+          },
+          {
+            "id": 2,
+            "value": 4
+          },
+          {
+            "id": 3,
+            "value": 1
+          },
+          {
+            "id": 4,
+            "value": 5
+          }
+        ],
+        "i": 0,
+        "j": 0,
+        "comparing": [
+          0,
+          1
+        ],
+        "swapped": true
+      },
+      "label": "swap"
+    },
+    {
+      "state": {
+        "bars": [
+          {
+            "id": 1,
+            "value": 1
+          },
+          {
+            "id": 0,
+            "value": 3
+          },
+          {
+            "id": 2,
+            "value": 4
+          },
+          {
+            "id": 3,
+            "value": 1
+          },
+          {
+            "id": 4,
+            "value": 5
+          }
+        ],
+        "i": 0,
+        "j": 1,
+        "comparing": [
+          1,
+          2
+        ],
+        "swapped": true
+      },
+      "label": "compare"
+    },
+    {
+      "state": {
+        "bars": [
+          {
+            "id": 1,
+            "value": 1
+          },
+          {
+            "id": 0,
+            "value": 3
+          },
+          {
+            "id": 2,
+            "value": 4
+          },
+          {
+            "id": 3,
+            "value": 1
+          },
+          {
+            "id": 4,
+            "value": 5
+          }
+        ],
+        "i": 0,
+        "j": 2,
+        "comparing": [
+          2,
+          3
+        ],
+        "swapped": true
+      },
+      "label": "compare"
+    },
+    {
+      "state": {
+        "bars": [
+          {
+            "id": 1,
+            "value": 1
+          },
+          {
+            "id": 0,
+            "value": 3
+          },
+          {
+            "id": 3,
+            "value": 1
+          },
+          {
+            "id": 2,
+            "value": 4
+          },
+          {
+            "id": 4,
+            "value": 5
+          }
+        ],
+        "i": 0,
+        "j": 2,
+        "comparing": [
+          2,
+          3
+        ],
+        "swapped": true
+      },
+      "label": "swap"
+    },
+    {
+      "state": {
+        "bars": [
+          {
+            "id": 1,
+            "value": 1
+          },
+          {
+            "id": 0,
+            "value": 3
+          },
+          {
+            "id": 3,
+            "value": 1
+          },
+          {
+            "id": 2,
+            "value": 4
+          },
+          {
+            "id": 4,
+            "value": 5
+          }
+        ],
+        "i": 0,
+        "j": 3,
+        "comparing": [
+          3,
+          4
+        ],
+        "swapped": true
+      },
+      "label": "compare"
+    },
+    {
+      "state": {
+        "bars": [
+          {
+            "id": 1,
+            "value": 1
+          },
+          {
+            "id": 0,
+            "value": 3
+          },
+          {
+            "id": 3,
+            "value": 1
+          },
+          {
+            "id": 2,
+            "value": 4
+          },
+          {
+            "id": 4,
+            "value": 5
+          }
+        ],
+        "i": 1,
+        "j": 3,
+        "comparing": [
+          3,
+          4
+        ],
+        "swapped": false
+      },
+      "label": "pass 2 ▸ start"
+    },
+    {
+      "state": {
+        "bars": [
+          {
+            "id": 1,
+            "value": 1
+          },
+          {
+            "id": 0,
+            "value": 3
+          },
+          {
+            "id": 3,
+            "value": 1
+          },
+          {
+            "id": 2,
+            "value": 4
+          },
+          {
+            "id": 4,
+            "value": 5
+          }
+        ],
+        "i": 1,
+        "j": 0,
+        "comparing": [
+          0,
+          1
+        ],
+        "swapped": false
+      },
+      "label": "compare"
+    },
+    {
+      "state": {
+        "bars": [
+          {
+            "id": 1,
+            "value": 1
+          },
+          {
+            "id": 0,
+            "value": 3
+          },
+          {
+            "id": 3,
+            "value": 1
+          },
+          {
+            "id": 2,
+            "value": 4
+          },
+          {
+            "id": 4,
+            "value": 5
+          }
+        ],
+        "i": 1,
+        "j": 1,
+        "comparing": [
+          1,
+          2
+        ],
+        "swapped": false
+      },
+      "label": "compare"
+    },
+    {
+      "state": {
+        "bars": [
+          {
+            "id": 1,
+            "value": 1
+          },
+          {
+            "id": 3,
+            "value": 1
+          },
+          {
+            "id": 0,
+            "value": 3
+          },
+          {
+            "id": 2,
+            "value": 4
+          },
+          {
+            "id": 4,
+            "value": 5
+          }
+        ],
+        "i": 1,
+        "j": 1,
+        "comparing": [
+          1,
+          2
+        ],
+        "swapped": true
+      },
+      "label": "swap"
+    },
+    {
+      "state": {
+        "bars": [
+          {
+            "id": 1,
+            "value": 1
+          },
+          {
+            "id": 3,
+            "value": 1
+          },
+          {
+            "id": 0,
+            "value": 3
+          },
+          {
+            "id": 2,
+            "value": 4
+          },
+          {
+            "id": 4,
+            "value": 5
+          }
+        ],
+        "i": 1,
+        "j": 2,
+        "comparing": [
+          2,
+          3
+        ],
+        "swapped": true
+      },
+      "label": "compare"
+    },
+    {
+      "state": {
+        "bars": [
+          {
+            "id": 1,
+            "value": 1
+          },
+          {
+            "id": 3,
+            "value": 1
+          },
+          {
+            "id": 0,
+            "value": 3
+          },
+          {
+            "id": 2,
+            "value": 4
+          },
+          {
+            "id": 4,
+            "value": 5
+          }
+        ],
+        "i": 2,
+        "j": 2,
+        "comparing": [
+          2,
+          3
+        ],
+        "swapped": false
+      },
+      "label": "pass 3 ▸ start"
+    },
+    {
+      "state": {
+        "bars": [
+          {
+            "id": 1,
+            "value": 1
+          },
+          {
+            "id": 3,
+            "value": 1
+          },
+          {
+            "id": 0,
+            "value": 3
+          },
+          {
+            "id": 2,
+            "value": 4
+          },
+          {
+            "id": 4,
+            "value": 5
+          }
+        ],
+        "i": 2,
+        "j": 0,
+        "comparing": [
+          0,
+          1
+        ],
+        "swapped": false
+      },
+      "label": "compare"
+    },
+    {
+      "state": {
+        "bars": [
+          {
+            "id": 1,
+            "value": 1
+          },
+          {
+            "id": 3,
+            "value": 1
+          },
+          {
+            "id": 0,
+            "value": 3
+          },
+          {
+            "id": 2,
+            "value": 4
+          },
+          {
+            "id": 4,
+            "value": 5
+          }
+        ],
+        "i": 2,
+        "j": 1,
+        "comparing": [
+          1,
+          2
+        ],
+        "swapped": false
+      },
+      "label": "compare"
+    },
+    {
+      "state": {
+        "bars": [
+          {
+            "id": 1,
+            "value": 1
+          },
+          {
+            "id": 3,
+            "value": 1
+          },
+          {
+            "id": 0,
+            "value": 3
+          },
+          {
+            "id": 2,
+            "value": 4
+          },
+          {
+            "id": 4,
+            "value": 5
+          }
+        ],
+        "i": 2,
+        "j": 1,
+        "comparing": null,
+        "swapped": false
+      },
+      "label": "no swaps ▸ sorted early"
+    }
+  ]
+}

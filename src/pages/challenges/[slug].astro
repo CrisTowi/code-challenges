@@ -1,0 +1,43 @@
+---
+import "../../styles/global.css";
+import { challenges } from "../../lib/challenges";
+import { Player } from "@framework/Player";
+
+export function getStaticPaths() {
+  return challenges.map((c) => ({
+    params: { slug: c.slug },
+    props: { challenge: c },
+  }));
+}
+
+const { challenge } = Astro.props;
+const { slug, title, description, examples, trace } = challenge;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title} — code::challenges</title>
+  </head>
+  <body>
+    <main class="layout">
+      <header class="header">
+        <div class="header__brand">
+          <a href="/" style="border-bottom: none; color: inherit;">code<span>::</span>challenges</a>
+        </div>
+      </header>
+
+      <div class="subtitle">▸ now playing</div>
+      <h1>{title}</h1>
+      <p class="muted" style="margin: 0 0 1.5rem 0;">{description}</p>
+
+      <Player
+        client:only="react"
+        slug={slug}
+        initialTrace={trace}
+        examples={examples}
+      />
+    </main>
+  </body>
+</html>
