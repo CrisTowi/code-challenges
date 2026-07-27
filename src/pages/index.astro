@@ -1,6 +1,8 @@
 ---
 import "../styles/global.css";
 import { challenges } from "../lib/challenges";
+
+const base = import.meta.env.BASE_URL;
 ---
 
 <html lang="en">
@@ -23,7 +25,7 @@ import { challenges } from "../lib/challenges";
         <ul class="challenge-list">
           {challenges.map((c) => (
             <li class="challenge-list__item">
-              <a href={`/challenges/${c.slug}`}>
+              <a href={`${base}challenges/${c.slug}/`}>
                 <h2>{c.title}</h2>
                 <p>{c.description}</p>
               </a>
