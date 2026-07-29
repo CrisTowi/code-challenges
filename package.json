@@ -9,6 +9,7 @@
     "build": "npm run build:traces && astro build",
     "build:traces": "tsx scripts/build-traces.ts",
     "new": "tsx scripts/new-challenge.ts",
+    "debug": "tsx scripts/debug.ts",
     "preview": "astro preview",
     "astro": "astro",
     "typecheck": "tsc --noEmit"

@@ -109,17 +109,28 @@ export { ${pascal}, ${pascal}Scene, examples };
 export type { ${pascal}Input, ${pascal}State };
 `;
 
+const debugInputs = `import type { ${pascal}Input } from "./algorithm";
+
+export const customInputs: Record<string, ${pascal}Input> = {
+  // TODO: add your test inputs here, e.g.
+  //   empty: { /* ... */ } as ${pascal}Input,
+  //   small: { /* ... */ } as ${pascal}Input,
+};
+`;
+
 writeFileSync(join(dir, "algorithm.ts"), algorithm);
 writeFileSync(join(dir, "scene.tsx"), scene);
 writeFileSync(join(dir, "examples.ts"), examples);
 writeFileSync(join(dir, "index.ts"), index);
+writeFileSync(join(dir, "debug-inputs.ts"), debugInputs);
 
 console.log(`✓ Created src/challenges/${slug}/`);
 console.log("");
 console.log("Next steps:");
 console.log(`  1. Edit algorithm.ts — define Input/State, implement run()`);
-console.log(`  2. Edit examples.ts — add 2–4 named inputs`);
-console.log(`  3. Edit index.ts — change title and description`);
-console.log(`  4. Run: npm run build:traces`);
-console.log(`  5. Run: npm run dev  (visit /challenges/${slug}/)`);
-console.log(`  6. Then come back for help with the visualization`);
+console.log(`  2. Edit debug-inputs.ts — add test inputs (npm run debug ${slug})`);
+console.log(`  3. Edit examples.ts — pick 2–4 for the challenge page`);
+console.log(`  4. Edit index.ts — change title and description`);
+console.log(`  5. Run: npm run build:traces`);
+console.log(`  6. Run: npm run dev  (visit /challenges/${slug}/)`);
+console.log(`  7. Then come back for help with the visualization`);
