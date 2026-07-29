@@ -64,10 +64,20 @@ if (input === undefined) {
 }
 
 const algo = new mod.challenge.Algorithm(input);
-algo.run();
+const result = algo.run();
 const trace = algo.getTrace();
 
-console.log(`\n${slug} › ${inputName} — ${trace.snapshots.length} snapshots\n`);
+console.log(`\n${slug} › ${inputName}`);
+
+console.log(`\ninput:`);
+console.log(JSON.stringify(input, null, 2));
+
+if (result !== undefined) {
+  console.log(`\nreturn:`);
+  console.log(JSON.stringify(result, null, 2));
+}
+
+console.log(`\n${trace.snapshots.length} snapshots:\n`);
 for (const [i, snap] of trace.snapshots.entries()) {
   const label = snap.label ?? "(no label)";
   console.log(`[${String(i).padStart(2, "0")}] ${label}`);
