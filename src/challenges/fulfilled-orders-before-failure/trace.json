@@ -1,0 +1,84 @@
+{
+  "snapshots": [
+    {
+      "state": {
+        "orders": [
+          [
+            "chocolate"
+          ],
+          [
+            "chocolate"
+          ],
+          [
+            "chocolate"
+          ]
+        ],
+        "freezerStock": {
+          "chocolate": 2
+        },
+        "fulfilledOrders": 0
+      },
+      "label": "init"
+    },
+    {
+      "state": {
+        "orders": [
+          [
+            "chocolate"
+          ],
+          [
+            "chocolate"
+          ],
+          [
+            "chocolate"
+          ]
+        ],
+        "freezerStock": {
+          "chocolate": 1
+        },
+        "fulfilledOrders": 1
+      },
+      "label": "foundIngredient"
+    },
+    {
+      "state": {
+        "orders": [
+          [
+            "chocolate"
+          ],
+          [
+            "chocolate"
+          ],
+          [
+            "chocolate"
+          ]
+        ],
+        "freezerStock": {
+          "chocolate": 0
+        },
+        "fulfilledOrders": 2
+      },
+      "label": "foundIngredient"
+    },
+    {
+      "state": {
+        "orders": [
+          [
+            "chocolate"
+          ],
+          [
+            "chocolate"
+          ],
+          [
+            "chocolate"
+          ]
+        ],
+        "freezerStock": {
+          "chocolate": 0
+        },
+        "fulfilledOrders": 2
+      },
+      "label": "noMoreIngredients"
+    }
+  ]
+}

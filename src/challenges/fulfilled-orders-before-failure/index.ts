@@ -8,7 +8,7 @@ export const challenge: Challenge<FulfilledOrdersBeforeFailureInput, FulfilledOr
   meta: {
     slug: "fulfilled-orders-before-failure",
     title: "Fulfilled Orders Before Failure",
-    description: "TODO: describe this challenge in one sentence.",
+    description: "Process an order queue against a freezer of flavors. Each order consumes one of each listed flavor; the first order that asks for an empty slot stops the line.",
   },
   examples,
   Algorithm: FulfilledOrdersBeforeFailure,
