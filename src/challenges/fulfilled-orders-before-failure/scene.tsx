@@ -46,6 +46,26 @@ function Cone({ flavors, status }: ConeProps) {
         transition: "opacity 250ms ease, filter 250ms ease",
       }}
     >
+      <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: stackHeight }}>
+        {flavors.map((flavor, idx) => (
+          <div
+            key={idx}
+            style={{
+              position: "absolute",
+              top: `${idx * (SCOOP_SIZE - SCOOP_GAP)}px`,
+              left: "50%",
+              transform: "translateX(-50%)",
+              width: SCOOP_SIZE,
+              height: SCOOP_SIZE,
+              borderRadius: "50%",
+              background: flavorColor(flavor),
+              border: "2px solid #000",
+              boxShadow: "inset 0 -5px 0 rgba(0,0,0,0.2)",
+            }}
+          />
+        ))}
+      </div>
+
       <div
         style={{
           position: "absolute",
@@ -84,26 +104,6 @@ function Cone({ flavors, status }: ConeProps) {
             opacity: 0.4,
           }}
         />
-      </div>
-
-      <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: stackHeight }}>
-        {flavors.map((flavor, idx) => (
-          <div
-            key={idx}
-            style={{
-              position: "absolute",
-              top: `${idx * (SCOOP_SIZE - SCOOP_GAP)}px`,
-              left: "50%",
-              transform: "translateX(-50%)",
-              width: SCOOP_SIZE,
-              height: SCOOP_SIZE,
-              borderRadius: "50%",
-              background: flavorColor(flavor),
-              border: "2px solid #000",
-              boxShadow: "inset 0 -5px 0 rgba(0,0,0,0.2)",
-            }}
-          />
-        ))}
       </div>
 
       {status === "fulfilled" && (
