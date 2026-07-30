@@ -1,8 +1,10 @@
 import { TracedAlgorithm } from "@framework";
 
-export interface BubbleSortInput {
+export interface NumbersInput {
   numbers: number[];
 }
+
+export type BubbleSortInput = NumbersInput;
 
 export interface Bar {
   id: number;

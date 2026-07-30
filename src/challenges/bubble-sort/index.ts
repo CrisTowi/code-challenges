@@ -3,6 +3,7 @@ import type { Challenge, Trace } from "@framework";
 import { BubbleSort, type BubbleSortInput, type BubbleSortState } from "./algorithm";
 import { BubbleSortScene } from "./scene";
 import { bubbleSortExamples } from "./examples";
+import { customInputs } from "./debug-inputs";
 
 const MAX_ITEMS = 20;
 
@@ -39,11 +40,13 @@ export const challenge: Challenge<BubbleSortInput, BubbleSortState> = {
   Scene: BubbleSortScene,
   parseInput,
   inputPlaceholder: "e.g. 5,3,8,1,4,9,2",
+  customInputs,
+  formatInput: (input) => input.numbers.join(","),
 };
+
+export { BubbleSort, BubbleSortScene, bubbleSortExamples, customInputs };
+export type { BubbleSortInput, BubbleSortState };
 
 export function runDefault(): Trace<BubbleSortState> {
   return runAndTrace(BubbleSort, bubbleSortExamples[0].input);
 }
-
-export { BubbleSort, BubbleSortScene, bubbleSortExamples };
-export type { BubbleSortInput, BubbleSortState };

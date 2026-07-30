@@ -3,6 +3,7 @@ import type { Challenge, Trace } from "@framework";
 import { QuickSort, type QuickSortInput, type QuickSortState } from "./algorithm";
 import { QuickSortScene } from "./scene";
 import { quickSortExamples } from "./examples";
+import { customInputs } from "./debug-inputs";
 
 const MAX_ITEMS = 20;
 
@@ -39,11 +40,13 @@ export const challenge: Challenge<QuickSortInput, QuickSortState> = {
   Scene: QuickSortScene,
   parseInput,
   inputPlaceholder: "e.g. 5,3,8,1,4,9,2",
+  customInputs,
+  formatInput: (input) => input.numbers.join(","),
 };
+
+export { QuickSort, QuickSortScene, quickSortExamples, customInputs };
+export type { QuickSortInput, QuickSortState };
 
 export function runDefault(): Trace<QuickSortState> {
   return runAndTrace(QuickSort, quickSortExamples[0].input);
 }
-
-export { QuickSort, QuickSortScene, quickSortExamples };
-export type { QuickSortInput, QuickSortState };

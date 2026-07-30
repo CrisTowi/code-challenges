@@ -8,6 +8,8 @@ type ChallengeModule = {
     Algorithm: new (input: unknown) => { run: () => void; getTrace: () => Trace<unknown> };
     parseInput?: (raw: string) => unknown | { error: string };
     inputPlaceholder?: string;
+    customInputs?: Record<string, { input: unknown; description?: string }>;
+    formatInput?: (input: unknown) => string;
   };
 };
 
@@ -25,6 +27,8 @@ export function Player({ slug, initialTrace, examples }: PlayerProps) {
   const [Algorithm, setAlgorithm] = useState<ChallengeModule["challenge"]["Algorithm"] | null>(null);
   const [parseInput, setParseInput] = useState<ChallengeModule["challenge"]["parseInput"] | undefined>(undefined);
   const [inputPlaceholder, setInputPlaceholder] = useState<string>("");
+  const [customInputs, setCustomInputs] = useState<ChallengeModule["challenge"]["customInputs"]>(undefined);
+  const [formatInput, setFormatInput] = useState<ChallengeModule["challenge"]["formatInput"]>(undefined);
   const [index, setIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [speed, setSpeed] = useState(1);
@@ -47,6 +51,8 @@ export function Player({ slug, initialTrace, examples }: PlayerProps) {
         setAlgorithm(() => mod.challenge.Algorithm);
         setParseInput(() => mod.challenge.parseInput);
         setInputPlaceholder(mod.challenge.inputPlaceholder ?? "");
+        setCustomInputs(mod.challenge.customInputs);
+        setFormatInput(() => mod.challenge.formatInput);
       })
       .catch((err) => {
         console.error(`Player: failed to load ${modulePath}`, err);
@@ -121,6 +127,20 @@ export function Player({ slug, initialTrace, examples }: PlayerProps) {
     setIsPlaying(false);
     setSelectedExample("");
   }, [Algorithm, parseInput, customRaw]);
+
+  const runCustomInput = useCallback((input: unknown, name: string) => {
+    if (!Algorithm) return;
+    const algo = new Algorithm(input);
+    algo.run();
+    setTrace(algo.getTrace());
+    setIndex(0);
+    setIsPlaying(false);
+    setSelectedExample("");
+    setCustomError(null);
+    if (formatInput) {
+      setCustomRaw(formatInput(input));
+    }
+  }, [Algorithm, formatInput]);
 
   if (!Scene) {
     return (
@@ -225,6 +245,25 @@ export function Player({ slug, initialTrace, examples }: PlayerProps) {
               >
                 {regenerating ? "▸▸▸ running" : "▸ run level"}
               </button>
+            </div>
+          </>
+        )}
+
+        {customInputs && Object.keys(customInputs).length > 0 && Algorithm && (
+          <>
+            <div className="subtitle">▸ quick inputs</div>
+            <div className="levels">
+              {Object.entries(customInputs).map(([name, entry]) => (
+                <button
+                  key={name}
+                  className="levels__item"
+                  onClick={() => runCustomInput(entry.input, name)}
+                  title={formatInput ? formatInput(entry.input) : name}
+                >
+                  <span className="levels__name">{name}</span>
+                  {entry.description && <span className="levels__desc">{entry.description}</span>}
+                </button>
+              ))}
             </div>
           </>
         )}

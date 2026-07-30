@@ -4,6 +4,8 @@ import { FulfilledOrdersBeforeFailure, type FulfilledOrdersBeforeFailureInput, t
 import { FulfilledOrdersBeforeFailureScene } from "./scene";
 import { examples } from "./examples";
 
+import { customInputs } from "./debug-inputs";
+
 export const challenge: Challenge<FulfilledOrdersBeforeFailureInput, FulfilledOrdersBeforeFailureState> = {
   meta: {
     slug: "fulfilled-orders-before-failure",
@@ -13,11 +15,12 @@ export const challenge: Challenge<FulfilledOrdersBeforeFailureInput, FulfilledOr
   examples,
   Algorithm: FulfilledOrdersBeforeFailure,
   Scene: FulfilledOrdersBeforeFailureScene,
+  customInputs,
 };
 
 export function runDefault(): Trace<FulfilledOrdersBeforeFailureState> {
   return runAndTrace(FulfilledOrdersBeforeFailure, examples[0].input);
 }
 
-export { FulfilledOrdersBeforeFailure, FulfilledOrdersBeforeFailureScene, examples };
+export { FulfilledOrdersBeforeFailure, FulfilledOrdersBeforeFailureScene, examples, customInputs };
 export type { FulfilledOrdersBeforeFailureInput, FulfilledOrdersBeforeFailureState };

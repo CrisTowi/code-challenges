@@ -34,6 +34,8 @@ export interface Challenge<I, S, O = void> {
   Scene: React.ComponentType<SceneProps<S>>;
   parseInput?: (raw: string) => I | { error: string };
   inputPlaceholder?: string;
+  customInputs?: Record<string, { input: I; description?: string }>;
+  formatInput?: (input: I) => string;
 }
 
 export type AnyChallenge = Challenge<unknown, unknown, unknown>;
