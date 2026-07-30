@@ -59,3 +59,51 @@ export function valueToFrequency(value: number, min: number, max: number): numbe
 export function playNoteForValue(value: number, min: number, max: number) {
   playTone(valueToFrequency(value, min, max));
 }
+
+export function playSuccess() {
+  if (muted) return;
+  const audio = getAudioContext();
+  if (audio.state === "suspended") {
+    void audio.resume();
+  }
+  const now = audio.currentTime;
+  const notes = [523.25, 659.25, 783.99];
+  notes.forEach((freq, i) => {
+    const osc = audio.createOscillator();
+    const gain = audio.createGain();
+    osc.type = "triangle";
+    osc.frequency.value = freq;
+    const start = now + i * 0.06;
+    gain.gain.setValueAtTime(0, start);
+    gain.gain.linearRampToValueAtTime(0.08, start + 0.01);
+    gain.gain.exponentialRampToValueAtTime(0.001, start + 0.18);
+    osc.connect(gain);
+    gain.connect(audio.destination);
+    osc.start(start);
+    osc.stop(start + 0.22);
+  });
+}
+
+export function playFailure() {
+  if (muted) return;
+  const audio = getAudioContext();
+  if (audio.state === "suspended") {
+    void audio.resume();
+  }
+  const now = audio.currentTime;
+  const notes = [392.0, 329.63, 261.63];
+  notes.forEach((freq, i) => {
+    const osc = audio.createOscillator();
+    const gain = audio.createGain();
+    osc.type = "sawtooth";
+    osc.frequency.value = freq;
+    const start = now + i * 0.12;
+    gain.gain.setValueAtTime(0, start);
+    gain.gain.linearRampToValueAtTime(0.06, start + 0.01);
+    gain.gain.exponentialRampToValueAtTime(0.001, start + 0.3);
+    osc.connect(gain);
+    gain.connect(audio.destination);
+    osc.start(start);
+    osc.stop(start + 0.35);
+  });
+}

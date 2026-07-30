@@ -1,4 +1,6 @@
+import { useEffect } from "react";
 import type { Snapshot } from "@framework";
+import { playSuccess, playFailure, ensureAudioRunning } from "@framework/audio";
 import type { FulfilledOrdersBeforeFailureState } from "./algorithm";
 
 const FLAVOR_COLORS: Record<string, string> = {
@@ -13,9 +15,10 @@ const FLAVOR_COLORS: Record<string, string> = {
 const DEFAULT_FLAVOR_COLOR = "#bd93f9";
 
 const SCOOP_SIZE = 36;
-const SCOOP_GAP = 8;
+const SCOOP_GAP = 6;
 const CONE_WIDTH = 64;
 const CONE_HEIGHT = 48;
+const CONE_OVERLAP = 12;
 
 const flavorColor = (flavor: string) => FLAVOR_COLORS[flavor] ?? DEFAULT_FLAVOR_COLOR;
 
@@ -27,15 +30,9 @@ interface ConeProps {
 }
 
 function Cone({ flavors, status }: ConeProps) {
-  const stackHeight = flavors.length * (SCOOP_SIZE - SCOOP_GAP) + SCOOP_SIZE;
-  const totalHeight = stackHeight + CONE_HEIGHT;
+  const stackHeight = (flavors.length - 1) * (SCOOP_SIZE - SCOOP_GAP) + SCOOP_SIZE;
+  const totalHeight = stackHeight + CONE_HEIGHT - CONE_OVERLAP;
 
-  const borderColor =
-    status === "fulfilled"
-      ? "var(--sorted)"
-      : status === "failed"
-        ? "var(--bar-compare)"
-        : "var(--border)";
   const opacity = status === "pending" ? 0.5 : status === "failed" ? 0.55 : 1;
 
   return (
@@ -49,26 +46,6 @@ function Cone({ flavors, status }: ConeProps) {
         transition: "opacity 250ms ease, filter 250ms ease",
       }}
     >
-      <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: stackHeight }}>
-        {flavors.map((flavor, idx) => (
-          <div
-            key={idx}
-            style={{
-              position: "absolute",
-              top: `${idx * (SCOOP_SIZE - SCOOP_GAP)}px`,
-              left: "50%",
-              transform: "translateX(-50%)",
-              width: SCOOP_SIZE,
-              height: SCOOP_SIZE,
-              borderRadius: "50%",
-              background: flavorColor(flavor),
-              border: "2px solid #000",
-              boxShadow: "inset 0 -5px 0 rgba(0,0,0,0.2)",
-            }}
-          />
-        ))}
-      </div>
-
       <div
         style={{
           position: "absolute",
@@ -109,6 +86,26 @@ function Cone({ flavors, status }: ConeProps) {
         />
       </div>
 
+      <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: stackHeight }}>
+        {flavors.map((flavor, idx) => (
+          <div
+            key={idx}
+            style={{
+              position: "absolute",
+              top: `${idx * (SCOOP_SIZE - SCOOP_GAP)}px`,
+              left: "50%",
+              transform: "translateX(-50%)",
+              width: SCOOP_SIZE,
+              height: SCOOP_SIZE,
+              borderRadius: "50%",
+              background: flavorColor(flavor),
+              border: "2px solid #000",
+              boxShadow: "inset 0 -5px 0 rgba(0,0,0,0.2)",
+            }}
+          />
+        ))}
+      </div>
+
       {status === "fulfilled" && (
         <div
           style={{
@@ -117,6 +114,7 @@ function Cone({ flavors, status }: ConeProps) {
             right: -10,
             width: 26,
             height: 26,
+            borderRadius: "50%",
             background: "var(--sorted)",
             color: "#000",
             display: "flex",
@@ -139,6 +137,7 @@ function Cone({ flavors, status }: ConeProps) {
             right: -10,
             width: 26,
             height: 26,
+            borderRadius: "50%",
             background: "var(--bar-compare)",
             color: "#000",
             display: "flex",
@@ -164,6 +163,16 @@ export function FulfilledOrdersBeforeFailureScene({
 }) {
   const { fulfilledOrders, orders, freezerStock } = snapshot.state;
   const isFail = snapshot.label === "noMoreIngredients";
+
+  useEffect(() => {
+    if (snapshot.label === "foundIngredient") {
+      void ensureAudioRunning();
+      playSuccess();
+    } else if (snapshot.label === "noMoreIngredients") {
+      void ensureAudioRunning();
+      playFailure();
+    }
+  }, [snapshot]);
 
   const flavors = Object.keys(freezerStock).sort();
 

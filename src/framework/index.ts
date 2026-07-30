@@ -5,6 +5,8 @@ export {
   isMuted,
   playNoteForValue,
   playTone,
+  playSuccess,
+  playFailure,
   valueToFrequency,
 } from "./audio";
 export type {
