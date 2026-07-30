@@ -46,112 +46,126 @@ function Cone({ flavors, status }: ConeProps) {
         transition: "opacity 250ms ease, filter 250ms ease",
       }}
     >
-      <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: stackHeight }}>
-        {flavors.map((flavor, idx) => (
-          <div
-            key={idx}
-            style={{
-              position: "absolute",
-              top: `${idx * (SCOOP_SIZE - SCOOP_GAP)}px`,
-              left: "50%",
-              transform: "translateX(-50%)",
-              width: SCOOP_SIZE,
-              height: SCOOP_SIZE,
-              borderRadius: "50%",
-              background: flavorColor(flavor),
-              border: "2px solid #000",
-              boxShadow: "inset 0 -5px 0 rgba(0,0,0,0.2)",
-            }}
-          />
-        ))}
-      </div>
-
       <div
+        key={status}
         style={{
           position: "absolute",
-          bottom: 0,
-          left: 0,
-          right: 0,
-          height: CONE_HEIGHT,
-          overflow: "hidden",
+          inset: 0,
+          animation:
+            status === "fulfilled"
+              ? "pop 350ms ease"
+              : status === "failed"
+                ? "shake 450ms ease"
+                : undefined,
         }}
       >
-        <div
-          style={{
-            position: "absolute",
-            top: 0,
-            left: "50%",
-            transform: "translateX(-50%)",
-            width: 0,
-            height: 0,
-            borderLeft: `${CONE_WIDTH / 2}px solid transparent`,
-            borderRight: `${CONE_WIDTH / 2}px solid transparent`,
-            borderTop: `${CONE_HEIGHT}px solid #d4a373`,
-            filter: "drop-shadow(0 0 0.5px #000)",
-          }}
-        />
-        <div
-          style={{
-            position: "absolute",
-            top: 0,
-            left: "50%",
-            transform: "translateX(-50%)",
-            width: 0,
-            height: 0,
-            borderLeft: `${CONE_WIDTH / 2 - 4}px solid transparent`,
-            borderRight: `${CONE_WIDTH / 2 - 4}px solid transparent`,
-            borderTop: `${CONE_HEIGHT - 4}px solid #f0d4a8`,
-            opacity: 0.4,
-          }}
-        />
-      </div>
+        <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: stackHeight }}>
+          {flavors.map((flavor, idx) => (
+            <div
+              key={idx}
+              style={{
+                position: "absolute",
+                top: `${idx * (SCOOP_SIZE - SCOOP_GAP)}px`,
+                left: "50%",
+                transform: "translateX(-50%)",
+                width: SCOOP_SIZE,
+                height: SCOOP_SIZE,
+                borderRadius: "50%",
+                background: flavorColor(flavor),
+                border: "2px solid #000",
+                boxShadow: "inset 0 -5px 0 rgba(0,0,0,0.2)",
+              }}
+            />
+          ))}
+        </div>
 
-      {status === "fulfilled" && (
         <div
           style={{
             position: "absolute",
-            top: -10,
-            right: -10,
-            width: 26,
-            height: 26,
-            borderRadius: "50%",
-            background: "var(--sorted)",
-            color: "#000",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            fontFamily: "var(--font-display)",
-            fontSize: "0.7rem",
-            border: "2px solid #000",
-            boxShadow: "2px 2px 0 #000",
+            bottom: 0,
+            left: 0,
+            right: 0,
+            height: CONE_HEIGHT,
+            overflow: "hidden",
           }}
         >
-          ✓
+          <div
+            style={{
+              position: "absolute",
+              top: 0,
+              left: "50%",
+              transform: "translateX(-50%)",
+              width: 0,
+              height: 0,
+              borderLeft: `${CONE_WIDTH / 2}px solid transparent`,
+              borderRight: `${CONE_WIDTH / 2}px solid transparent`,
+              borderTop: `${CONE_HEIGHT}px solid #d4a373`,
+              filter: "drop-shadow(0 0 0.5px #000)",
+            }}
+          />
+          <div
+            style={{
+              position: "absolute",
+              top: 0,
+              left: "50%",
+              transform: "translateX(-50%)",
+              width: 0,
+              height: 0,
+              borderLeft: `${CONE_WIDTH / 2 - 4}px solid transparent`,
+              borderRight: `${CONE_WIDTH / 2 - 4}px solid transparent`,
+              borderTop: `${CONE_HEIGHT - 4}px solid #f0d4a8`,
+              opacity: 0.4,
+            }}
+          />
         </div>
-      )}
-      {status === "failed" && (
-        <div
-          style={{
-            position: "absolute",
-            top: -10,
-            right: -10,
-            width: 26,
-            height: 26,
-            borderRadius: "50%",
-            background: "var(--bar-compare)",
-            color: "#000",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            fontFamily: "var(--font-display)",
-            fontSize: "0.7rem",
-            border: "2px solid #000",
-            boxShadow: "2px 2px 0 #000",
-          }}
-        >
-          ✗
-        </div>
-      )}
+
+        {status === "fulfilled" && (
+          <div
+            style={{
+              position: "absolute",
+              top: -10,
+              right: -10,
+              width: 26,
+              height: 26,
+              borderRadius: "50%",
+              background: "var(--sorted)",
+              color: "#000",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontFamily: "var(--font-display)",
+              fontSize: "0.7rem",
+              border: "2px solid #000",
+              boxShadow: "2px 2px 0 #000",
+            }}
+          >
+            ✓
+          </div>
+        )}
+        {status === "failed" && (
+          <div
+            style={{
+              position: "absolute",
+              top: -10,
+              right: -10,
+              width: 26,
+              height: 26,
+              borderRadius: "50%",
+              background: "var(--bar-compare)",
+              color: "#000",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontFamily: "var(--font-display)",
+              fontSize: "0.7rem",
+              border: "2px solid #000",
+              boxShadow: "2px 2px 0 #000",
+            }}
+          >
+            ✗
+          </div>
+        )}
+      </div>
     </div>
   );
 }
