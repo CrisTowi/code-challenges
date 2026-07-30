@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { ensureAudioRunning, setMuted, isMuted } from "./audio";
-import type { Snapshot, Trace, Example } from "./trace";
+import type { Snapshot, Trace } from "./trace";
 
 type ChallengeModule = {
   challenge: {
@@ -18,10 +18,9 @@ const challengeModules = import.meta.glob<ChallengeModule>("/src/challenges/*/in
 interface PlayerProps {
   slug: string;
   initialTrace: Trace<unknown>;
-  examples: Example<unknown>[];
 }
 
-export function Player({ slug, initialTrace, examples }: PlayerProps) {
+export function Player({ slug, initialTrace }: PlayerProps) {
   const [trace, setTrace] = useState<Trace<unknown>>(initialTrace);
   const [Scene, setScene] = useState<ChallengeModule["challenge"]["Scene"] | null>(null);
   const [Algorithm, setAlgorithm] = useState<ChallengeModule["challenge"]["Algorithm"] | null>(null);
@@ -32,7 +31,6 @@ export function Player({ slug, initialTrace, examples }: PlayerProps) {
   const [index, setIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [speed, setSpeed] = useState(1);
-  const [selectedExample, setSelectedExample] = useState<string>(examples[0]?.name ?? "");
   const [regenerating, setRegenerating] = useState(false);
   const [muted, setMutedState] = useState(false);
   const [customRaw, setCustomRaw] = useState("");
@@ -85,22 +83,6 @@ export function Player({ slug, initialTrace, examples }: PlayerProps) {
     setIndex((i) => Math.min(total - 1, i + 1));
   }, [total]);
 
-  const handleRegen = useCallback(async () => {
-    if (!Algorithm || !selectedExample) return;
-    const example = examples.find((e) => e.name === selectedExample);
-    if (!example) return;
-    setRegenerating(true);
-    try {
-      const algo = new Algorithm(example.input);
-      algo.run();
-      setTrace(algo.getTrace());
-      setIndex(0);
-      setIsPlaying(false);
-    } finally {
-      setRegenerating(false);
-    }
-  }, [Algorithm, selectedExample, examples]);
-
   const togglePlay = useCallback(() => {
     void ensureAudioRunning();
     setIsPlaying((p) => !p);
@@ -112,6 +94,19 @@ export function Player({ slug, initialTrace, examples }: PlayerProps) {
     setMutedState(next);
   }, [muted]);
 
+  const runWithInput = useCallback(
+    (input: unknown) => {
+      if (!Algorithm) return;
+      const algo = new Algorithm(input);
+      algo.run();
+      setTrace(algo.getTrace());
+      setIndex(0);
+      setIsPlaying(false);
+      setCustomError(null);
+    },
+    [Algorithm],
+  );
+
   const runCustom = useCallback(() => {
     if (!Algorithm || !parseInput) return;
     const parsed = parseInput(customRaw);
@@ -120,27 +115,23 @@ export function Player({ slug, initialTrace, examples }: PlayerProps) {
       return;
     }
     setCustomError(null);
-    const algo = new Algorithm(parsed);
-    algo.run();
-    setTrace(algo.getTrace());
-    setIndex(0);
-    setIsPlaying(false);
-    setSelectedExample("");
-  }, [Algorithm, parseInput, customRaw]);
-
-  const runCustomInput = useCallback((input: unknown, name: string) => {
-    if (!Algorithm) return;
-    const algo = new Algorithm(input);
-    algo.run();
-    setTrace(algo.getTrace());
-    setIndex(0);
-    setIsPlaying(false);
-    setSelectedExample("");
-    setCustomError(null);
-    if (formatInput) {
-      setCustomRaw(formatInput(input));
+    setRegenerating(true);
+    try {
+      runWithInput(parsed);
+    } finally {
+      setRegenerating(false);
     }
-  }, [Algorithm, formatInput]);
+  }, [Algorithm, parseInput, customRaw, runWithInput]);
+
+  const runCustomInput = useCallback(
+    (input: unknown) => {
+      runWithInput(input);
+      if (formatInput) {
+        setCustomRaw(formatInput(input));
+      }
+    },
+    [runWithInput, formatInput],
+  );
 
   if (!Scene) {
     return (
@@ -183,6 +174,7 @@ export function Player({ slug, initialTrace, examples }: PlayerProps) {
               setIndex(Number(e.target.value));
               setIsPlaying(false);
             }}
+            style={{ flex: 1, minWidth: "200px" }}
           />
 
           <span className="player__counter">
@@ -222,42 +214,15 @@ export function Player({ slug, initialTrace, examples }: PlayerProps) {
           {snapshot.label && <span className="player__status">{snapshot.label}</span>}
         </div>
 
-        {examples.length > 0 && Algorithm && (
-          <>
-            <div className="subtitle">▸ select level</div>
-            <div className="levels">
-              {examples.map((ex) => (
-                <button
-                  key={ex.name}
-                  className={`levels__item ${ex.name === selectedExample ? "levels__item--active" : ""}`}
-                  onClick={() => setSelectedExample(ex.name)}
-                >
-                  <span className="levels__name">{ex.name}</span>
-                  {ex.description && <span className="levels__desc">{ex.description}</span>}
-                </button>
-              ))}
-            </div>
-            <div className="player__row" style={{ justifyContent: "flex-end" }}>
-              <button
-                className="btn btn--primary"
-                onClick={handleRegen}
-                disabled={regenerating}
-              >
-                {regenerating ? "▸▸▸ running" : "▸ run level"}
-              </button>
-            </div>
-          </>
-        )}
-
         {customInputs && Object.keys(customInputs).length > 0 && Algorithm && (
           <>
-            <div className="subtitle">▸ quick inputs</div>
+            <div className="subtitle">▸ inputs</div>
             <div className="levels">
               {Object.entries(customInputs).map(([name, entry]) => (
                 <button
                   key={name}
                   className="levels__item"
-                  onClick={() => runCustomInput(entry.input, name)}
+                  onClick={() => runCustomInput(entry.input)}
                   title={formatInput ? formatInput(entry.input) : name}
                 >
                   <span className="levels__name">{name}</span>
@@ -270,7 +235,7 @@ export function Player({ slug, initialTrace, examples }: PlayerProps) {
 
         {parseInput && Algorithm && (
           <>
-            <div className="subtitle">▸ custom array</div>
+            <div className="subtitle">▸ custom</div>
             <div className="player__row">
               <input
                 type="text"
@@ -300,7 +265,7 @@ export function Player({ slug, initialTrace, examples }: PlayerProps) {
                 onClick={runCustom}
                 disabled={!customRaw.trim() || regenerating}
               >
-                ▸ add &amp; run
+                ▸ run
               </button>
               <button
                 className="btn btn--icon"
