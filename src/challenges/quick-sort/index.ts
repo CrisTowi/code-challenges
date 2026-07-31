@@ -2,7 +2,6 @@ import { runAndTrace } from "@framework";
 import type { Challenge, Trace } from "@framework";
 import { QuickSort, type QuickSortInput, type QuickSortState } from "./algorithm";
 import { QuickSortScene } from "./scene";
-import { quickSortExamples } from "./examples";
 import { customInputs } from "./debug-inputs";
 
 const MAX_ITEMS = 20;
@@ -35,7 +34,6 @@ export const challenge: Challenge<QuickSortInput, QuickSortState> = {
     description:
       "Pick a pivot, partition the array so smaller values go left and larger go right, then recurse on each side. The pivot ends up in its final sorted position after each partition.",
   },
-  examples: quickSortExamples,
   Algorithm: QuickSort,
   Scene: QuickSortScene,
   parseInput,
@@ -44,9 +42,15 @@ export const challenge: Challenge<QuickSortInput, QuickSortState> = {
   formatInput: (input) => input.numbers.join(","),
 };
 
-export { QuickSort, QuickSortScene, quickSortExamples, customInputs };
-export type { QuickSortInput, QuickSortState };
+function firstInput(): QuickSortInput {
+  const first = Object.values(customInputs)[0];
+  if (!first) throw new Error("quick-sort: no customInputs defined");
+  return first.input;
+}
 
 export function runDefault(): Trace<QuickSortState> {
-  return runAndTrace(QuickSort, quickSortExamples[0].input);
+  return runAndTrace(QuickSort, firstInput());
 }
+
+export { QuickSort, QuickSortScene, customInputs };
+export type { QuickSortInput, QuickSortState };

@@ -2,7 +2,6 @@ import { runAndTrace } from "@framework";
 import type { Challenge, Trace } from "@framework";
 import { BubbleSort, type BubbleSortInput, type BubbleSortState } from "./algorithm";
 import { BubbleSortScene } from "./scene";
-import { bubbleSortExamples } from "./examples";
 import { customInputs } from "./debug-inputs";
 
 const MAX_ITEMS = 20;
@@ -35,7 +34,6 @@ export const challenge: Challenge<BubbleSortInput, BubbleSortState> = {
     description:
       "Walk through the simplest sorting algorithm: scan the array, swap adjacent out-of-order pairs, repeat until a full pass has no swaps.",
   },
-  examples: bubbleSortExamples,
   Algorithm: BubbleSort,
   Scene: BubbleSortScene,
   parseInput,
@@ -44,9 +42,15 @@ export const challenge: Challenge<BubbleSortInput, BubbleSortState> = {
   formatInput: (input) => input.numbers.join(","),
 };
 
-export { BubbleSort, BubbleSortScene, bubbleSortExamples, customInputs };
-export type { BubbleSortInput, BubbleSortState };
+function firstInput(): BubbleSortInput {
+  const first = Object.values(customInputs)[0];
+  if (!first) throw new Error("bubble-sort: no customInputs defined");
+  return first.input;
+}
 
 export function runDefault(): Trace<BubbleSortState> {
-  return runAndTrace(BubbleSort, bubbleSortExamples[0].input);
+  return runAndTrace(BubbleSort, firstInput());
 }
+
+export { BubbleSort, BubbleSortScene, customInputs };
+export type { BubbleSortInput, BubbleSortState };

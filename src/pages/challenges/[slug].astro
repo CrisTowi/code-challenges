@@ -11,7 +11,10 @@ export function getStaticPaths() {
 }
 
 const { challenge } = Astro.props;
-const { slug, title, description, trace } = challenge;
+const { slug, title, description, customInputs, trace } = challenge;
+const initialInput = customInputs
+  ? Object.values(customInputs)[0]?.input
+  : undefined;
 const base = import.meta.env.BASE_URL;
 ---
 
@@ -33,10 +36,11 @@ const base = import.meta.env.BASE_URL;
       <h1>{title}</h1>
       <p class="muted" style="margin: 0 0 1.5rem 0;">{description}</p>
 
-      <Player
+<Player
         client:only="react"
         slug={slug}
         initialTrace={trace}
+        initialInput={initialInput}
       />
     </main>
   </body>

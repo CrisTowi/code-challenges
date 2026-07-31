@@ -5,7 +5,7 @@
         "bars": [
           {
             "id": 0,
-            "value": 3
+            "value": 4
           },
           {
             "id": 1,
@@ -13,15 +13,11 @@
           },
           {
             "id": 2,
-            "value": 4
+            "value": 3
           },
           {
             "id": 3,
-            "value": 1
-          },
-          {
-            "id": 4,
-            "value": 5
+            "value": 2
           }
         ],
         "i": 0,
@@ -36,7 +32,7 @@
         "bars": [
           {
             "id": 0,
-            "value": 3
+            "value": 4
           },
           {
             "id": 1,
@@ -44,15 +40,11 @@
           },
           {
             "id": 2,
-            "value": 4
+            "value": 3
           },
           {
             "id": 3,
-            "value": 1
-          },
-          {
-            "id": 4,
-            "value": 5
+            "value": 2
           }
         ],
         "i": 0,
@@ -67,7 +59,7 @@
         "bars": [
           {
             "id": 0,
-            "value": 3
+            "value": 4
           },
           {
             "id": 1,
@@ -75,15 +67,11 @@
           },
           {
             "id": 2,
-            "value": 4
+            "value": 3
           },
           {
             "id": 3,
-            "value": 1
-          },
-          {
-            "id": 4,
-            "value": 5
+            "value": 2
           }
         ],
         "i": 0,
@@ -105,19 +93,15 @@
           },
           {
             "id": 0,
-            "value": 3
-          },
-          {
-            "id": 2,
             "value": 4
           },
           {
-            "id": 3,
-            "value": 1
+            "id": 2,
+            "value": 3
           },
           {
-            "id": 4,
-            "value": 5
+            "id": 3,
+            "value": 2
           }
         ],
         "i": 0,
@@ -139,19 +123,15 @@
           },
           {
             "id": 0,
-            "value": 3
-          },
-          {
-            "id": 2,
             "value": 4
           },
           {
-            "id": 3,
-            "value": 1
+            "id": 2,
+            "value": 3
           },
           {
-            "id": 4,
-            "value": 5
+            "id": 3,
+            "value": 2
           }
         ],
         "i": 0,
@@ -172,20 +152,46 @@
             "value": 1
           },
           {
-            "id": 0,
+            "id": 2,
             "value": 3
           },
           {
-            "id": 2,
+            "id": 0,
             "value": 4
           },
           {
             "id": 3,
+            "value": 2
+          }
+        ],
+        "i": 0,
+        "j": 1,
+        "comparing": [
+          1,
+          2
+        ],
+        "swapped": true
+      },
+      "label": "swap"
+    },
+    {
+      "state": {
+        "bars": [
+          {
+            "id": 1,
             "value": 1
           },
           {
-            "id": 4,
-            "value": 5
+            "id": 2,
+            "value": 3
+          },
+          {
+            "id": 0,
+            "value": 4
+          },
+          {
+            "id": 3,
+            "value": 2
           }
         ],
         "i": 0,
@@ -206,20 +212,16 @@
             "value": 1
           },
           {
-            "id": 0,
+            "id": 2,
             "value": 3
           },
           {
             "id": 3,
-            "value": 1
+            "value": 2
           },
           {
-            "id": 2,
+            "id": 0,
             "value": 4
-          },
-          {
-            "id": 4,
-            "value": 5
           }
         ],
         "i": 0,
@@ -240,61 +242,23 @@
             "value": 1
           },
           {
-            "id": 0,
+            "id": 2,
             "value": 3
           },
           {
             "id": 3,
-            "value": 1
-          },
-          {
-            "id": 2,
-            "value": 4
-          },
-          {
-            "id": 4,
-            "value": 5
-          }
-        ],
-        "i": 0,
-        "j": 3,
-        "comparing": [
-          3,
-          4
-        ],
-        "swapped": true
-      },
-      "label": "compare"
-    },
-    {
-      "state": {
-        "bars": [
-          {
-            "id": 1,
-            "value": 1
+            "value": 2
           },
           {
             "id": 0,
-            "value": 3
-          },
-          {
-            "id": 3,
-            "value": 1
-          },
-          {
-            "id": 2,
             "value": 4
-          },
-          {
-            "id": 4,
-            "value": 5
           }
         ],
         "i": 1,
-        "j": 3,
+        "j": 2,
         "comparing": [
-          3,
-          4
+          2,
+          3
         ],
         "swapped": false
       },
@@ -308,20 +272,16 @@
             "value": 1
           },
           {
-            "id": 0,
+            "id": 2,
             "value": 3
           },
           {
             "id": 3,
-            "value": 1
+            "value": 2
           },
           {
-            "id": 2,
+            "id": 0,
             "value": 4
-          },
-          {
-            "id": 4,
-            "value": 5
           }
         ],
         "i": 1,
@@ -342,20 +302,16 @@
             "value": 1
           },
           {
-            "id": 0,
+            "id": 2,
             "value": 3
           },
           {
             "id": 3,
-            "value": 1
+            "value": 2
           },
           {
-            "id": 2,
+            "id": 0,
             "value": 4
-          },
-          {
-            "id": 4,
-            "value": 5
           }
         ],
         "i": 1,
@@ -377,19 +333,15 @@
           },
           {
             "id": 3,
-            "value": 1
-          },
-          {
-            "id": 0,
-            "value": 3
+            "value": 2
           },
           {
             "id": 2,
-            "value": 4
+            "value": 3
           },
           {
-            "id": 4,
-            "value": 5
+            "id": 0,
+            "value": 4
           }
         ],
         "i": 1,
@@ -411,60 +363,22 @@
           },
           {
             "id": 3,
-            "value": 1
-          },
-          {
-            "id": 0,
-            "value": 3
+            "value": 2
           },
           {
             "id": 2,
-            "value": 4
-          },
-          {
-            "id": 4,
-            "value": 5
-          }
-        ],
-        "i": 1,
-        "j": 2,
-        "comparing": [
-          2,
-          3
-        ],
-        "swapped": true
-      },
-      "label": "compare"
-    },
-    {
-      "state": {
-        "bars": [
-          {
-            "id": 1,
-            "value": 1
-          },
-          {
-            "id": 3,
-            "value": 1
-          },
-          {
-            "id": 0,
             "value": 3
           },
           {
-            "id": 2,
+            "id": 0,
             "value": 4
-          },
-          {
-            "id": 4,
-            "value": 5
           }
         ],
         "i": 2,
-        "j": 2,
+        "j": 1,
         "comparing": [
-          2,
-          3
+          1,
+          2
         ],
         "swapped": false
       },
@@ -479,19 +393,15 @@
           },
           {
             "id": 3,
-            "value": 1
-          },
-          {
-            "id": 0,
-            "value": 3
+            "value": 2
           },
           {
             "id": 2,
-            "value": 4
+            "value": 3
           },
           {
-            "id": 4,
-            "value": 5
+            "id": 0,
+            "value": 4
           }
         ],
         "i": 2,
@@ -513,57 +423,19 @@
           },
           {
             "id": 3,
-            "value": 1
-          },
-          {
-            "id": 0,
-            "value": 3
+            "value": 2
           },
           {
             "id": 2,
-            "value": 4
-          },
-          {
-            "id": 4,
-            "value": 5
-          }
-        ],
-        "i": 2,
-        "j": 1,
-        "comparing": [
-          1,
-          2
-        ],
-        "swapped": false
-      },
-      "label": "compare"
-    },
-    {
-      "state": {
-        "bars": [
-          {
-            "id": 1,
-            "value": 1
-          },
-          {
-            "id": 3,
-            "value": 1
-          },
-          {
-            "id": 0,
             "value": 3
           },
           {
-            "id": 2,
+            "id": 0,
             "value": 4
-          },
-          {
-            "id": 4,
-            "value": 5
           }
         ],
         "i": 2,
-        "j": 1,
+        "j": 0,
         "comparing": null,
         "swapped": false
       },

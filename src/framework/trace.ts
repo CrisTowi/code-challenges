@@ -10,11 +10,10 @@ export interface Trace<S> {
   snapshots: Snapshot<S>[];
 }
 
-export type Example<I> = {
-  name: string;
-  description?: string;
+export interface Example<I> {
   input: I;
-};
+  description?: string;
+}
 
 export interface ChallengeMeta {
   slug: string;
@@ -27,15 +26,20 @@ export interface SceneProps<S> {
   playbackSpeed?: number;
 }
 
+export interface EditorProps<I> {
+  initial: I;
+  onRun: (input: I) => void;
+}
+
 export interface Challenge<I, S, O = void> {
   meta: ChallengeMeta;
-  examples: Example<I>[];
   Algorithm: new (input: I) => TracedAlgorithm<I, S, O>;
   Scene: React.ComponentType<SceneProps<S>>;
   parseInput?: (raw: string) => I | { error: string };
   inputPlaceholder?: string;
-  customInputs?: Record<string, { input: I; description?: string }>;
+  customInputs?: Record<string, Example<I>>;
   formatInput?: (input: I) => string;
+  Editor?: React.ComponentType<EditorProps<I>>;
 }
 
 export type AnyChallenge = Challenge<unknown, unknown, unknown>;

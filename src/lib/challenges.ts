@@ -20,9 +20,7 @@ export const challenges = Object.entries(modules)
       slug,
       title: mod.challenge.meta.title,
       description: mod.challenge.meta.description,
-      Algorithm: mod.challenge.Algorithm,
-      Scene: mod.challenge.Scene,
-      examples: mod.challenge.examples,
+      customInputs: mod.challenge.customInputs,
       trace,
     };
   })
