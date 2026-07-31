@@ -1,0 +1,53 @@
+.playButton {
+  min-width: 5rem;
+}
+
+.scrubber {
+  flex: 1;
+  min-width: 200px;
+}
+
+.speedLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-display);
+  font-size: 0.5rem;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  letter-spacing: 1px;
+}
+
+.statusLabel {
+  font-family: var(--font-display);
+  font-size: 0.6rem;
+  color: var(--text);
+  background: var(--player-status-bg, var(--bg-elev));
+  border: 1px solid var(--player-status-border, var(--border));
+  padding: 0.4rem 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.customInput {
+  flex: 1;
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  background: var(--bg-elev);
+  color: var(--text);
+  border: 2px solid var(--border);
+  padding: 0.55rem 0.75rem;
+  outline: none;
+}
+
+.customInputError {
+  border-color: var(--bar-compare);
+}
+
+.errorText {
+  color: var(--bar-compare);
+  font-family: var(--font-display);
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}

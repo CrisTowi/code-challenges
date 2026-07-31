@@ -1,0 +1,183 @@
+.editor {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.subtitleSmall {
+  margin: 0;
+  font-size: 0.55rem;
+}
+
+.subtitleFirst {
+  margin-top: 0;
+}
+
+.subtitleWithTopMargin {
+  margin-top: 0.4rem;
+}
+
+.row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.rowInline {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.muted {
+  font-size: 0.9rem;
+  color: var(--text-dim);
+}
+
+.empty {
+  font-size: 0.9rem;
+  color: var(--text-dim);
+}
+
+.input {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  background: var(--bg-elev);
+  color: var(--text);
+  border: 2px solid var(--border);
+  padding: 0.35rem 0.55rem;
+  outline: none;
+  flex: 1 1 8rem;
+  min-width: 8rem;
+}
+
+.inputSmall {
+  width: 4rem;
+}
+
+.select {
+  font-family: var(--font-display);
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  background: var(--bg-elev);
+  color: var(--text);
+  border: 2px solid var(--border);
+  padding: 0.35rem 0.55rem;
+  flex: 1 1 auto;
+  min-width: 8rem;
+}
+
+.selectSmall {
+  min-width: 7rem;
+}
+
+.iconBtn {
+  padding: 0.2rem 0.5rem;
+  background: var(--bg-panel);
+  color: var(--text);
+  border: 1px solid var(--border);
+  font-family: var(--font-display);
+  font-size: 0.6rem;
+  cursor: pointer;
+}
+
+.iconBtnDanger {
+  color: var(--bar-compare);
+}
+
+.iconBtnRemove {
+  margin-left: auto;
+}
+
+.flavorRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.6rem;
+  background: var(--bg-elev);
+  border: 2px solid var(--border);
+  opacity: 1;
+}
+
+.flavorRowEmpty {
+  opacity: 0.6;
+  border-color: var(--bar-compare);
+}
+
+.flavorSwatch {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1px solid #000;
+  flex-shrink: 0;
+  background: var(--swatch-color, var(--accent));
+}
+
+.flavorName {
+  min-width: 7rem;
+}
+
+.flavorCount {
+  font-family: var(--font-display);
+  font-size: 0.6rem;
+  color: var(--text);
+  min-width: 2.5rem;
+}
+
+.flavorCountEmpty {
+  color: var(--bar-compare);
+}
+
+.orderRow {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.6rem;
+  background: var(--bg-elev);
+  border: 2px solid var(--border);
+  flex-wrap: wrap;
+}
+
+.orderIndex {
+  font-family: var(--font-display);
+  font-size: 0.6rem;
+  color: var(--text-dim);
+  min-width: 1.6rem;
+}
+
+.orderChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.6rem;
+  background: var(--bg-elev);
+  border: 2px solid var(--border);
+  font-family: var(--font-body);
+  font-size: 1rem;
+}
+
+.orderChipSwatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid #000;
+  background: var(--swatch-color, var(--accent));
+}
+
+.orderChipRemove {
+  background: transparent;
+  border: none;
+  color: var(--bar-compare);
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  padding: 0;
+}
+
+.runRow {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.5rem;
+}

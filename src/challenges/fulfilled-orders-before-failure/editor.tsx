@@ -1,50 +1,12 @@
 import { useState } from "react";
 import type { FulfilledOrdersBeforeFailureInput } from "./algorithm";
 import { flavorColor } from "./colors";
+import styles from "./editor.module.css";
 
 interface EditorProps {
   initial: FulfilledOrdersBeforeFailureInput;
   onRun: (input: FulfilledOrdersBeforeFailureInput) => void;
 }
-
-const inputStyle: React.CSSProperties = {
-  fontFamily: "var(--font-body)",
-  fontSize: "1rem",
-  background: "var(--bg-elev)",
-  color: "var(--text)",
-  border: "2px solid var(--border)",
-  padding: "0.35rem 0.55rem",
-  outline: "none",
-};
-
-const selectStyle: React.CSSProperties = {
-  ...inputStyle,
-  fontFamily: "var(--font-display)",
-  fontSize: "0.55rem",
-  textTransform: "uppercase",
-  cursor: "pointer",
-};
-
-const chipStyle: React.CSSProperties = {
-  display: "inline-flex",
-  alignItems: "center",
-  gap: "0.4rem",
-  padding: "0.3rem 0.6rem",
-  background: "var(--bg-elev)",
-  border: "2px solid var(--border)",
-  fontFamily: "var(--font-body)",
-  fontSize: "1rem",
-};
-
-const iconBtnStyle: React.CSSProperties = {
-  padding: "0.2rem 0.5rem",
-  background: "var(--bg-panel)",
-  color: "var(--text)",
-  border: "1px solid var(--border)",
-  fontFamily: "var(--font-display)",
-  fontSize: "0.6rem",
-  cursor: "pointer",
-};
 
 export function FulfilledOrdersBeforeFailureEditor({ initial, onRun }: EditorProps) {
   const [freezerStock, setFreezerStock] = useState<Record<string, number>>(
@@ -113,15 +75,11 @@ export function FulfilledOrdersBeforeFailureEditor({ initial, onRun }: EditorPro
     <div>
       <div className="subtitle">▸ build scenario</div>
 
-      <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem" }}>
-        <div className="subtitle" style={{ margin: 0, fontSize: "0.55rem" }}>
-          freezer
-        </div>
-        <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
+      <div className={styles.editor}>
+        <div className={`${styles.subtitleSmall} ${styles.subtitleFirst}`}>freezer</div>
+        <div className={styles.row}>
           {flavorNames.length === 0 ? (
-            <div className="muted" style={{ fontSize: "0.9rem" }}>
-              empty — add a flavor below
-            </div>
+            <div className={styles.empty}>empty — add a flavor below</div>
           ) : (
             flavorNames.map((name) => {
               const stock = freezerStock[name];
@@ -129,45 +87,26 @@ export function FulfilledOrdersBeforeFailureEditor({ initial, onRun }: EditorPro
               return (
                 <div
                   key={name}
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "0.5rem",
-                    padding: "0.4rem 0.6rem",
-                    background: "var(--bg-elev)",
-                    border: `2px solid ${empty ? "var(--bar-compare)" : "var(--border)"}`,
-                    opacity: empty ? 0.6 : 1,
-                  }}
+                  className={`${styles.flavorRow} ${empty ? styles.flavorRowEmpty : ""}`}
                 >
                   <span
-                    style={{
-                      width: 16,
-                      height: 16,
-                      borderRadius: "50%",
-                      background: flavorColor(name),
-                      border: "1px solid #000",
-                      flexShrink: 0,
-                    }}
+                    className={styles.flavorSwatch}
+                    style={{ "--swatch-color": flavorColor(name) } as React.CSSProperties}
                   />
-                  <span style={{ minWidth: "7rem" }}>{name}</span>
+                  <span className={styles.flavorName}>{name}</span>
                   <span
-                    style={{
-                      fontFamily: "var(--font-display)",
-                      fontSize: "0.6rem",
-                      color: empty ? "var(--bar-compare)" : "var(--text)",
-                      minWidth: "2.5rem",
-                    }}
+                    className={`${styles.flavorCount} ${empty ? styles.flavorCountEmpty : ""}`}
                   >
                     ×{stock}
                   </span>
-                  <button style={iconBtnStyle} onClick={() => adjustStock(name, -1)}>
+                  <button className={styles.iconBtn} onClick={() => adjustStock(name, -1)}>
                     −
                   </button>
-                  <button style={iconBtnStyle} onClick={() => adjustStock(name, 1)}>
+                  <button className={styles.iconBtn} onClick={() => adjustStock(name, 1)}>
                     +
                   </button>
                   <button
-                    style={{ ...iconBtnStyle, color: "var(--bar-compare)" }}
+                    className={`${styles.iconBtn} ${styles.iconBtnDanger}`}
                     onClick={() => removeFlavor(name)}
                   >
                     ×
@@ -177,9 +116,9 @@ export function FulfilledOrdersBeforeFailureEditor({ initial, onRun }: EditorPro
             })
           )}
         </div>
-        <div style={{ display: "flex", gap: "0.4rem", alignItems: "center", flexWrap: "wrap" }}>
+        <div className={styles.rowInline}>
           <input
-            style={{ ...inputStyle, flex: "1 1 8rem", minWidth: "8rem" }}
+            className={styles.input}
             value={newFlavor.name}
             placeholder="flavor name"
             onChange={(e) => setNewFlavor({ ...newFlavor, name: e.target.value })}
@@ -188,7 +127,7 @@ export function FulfilledOrdersBeforeFailureEditor({ initial, onRun }: EditorPro
             }}
           />
           <input
-            style={{ ...inputStyle, width: "4rem" }}
+            className={`${styles.input} ${styles.inputSmall}`}
             type="number"
             min={0}
             value={newFlavor.stock}
@@ -199,65 +138,28 @@ export function FulfilledOrdersBeforeFailureEditor({ initial, onRun }: EditorPro
           </button>
         </div>
 
-        <div className="subtitle" style={{ margin: "0.4rem 0 0 0", fontSize: "0.55rem" }}>
+        <div className={`${styles.subtitleSmall} ${styles.subtitleWithTopMargin}`}>
           order queue
         </div>
-        <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
+        <div className={styles.row}>
           {orders.length === 0 ? (
-            <div className="muted" style={{ fontSize: "0.9rem" }}>
-              empty — add an order below
-            </div>
+            <div className={styles.empty}>empty — add an order below</div>
           ) : (
             orders.map((order, idx) => (
-              <div
-                key={idx}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "0.4rem",
-                  padding: "0.4rem 0.6rem",
-                  background: "var(--bg-elev)",
-                  border: "2px solid var(--border)",
-                  flexWrap: "wrap",
-                }}
-              >
-                <span
-                  style={{
-                    fontFamily: "var(--font-display)",
-                    fontSize: "0.6rem",
-                    color: "var(--text-dim)",
-                    minWidth: "1.6rem",
-                  }}
-                >
-                  #{idx + 1}
-                </span>
+              <div key={idx} className={styles.orderRow}>
+                <span className={styles.orderIndex}>#{idx + 1}</span>
                 {order.length === 0 ? (
-                  <span className="muted" style={{ fontSize: "0.9rem" }}>
-                    (no flavors)
-                  </span>
+                  <span className={styles.muted}>(no flavors)</span>
                 ) : (
                   order.map((flavor, fIdx) => (
-                    <span key={fIdx} style={chipStyle}>
+                    <span key={fIdx} className={styles.orderChip}>
                       <span
-                        style={{
-                          width: 10,
-                          height: 10,
-                          borderRadius: "50%",
-                          background: flavorColor(flavor),
-                          border: "1px solid #000",
-                        }}
+                        className={styles.orderChipSwatch}
+                        style={{ "--swatch-color": flavorColor(flavor) } as React.CSSProperties}
                       />
                       {flavor}
                       <button
-                        style={{
-                          background: "transparent",
-                          border: "none",
-                          color: "var(--bar-compare)",
-                          cursor: "pointer",
-                          fontFamily: "var(--font-display)",
-                          fontSize: "0.7rem",
-                          padding: 0,
-                        }}
+                        className={styles.orderChipRemove}
                         onClick={() => removeFlavorFromOrder(idx, fIdx)}
                       >
                         ×
@@ -268,7 +170,7 @@ export function FulfilledOrdersBeforeFailureEditor({ initial, onRun }: EditorPro
                 {flavorNames.length > 0 && (
                   <>
                     <select
-                      style={{ ...selectStyle, minWidth: "7rem" }}
+                      className={`${styles.select} ${styles.selectSmall}`}
                       value={addToOrder[idx] ?? ""}
                       onChange={(e) =>
                         setAddToOrder((prev) => ({ ...prev, [idx]: e.target.value }))
@@ -282,7 +184,7 @@ export function FulfilledOrdersBeforeFailureEditor({ initial, onRun }: EditorPro
                       ))}
                     </select>
                     <button
-                      style={iconBtnStyle}
+                      className={styles.iconBtn}
                       onClick={() => addFlavorToOrder(idx)}
                       disabled={!addToOrder[idx]}
                     >
@@ -291,7 +193,7 @@ export function FulfilledOrdersBeforeFailureEditor({ initial, onRun }: EditorPro
                   </>
                 )}
                 <button
-                  style={{ ...iconBtnStyle, color: "var(--bar-compare)", marginLeft: "auto" }}
+                  className={`${styles.iconBtn} ${styles.iconBtnDanger} ${styles.iconBtnRemove}`}
                   onClick={() => removeOrder(idx)}
                 >
                   remove
@@ -300,9 +202,9 @@ export function FulfilledOrdersBeforeFailureEditor({ initial, onRun }: EditorPro
             ))
           )}
         </div>
-        <div style={{ display: "flex", gap: "0.4rem", alignItems: "center" }}>
+        <div className={styles.rowInline}>
           <select
-            style={{ ...selectStyle, flex: "1 1 auto", minWidth: "8rem" }}
+            className={styles.select}
             value={newOrderFlavor}
             onChange={(e) => setNewOrderFlavor(e.target.value)}
             disabled={flavorNames.length === 0}
@@ -321,7 +223,7 @@ export function FulfilledOrdersBeforeFailureEditor({ initial, onRun }: EditorPro
           </button>
         </div>
 
-        <div style={{ display: "flex", justifyContent: "flex-end", marginTop: "0.5rem" }}>
+        <div className={styles.runRow}>
           <button className="btn btn--primary" onClick={handleRun}>
             ▸ run scenario
           </button>

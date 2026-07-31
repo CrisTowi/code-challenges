@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { ensureAudioRunning, setMuted, isMuted } from "./audio";
 import type { Snapshot, Trace } from "./trace";
+import styles from "./Player.module.css";
 
 type ChallengeModule = {
   challenge: {
@@ -10,6 +11,10 @@ type ChallengeModule = {
     inputPlaceholder?: string;
     customInputs?: Record<string, { input: unknown; description?: string }>;
     formatInput?: (input: unknown) => string;
+    Editor?: React.ComponentType<{
+      initial: unknown;
+      onRun: (input: unknown) => void;
+    }>;
   };
 };
 
@@ -18,9 +23,10 @@ const challengeModules = import.meta.glob<ChallengeModule>("/src/challenges/*/in
 interface PlayerProps {
   slug: string;
   initialTrace: Trace<unknown>;
+  initialInput?: unknown;
 }
 
-export function Player({ slug, initialTrace }: PlayerProps) {
+export function Player({ slug, initialTrace, initialInput }: PlayerProps) {
   const [trace, setTrace] = useState<Trace<unknown>>(initialTrace);
   const [Scene, setScene] = useState<ChallengeModule["challenge"]["Scene"] | null>(null);
   const [Algorithm, setAlgorithm] = useState<ChallengeModule["challenge"]["Algorithm"] | null>(null);
@@ -28,6 +34,9 @@ export function Player({ slug, initialTrace }: PlayerProps) {
   const [inputPlaceholder, setInputPlaceholder] = useState<string>("");
   const [customInputs, setCustomInputs] = useState<ChallengeModule["challenge"]["customInputs"]>(undefined);
   const [formatInput, setFormatInput] = useState<ChallengeModule["challenge"]["formatInput"]>(undefined);
+  const [Editor, setEditor] = useState<ChallengeModule["challenge"]["Editor"]>(undefined);
+  const [currentInput, setCurrentInput] = useState<unknown>(initialInput);
+  const [inputVersion, setInputVersion] = useState(0);
   const [index, setIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [speed, setSpeed] = useState(1);
@@ -51,6 +60,7 @@ export function Player({ slug, initialTrace }: PlayerProps) {
         setInputPlaceholder(mod.challenge.inputPlaceholder ?? "");
         setCustomInputs(mod.challenge.customInputs);
         setFormatInput(() => mod.challenge.formatInput);
+        setEditor(() => mod.challenge.Editor);
       })
       .catch((err) => {
         console.error(`Player: failed to load ${modulePath}`, err);
@@ -118,6 +128,8 @@ export function Player({ slug, initialTrace }: PlayerProps) {
     setRegenerating(true);
     try {
       runWithInput(parsed);
+      setCurrentInput(parsed);
+      setInputVersion((v) => v + 1);
     } finally {
       setRegenerating(false);
     }
@@ -126,11 +138,22 @@ export function Player({ slug, initialTrace }: PlayerProps) {
   const runCustomInput = useCallback(
     (input: unknown) => {
       runWithInput(input);
+      setCurrentInput(input);
+      setInputVersion((v) => v + 1);
       if (formatInput) {
         setCustomRaw(formatInput(input));
       }
     },
     [runWithInput, formatInput],
+  );
+
+  const runFromEditor = useCallback(
+    (input: unknown) => {
+      runWithInput(input);
+      setCurrentInput(input);
+      setInputVersion((v) => v + 1);
+    },
+    [runWithInput],
   );
 
   if (!Scene) {
@@ -154,9 +177,8 @@ export function Player({ slug, initialTrace }: PlayerProps) {
             ◀
           </button>
           <button
-            className={`btn ${isPlaying ? "" : "btn--primary"}`}
+            className={`btn ${isPlaying ? "" : "btn--primary"} ${styles.playButton}`}
             onClick={togglePlay}
-            style={{ minWidth: "5rem" }}
           >
             {isPlaying ? "❚❚ Pause" : "▶ Play"}
           </button>
@@ -165,7 +187,7 @@ export function Player({ slug, initialTrace }: PlayerProps) {
           </button>
 
           <input
-            className="player__scrubber"
+            className={styles.scrubber}
             type="range"
             min={0}
             max={total - 1}
@@ -174,7 +196,6 @@ export function Player({ slug, initialTrace }: PlayerProps) {
               setIndex(Number(e.target.value));
               setIsPlaying(false);
             }}
-            style={{ flex: 1, minWidth: "200px" }}
           />
 
           <span className="player__counter">
@@ -183,18 +204,7 @@ export function Player({ slug, initialTrace }: PlayerProps) {
         </div>
 
         <div className="player__row">
-          <label
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "0.5rem",
-              fontFamily: "var(--font-display)",
-              fontSize: "0.5rem",
-              textTransform: "uppercase",
-              color: "var(--text-dim)",
-              letterSpacing: "1px",
-            }}
-          >
+          <label className={styles.speedLabel}>
             speed
             <select value={speed} onChange={(e) => setSpeed(Number(e.target.value))}>
               <option value={0.5}>0.5×</option>
@@ -211,7 +221,7 @@ export function Player({ slug, initialTrace }: PlayerProps) {
             {muted ? "🔇 mute" : "🔊 sound"}
           </button>
 
-          {snapshot.label && <span className="player__status">{snapshot.label}</span>}
+          {snapshot.label && <span className={styles.statusLabel}>{snapshot.label}</span>}
         </div>
 
         {customInputs && Object.keys(customInputs).length > 0 && Algorithm && (
@@ -239,7 +249,7 @@ export function Player({ slug, initialTrace }: PlayerProps) {
             <div className="player__row">
               <input
                 type="text"
-                className="custom-input"
+                className={`${styles.customInput} ${customError ? styles.customInputError : ""}`}
                 value={customRaw}
                 placeholder={inputPlaceholder || "e.g. 5,3,8,1,4,9,2"}
                 onChange={(e) => {
@@ -248,16 +258,6 @@ export function Player({ slug, initialTrace }: PlayerProps) {
                 }}
                 onKeyDown={(e) => {
                   if (e.key === "Enter") runCustom();
-                }}
-                style={{
-                  flex: 1,
-                  fontFamily: "var(--font-body)",
-                  fontSize: "1.1rem",
-                  background: "var(--bg-elev)",
-                  color: "var(--text)",
-                  border: `2px solid ${customError ? "var(--bar-compare)" : "var(--border)"}`,
-                  padding: "0.55rem 0.75rem",
-                  outline: "none",
                 }}
               />
               <button
@@ -277,20 +277,14 @@ export function Player({ slug, initialTrace }: PlayerProps) {
                 +?
               </button>
             </div>
-            {customError && (
-              <div
-                style={{
-                  color: "var(--bar-compare)",
-                  fontFamily: "var(--font-display)",
-                  fontSize: "0.55rem",
-                  textTransform: "uppercase",
-                  letterSpacing: "1px",
-                }}
-              >
-                ✕ {customError}
-              </div>
-            )}
+            {customError && <div className={styles.errorText}>✕ {customError}</div>}
           </>
+        )}
+
+        {Editor && currentInput !== undefined && (
+          <div style={{ marginTop: "0.5rem" }}>
+            <Editor key={inputVersion} initial={currentInput} onRun={runFromEditor} />
+          </div>
         )}
       </div>
     </div>
