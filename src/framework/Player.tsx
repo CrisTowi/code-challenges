@@ -11,10 +11,6 @@ type ChallengeModule = {
     inputPlaceholder?: string;
     customInputs?: Record<string, { input: unknown; description?: string }>;
     formatInput?: (input: unknown) => string;
-    Editor?: React.ComponentType<{
-      initial: unknown;
-      onRun: (input: unknown) => void;
-    }>;
   };
 };
 
@@ -23,10 +19,9 @@ const challengeModules = import.meta.glob<ChallengeModule>("/src/challenges/*/in
 interface PlayerProps {
   slug: string;
   initialTrace: Trace<unknown>;
-  initialInput?: unknown;
 }
 
-export function Player({ slug, initialTrace, initialInput }: PlayerProps) {
+export function Player({ slug, initialTrace }: PlayerProps) {
   const [trace, setTrace] = useState<Trace<unknown>>(initialTrace);
   const [Scene, setScene] = useState<ChallengeModule["challenge"]["Scene"] | null>(null);
   const [Algorithm, setAlgorithm] = useState<ChallengeModule["challenge"]["Algorithm"] | null>(null);
@@ -34,9 +29,6 @@ export function Player({ slug, initialTrace, initialInput }: PlayerProps) {
   const [inputPlaceholder, setInputPlaceholder] = useState<string>("");
   const [customInputs, setCustomInputs] = useState<ChallengeModule["challenge"]["customInputs"]>(undefined);
   const [formatInput, setFormatInput] = useState<ChallengeModule["challenge"]["formatInput"]>(undefined);
-  const [Editor, setEditor] = useState<ChallengeModule["challenge"]["Editor"]>(undefined);
-  const [currentInput, setCurrentInput] = useState<unknown>(initialInput);
-  const [inputVersion, setInputVersion] = useState(0);
   const [index, setIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [speed, setSpeed] = useState(1);
@@ -60,7 +52,6 @@ export function Player({ slug, initialTrace, initialInput }: PlayerProps) {
         setInputPlaceholder(mod.challenge.inputPlaceholder ?? "");
         setCustomInputs(mod.challenge.customInputs);
         setFormatInput(() => mod.challenge.formatInput);
-        setEditor(() => mod.challenge.Editor);
       })
       .catch((err) => {
         console.error(`Player: failed to load ${modulePath}`, err);
@@ -128,8 +119,6 @@ export function Player({ slug, initialTrace, initialInput }: PlayerProps) {
     setRegenerating(true);
     try {
       runWithInput(parsed);
-      setCurrentInput(parsed);
-      setInputVersion((v) => v + 1);
     } finally {
       setRegenerating(false);
     }
@@ -138,22 +127,11 @@ export function Player({ slug, initialTrace, initialInput }: PlayerProps) {
   const runCustomInput = useCallback(
     (input: unknown) => {
       runWithInput(input);
-      setCurrentInput(input);
-      setInputVersion((v) => v + 1);
       if (formatInput) {
         setCustomRaw(formatInput(input));
       }
     },
     [runWithInput, formatInput],
-  );
-
-  const runFromEditor = useCallback(
-    (input: unknown) => {
-      runWithInput(input);
-      setCurrentInput(input);
-      setInputVersion((v) => v + 1);
-    },
-    [runWithInput],
   );
 
   if (!Scene) {
@@ -279,12 +257,6 @@ export function Player({ slug, initialTrace, initialInput }: PlayerProps) {
             </div>
             {customError && <div className={styles.errorText}>✕ {customError}</div>}
           </>
-        )}
-
-        {Editor && currentInput !== undefined && (
-          <div style={{ marginTop: "0.5rem" }}>
-            <Editor key={inputVersion} initial={currentInput} onRun={runFromEditor} />
-          </div>
         )}
       </div>
     </div>

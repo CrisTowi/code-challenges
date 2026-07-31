@@ -26,11 +26,6 @@ export interface SceneProps<S> {
   playbackSpeed?: number;
 }
 
-export interface EditorProps<I> {
-  initial: I;
-  onRun: (input: I) => void;
-}
-
 export interface Challenge<I, S, O = void> {
   meta: ChallengeMeta;
   Algorithm: new (input: I) => TracedAlgorithm<I, S, O>;
@@ -39,7 +34,6 @@ export interface Challenge<I, S, O = void> {
   inputPlaceholder?: string;
   customInputs?: Record<string, Example<I>>;
   formatInput?: (input: I) => string;
-  Editor?: React.ComponentType<EditorProps<I>>;
 }
 
 export type AnyChallenge = Challenge<unknown, unknown, unknown>;

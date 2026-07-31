@@ -2,7 +2,6 @@ import { runAndTrace } from "@framework";
 import type { Challenge, Trace } from "@framework";
 import { FulfilledOrdersBeforeFailure, type FulfilledOrdersBeforeFailureInput, type FulfilledOrdersBeforeFailureState } from "./algorithm";
 import { FulfilledOrdersBeforeFailureScene } from "./scene";
-import { FulfilledOrdersBeforeFailureEditor } from "./editor";
 import { customInputs } from "./debug-inputs";
 
 export const challenge: Challenge<FulfilledOrdersBeforeFailureInput, FulfilledOrdersBeforeFailureState> = {
@@ -14,7 +13,6 @@ export const challenge: Challenge<FulfilledOrdersBeforeFailureInput, FulfilledOr
   Algorithm: FulfilledOrdersBeforeFailure,
   Scene: FulfilledOrdersBeforeFailureScene,
   customInputs,
-  Editor: FulfilledOrdersBeforeFailureEditor,
 };
 
 function firstInput(): FulfilledOrdersBeforeFailureInput {
@@ -27,5 +25,5 @@ export function runDefault(): Trace<FulfilledOrdersBeforeFailureState> {
   return runAndTrace(FulfilledOrdersBeforeFailure, firstInput());
 }
 
-export { FulfilledOrdersBeforeFailure, FulfilledOrdersBeforeFailureScene, FulfilledOrdersBeforeFailureEditor, customInputs };
+export { FulfilledOrdersBeforeFailure, FulfilledOrdersBeforeFailureScene, customInputs };
 export type { FulfilledOrdersBeforeFailureInput, FulfilledOrdersBeforeFailureState };
