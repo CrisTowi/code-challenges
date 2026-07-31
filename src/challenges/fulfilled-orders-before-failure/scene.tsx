@@ -50,7 +50,7 @@ function Cone({ flavors, status }: ConeProps) {
         } as React.CSSProperties
       }
     >
-      <div className={innerClass}>
+      <div key={status} className={innerClass}>
         <div className={styles.scoopsStack} style={{ "--stack-height": `${stackHeight}px` } as React.CSSProperties}>
           {flavors.map((flavor, idx) => (
             <div
