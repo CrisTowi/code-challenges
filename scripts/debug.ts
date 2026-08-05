@@ -57,7 +57,7 @@ if (!inputName) {
   process.exit(0);
 }
 
-const input = inputs[inputName];
+const input = (inputs[inputName] as { input: unknown }).input;
 if (input === undefined) {
   console.error(`Input "${inputName}" not found. Available: ${Object.keys(inputs).join(", ")}`);
   process.exit(1);

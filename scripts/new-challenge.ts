@@ -70,25 +70,11 @@ export function ${pascal}Scene({ snapshot }: { snapshot: Snapshot<${pascal}State
 }
 `;
 
-const examples = `import type { Example } from "@framework";
-import type { ${pascal}Input } from "./algorithm";
-
-export const examples: Example<${pascal}Input>[] = [
-  {
-    name: "small",
-    description: "TODO: describe this example",
-    input: {
-      // TODO: provide input data
-    } as ${pascal}Input,
-  },
-];
-`;
-
 const index = `import { runAndTrace } from "@framework";
 import type { Challenge, Trace } from "@framework";
 import { ${pascal}, type ${pascal}Input, type ${pascal}State } from "./algorithm";
 import { ${pascal}Scene } from "./scene";
-import { examples } from "./examples";
+import { customInputs } from "./debug-inputs";
 
 export const challenge: Challenge<${pascal}Input, ${pascal}State> = {
   meta: {
@@ -96,31 +82,36 @@ export const challenge: Challenge<${pascal}Input, ${pascal}State> = {
     title: "${Title}",
     description: "TODO: describe this challenge in one sentence.",
   },
-  examples,
+  customInputs,
   Algorithm: ${pascal},
   Scene: ${pascal}Scene,
 };
 
-export function runDefault(): Trace<${pascal}State> {
-  return runAndTrace(${pascal}, examples[0].input);
+function firstInput(): ${pascal}Input {
+  const first = Object.values(customInputs)[0];
+  if (!first) throw new Error("${slug}: no customInputs defined");
+  return first.input;
 }
 
-export { ${pascal}, ${pascal}Scene, examples };
+export function runDefault(): Trace<${pascal}State> {
+  return runAndTrace(${pascal}, firstInput());
+}
+
+export { ${pascal}, ${pascal}Scene, customInputs };
 export type { ${pascal}Input, ${pascal}State };
 `;
 
 const debugInputs = `import type { ${pascal}Input } from "./algorithm";
 
-export const customInputs: Record<string, ${pascal}Input> = {
+export const customInputs: Record<string, { input: ${pascal}Input; description?: string }> = {
   // TODO: add your test inputs here, e.g.
-  //   empty: { /* ... */ } as ${pascal}Input,
-  //   small: { /* ... */ } as ${pascal}Input,
+  //   empty: { input: { /* ... */ } as ${pascal}Input },
+  //   small: { input: { /* ... */ } as ${pascal}Input, description: "..." },
 };
 `;
 
 writeFileSync(join(dir, "algorithm.ts"), algorithm);
 writeFileSync(join(dir, "scene.tsx"), scene);
-writeFileSync(join(dir, "examples.ts"), examples);
 writeFileSync(join(dir, "index.ts"), index);
 writeFileSync(join(dir, "debug-inputs.ts"), debugInputs);
 
@@ -129,8 +120,7 @@ console.log("");
 console.log("Next steps:");
 console.log(`  1. Edit algorithm.ts — define Input/State, implement run()`);
 console.log(`  2. Edit debug-inputs.ts — add test inputs (npm run debug ${slug})`);
-console.log(`  3. Edit examples.ts — pick 2–4 for the challenge page`);
-console.log(`  4. Edit index.ts — change title and description`);
-console.log(`  5. Run: npm run build:traces`);
-console.log(`  6. Run: npm run dev  (visit /challenges/${slug}/)`);
-console.log(`  7. Then come back for help with the visualization`);
+console.log(`  3. Edit index.ts — change title and description`);
+console.log(`  4. Run: npm run build:traces`);
+console.log(`  5. Run: npm run dev  (visit /challenges/${slug}/)`);
+console.log(`  6. Then come back for help with the visualization`);
