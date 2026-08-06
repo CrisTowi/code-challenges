@@ -179,7 +179,7 @@ export function ReorderScene({ snapshot }: { snapshot: Snapshot<ReorderState> })
                       ✓
                     </span>
                   )}
-                  <span className={styles.cellIndex}>[{i}]</span>
+                  <span className={styles.cellIndex}>[{arrayB[i]}]</span>
                 </div>
               );
             })}
@@ -261,7 +261,7 @@ export function ReorderScene({ snapshot }: { snapshot: Snapshot<ReorderState> })
                 >
                   {value}
                   {isVisited(i) && <span className={styles.settledBadge}>✓</span>}
-                  <span className={styles.cellIndex}>[{i}]</span>
+                  <span className={styles.cellIndex}>[{arrayB[i]}]</span>
                 </div>
               );
             })}
