@@ -1,0 +1,313 @@
+{
+  "snapshots": [
+    {
+      "state": {
+        "arrayA": [
+          "C",
+          "D",
+          "E",
+          "F",
+          "G",
+          "H"
+        ],
+        "arrayB": [
+          3,
+          0,
+          4,
+          1,
+          2,
+          5
+        ],
+        "currentIndexValue": -1,
+        "currentStrValue": "",
+        "visited": []
+      },
+      "label": "init"
+    },
+    {
+      "state": {
+        "arrayA": [
+          "C",
+          "D",
+          "E",
+          "C",
+          "G",
+          "H"
+        ],
+        "arrayB": [
+          3,
+          0,
+          4,
+          3,
+          2,
+          5
+        ],
+        "currentIndexValue": 1,
+        "currentStrValue": "F",
+        "visited": [
+          3
+        ]
+      },
+      "label": "swapped"
+    },
+    {
+      "state": {
+        "arrayA": [
+          "C",
+          "F",
+          "E",
+          "C",
+          "G",
+          "H"
+        ],
+        "arrayB": [
+          3,
+          1,
+          4,
+          3,
+          2,
+          5
+        ],
+        "currentIndexValue": 0,
+        "currentStrValue": "D",
+        "visited": [
+          3,
+          1
+        ]
+      },
+      "label": "swapped"
+    },
+    {
+      "state": {
+        "arrayA": [
+          "D",
+          "F",
+          "E",
+          "C",
+          "G",
+          "H"
+        ],
+        "arrayB": [
+          0,
+          1,
+          4,
+          3,
+          2,
+          5
+        ],
+        "currentIndexValue": 3,
+        "currentStrValue": "C",
+        "visited": [
+          3,
+          1,
+          0
+        ]
+      },
+      "label": "swapped"
+    },
+    {
+      "state": {
+        "arrayA": [
+          "D",
+          "F",
+          "E",
+          "C",
+          "G",
+          "H"
+        ],
+        "arrayB": [
+          0,
+          1,
+          4,
+          3,
+          2,
+          5
+        ],
+        "currentIndexValue": 3,
+        "currentStrValue": "C",
+        "visited": [
+          3,
+          1,
+          0
+        ]
+      },
+      "label": "foundCycle"
+    },
+    {
+      "state": {
+        "arrayA": [
+          "D",
+          "F",
+          "E",
+          "C",
+          "G",
+          "H"
+        ],
+        "arrayB": [
+          0,
+          1,
+          4,
+          3,
+          2,
+          5
+        ],
+        "currentIndexValue": 5,
+        "currentStrValue": "H",
+        "visited": [
+          3,
+          1,
+          0
+        ]
+      },
+      "label": "findNewStartingPoint"
+    },
+    {
+      "state": {
+        "arrayA": [
+          "D",
+          "F",
+          "E",
+          "C",
+          "G",
+          "H"
+        ],
+        "arrayB": [
+          0,
+          1,
+          4,
+          3,
+          2,
+          5
+        ],
+        "currentIndexValue": 5,
+        "currentStrValue": "H",
+        "visited": [
+          3,
+          1,
+          0,
+          5
+        ]
+      },
+      "label": "swapped"
+    },
+    {
+      "state": {
+        "arrayA": [
+          "D",
+          "F",
+          "E",
+          "C",
+          "G",
+          "H"
+        ],
+        "arrayB": [
+          0,
+          1,
+          4,
+          3,
+          2,
+          5
+        ],
+        "currentIndexValue": 5,
+        "currentStrValue": "H",
+        "visited": [
+          3,
+          1,
+          0,
+          5
+        ]
+      },
+      "label": "foundCycle"
+    },
+    {
+      "state": {
+        "arrayA": [
+          "D",
+          "F",
+          "E",
+          "C",
+          "G",
+          "H"
+        ],
+        "arrayB": [
+          0,
+          1,
+          4,
+          3,
+          2,
+          5
+        ],
+        "currentIndexValue": 2,
+        "currentStrValue": "G",
+        "visited": [
+          3,
+          1,
+          0,
+          5
+        ]
+      },
+      "label": "findNewStartingPoint"
+    },
+    {
+      "state": {
+        "arrayA": [
+          "D",
+          "F",
+          "G",
+          "C",
+          "G",
+          "H"
+        ],
+        "arrayB": [
+          0,
+          1,
+          2,
+          3,
+          2,
+          5
+        ],
+        "currentIndexValue": 4,
+        "currentStrValue": "E",
+        "visited": [
+          3,
+          1,
+          0,
+          5,
+          2
+        ]
+      },
+      "label": "swapped"
+    },
+    {
+      "state": {
+        "arrayA": [
+          "D",
+          "F",
+          "G",
+          "C",
+          "E",
+          "H"
+        ],
+        "arrayB": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "currentIndexValue": 2,
+        "currentStrValue": "G",
+        "visited": [
+          3,
+          1,
+          0,
+          5,
+          2,
+          4
+        ]
+      },
+      "label": "swapped"
+    }
+  ]
+}

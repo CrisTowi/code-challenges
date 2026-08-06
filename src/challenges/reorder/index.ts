@@ -8,7 +8,7 @@ export const challenge: Challenge<ReorderInput, ReorderState> = {
   meta: {
     slug: "reorder",
     title: "Reorder",
-    description: "TODO: describe this challenge in one sentence.",
+    description: "Reorder an array in place by following the destination indices, one cycle at a time.",
   },
   customInputs,
   Algorithm: Reorder,
