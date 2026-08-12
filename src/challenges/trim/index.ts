@@ -8,7 +8,8 @@ export const challenge: Challenge<TrimInput, TrimState> = {
   meta: {
     slug: "trim",
     title: "Trim",
-    description: "TODO: describe this challenge in one sentence.",
+    description:
+      "A project where you have to trim the blank spaces from a string at the leading, trailing, or both. With a nice visualization inspired by the Pacman video game, the pacman will gladly eat those white spaces for you.",
   },
   customInputs,
   Algorithm: Trim,
