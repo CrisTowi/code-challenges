@@ -1,0 +1,49 @@
+{
+  "snapshots": [
+    {
+      "state": {
+        "str": "   hello world   ",
+        "trimType": "leading",
+        "left": 0,
+        "right": 0
+      },
+      "label": "init"
+    },
+    {
+      "state": {
+        "str": "   hello world   ",
+        "trimType": "leading",
+        "left": 1,
+        "right": 0
+      },
+      "label": "moveLeftPointer"
+    },
+    {
+      "state": {
+        "str": "   hello world   ",
+        "trimType": "leading",
+        "left": 2,
+        "right": 0
+      },
+      "label": "moveLeftPointer"
+    },
+    {
+      "state": {
+        "str": "   hello world   ",
+        "trimType": "leading",
+        "left": 3,
+        "right": 0
+      },
+      "label": "moveLeftPointer"
+    },
+    {
+      "state": {
+        "str": "hello world   ",
+        "trimType": "leading",
+        "left": 3,
+        "right": 0
+      },
+      "label": "applyLeadingTrim"
+    }
+  ]
+}
