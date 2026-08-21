@@ -1,0 +1,24 @@
+{
+  "snapshots": [
+    {
+      "state": {
+        "count": 0,
+        "containerWidth": 10,
+        "containerHeight": 10,
+        "rectWidth": 3,
+        "rectHeight": 4
+      },
+      "label": "init"
+    },
+    {
+      "state": {
+        "count": 6,
+        "containerWidth": 10,
+        "containerHeight": 10,
+        "rectWidth": 3,
+        "rectHeight": 4
+      },
+      "label": "result"
+    }
+  ]
+}

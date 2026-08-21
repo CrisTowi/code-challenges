@@ -84,6 +84,35 @@ export function playSuccess() {
   });
 }
 
+export function playWoodKnock() {
+  if (muted) return;
+  const audio = getAudioContext();
+  if (audio.state === "suspended") {
+    void audio.resume();
+  }
+  const now = audio.currentTime;
+  const dur = 0.14;
+  // Two stacked sine bursts emulate the resonant body of wood being tapped.
+  const partials = [
+    { freq: 185, gain: 0.16, decay: dur },
+    { freq: 92, gain: 0.13, decay: dur * 1.6 },
+    { freq: 370, gain: 0.05, decay: dur * 0.5 },
+  ];
+  for (const p of partials) {
+    const osc = audio.createOscillator();
+    const gain = audio.createGain();
+    osc.type = "sine";
+    osc.frequency.value = p.freq;
+    gain.gain.setValueAtTime(0, now);
+    gain.gain.linearRampToValueAtTime(p.gain, now + 0.004);
+    gain.gain.exponentialRampToValueAtTime(0.0005, now + p.decay);
+    osc.connect(gain);
+    gain.connect(audio.destination);
+    osc.start(now);
+    osc.stop(now + p.decay + 0.02);
+  }
+}
+
 export function playFailure() {
   if (muted) return;
   const audio = getAudioContext();

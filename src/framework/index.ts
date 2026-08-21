@@ -7,6 +7,7 @@ export {
   playTone,
   playSuccess,
   playFailure,
+  playWoodKnock,
   valueToFrequency,
 } from "./audio";
 export type {

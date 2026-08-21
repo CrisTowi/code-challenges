@@ -34,6 +34,7 @@ export interface Challenge<I, S, O = void> {
   inputPlaceholder?: string;
   customInputs?: Record<string, Example<I>>;
   formatInput?: (input: I) => string;
+  mode?: "algorithm" | "game";
 }
 
 export type AnyChallenge = Challenge<unknown, unknown, unknown>;

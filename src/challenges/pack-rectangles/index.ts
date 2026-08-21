@@ -8,8 +8,9 @@ export const challenge: Challenge<PackRectanglesInput, PackRectanglesState> = {
   meta: {
     slug: "pack-rectangles",
     title: "Pack Rectangles",
-    description: "TODO: describe this challenge in one sentence.",
+    description: "Drag wooden rectangles onto the board — fit every piece the algorithm says is possible, rotating as needed.",
   },
+  mode: "game",
   customInputs,
   Algorithm: PackRectangles,
   Scene: PackRectanglesScene,

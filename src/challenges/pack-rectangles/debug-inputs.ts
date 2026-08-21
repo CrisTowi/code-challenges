@@ -30,7 +30,7 @@ export const customInputs: Record<string, { input: PackRectanglesInput; descript
   },
   mixed: {
     input: {
-      containerWidth: 3,
+      containerWidth: 4,
       containerHeight: 5,
       rectWidth: 3,
       rectHeight: 2,

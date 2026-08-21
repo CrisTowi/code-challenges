@@ -11,6 +11,7 @@ type ChallengeModule = {
     inputPlaceholder?: string;
     customInputs?: Record<string, { input: unknown; description?: string }>;
     formatInput?: (input: unknown) => string;
+    mode?: "algorithm" | "game";
   };
 };
 
@@ -29,6 +30,7 @@ export function Player({ slug, initialTrace }: PlayerProps) {
   const [inputPlaceholder, setInputPlaceholder] = useState<string>("");
   const [customInputs, setCustomInputs] = useState<ChallengeModule["challenge"]["customInputs"]>(undefined);
   const [formatInput, setFormatInput] = useState<ChallengeModule["challenge"]["formatInput"]>(undefined);
+  const [mode, setMode] = useState<"algorithm" | "game">("algorithm");
   const [index, setIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [speed, setSpeed] = useState(1);
@@ -38,7 +40,11 @@ export function Player({ slug, initialTrace }: PlayerProps) {
   const [customError, setCustomError] = useState<string | null>(null);
 
   const total = trace.snapshots.length;
-  const snapshot = trace.snapshots[index];
+  // In game mode the Scene needs the final, computed snapshot (e.g. the count),
+  // not the algorithm's init snapshot. For algorithm mode we honour `index` so
+  // the scrubber keeps working.
+  const effectiveIndex = mode === "game" ? total - 1 : Math.min(index, total - 1);
+  const snapshot = trace.snapshots[Math.max(0, effectiveIndex)];
 
   useEffect(() => {
     const modulePath = `/src/challenges/${slug}/index.ts`;
@@ -52,6 +58,7 @@ export function Player({ slug, initialTrace }: PlayerProps) {
         setInputPlaceholder(mod.challenge.inputPlaceholder ?? "");
         setCustomInputs(mod.challenge.customInputs);
         setFormatInput(() => mod.challenge.formatInput);
+        setMode(mod.challenge.mode ?? "algorithm");
       })
       .catch((err) => {
         console.error(`Player: failed to load ${modulePath}`, err);
@@ -138,6 +145,40 @@ export function Player({ slug, initialTrace }: PlayerProps) {
     return (
       <div className="panel" style={{ textAlign: "center", padding: "2rem" }}>
         <span className="subtitle">Loading scene…</span>
+      </div>
+    );
+  }
+
+  if (mode === "game") {
+    return (
+      <div>
+        <Scene snapshot={snapshot} />
+        <div className="player">
+          <div className="player__row">
+            <button className="btn btn--icon" onClick={toggleMute} aria-label="toggle sound">
+              {muted ? "🔇 mute" : "🔊 sound"}
+            </button>
+          </div>
+
+          {customInputs && Object.keys(customInputs).length > 0 && Algorithm && (
+            <>
+              <div className="subtitle">▸ boards</div>
+              <div className="levels">
+                {Object.entries(customInputs).map(([name, entry]) => (
+                  <button
+                    key={name}
+                    className="levels__item"
+                    onClick={() => runCustomInput(entry.input)}
+                    title={formatInput ? formatInput(entry.input) : name}
+                  >
+                    <span className="levels__name">{name}</span>
+                    {entry.description && <span className="levels__desc">{entry.description}</span>}
+                  </button>
+                ))}
+              </div>
+            </>
+          )}
+        </div>
       </div>
     );
   }

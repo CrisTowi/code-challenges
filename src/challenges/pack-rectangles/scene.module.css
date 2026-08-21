@@ -1,0 +1,450 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 0.75rem 0.75rem 0.5rem;
+  min-height: 320px;
+}
+
+/* ---------- Header strip ---------- */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  font-family: var(--font-display);
+  font-size: 0.5rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  flex-wrap: wrap;
+}
+
+.header__title {
+  color: var(--accent-2);
+}
+
+.header__chips {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.55rem;
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+}
+
+.chip--accent {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.chip--settled {
+  color: var(--sorted);
+  border-color: var(--sorted);
+}
+
+.chip--wood {
+  color: #d6a26a;
+  border-color: #d6a26a;
+}
+
+/* ---------- Board (container) ---------- */
+.boardWrap {
+  display: flex;
+  justify-content: center;
+  padding: 0.25rem;
+}
+
+.board {
+  position: relative;
+  width: var(--board-w);
+  height: var(--board-h);
+  background-color: #5a3a1c;
+  background-image:
+    repeating-linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.06) 0 2px,
+      rgba(255, 255, 255, 0.04) 2px 5px,
+      rgba(0, 0, 0, 0.05) 5px 7px,
+      rgba(255, 255, 255, 0.03) 7px 11px
+    ),
+    linear-gradient(180deg, #6c4424 0%, #4f3017 100%);
+  border: 3px solid #2b1a0a;
+  border-radius: 4px;
+  box-shadow:
+    inset 0 0 0 2px #8a5a30,
+    inset 0 -8px 12px rgba(0, 0, 0, 0.45),
+    inset 0 6px 10px rgba(255, 255, 255, 0.07),
+    0 8px 18px rgba(0, 0, 0, 0.55);
+  overflow: hidden;
+}
+
+/* The dotted panel grid: a fine dotted pattern drawn in the inner padding. */
+.boardGrid {
+  position: absolute;
+  inset: 4px;
+  background-image:
+    radial-gradient(circle, rgba(20, 12, 4, 0.55) 0.7px, transparent 1px);
+  background-size: var(--cell-size) var(--cell-size);
+  background-position: 0 0;
+  pointer-events: none;
+  opacity: 0.85;
+}
+
+/* The actual cell markers (dotted squares) we use for snap targets. */
+.cell {
+  position: absolute;
+  width: var(--cell-size);
+  height: var(--cell-size);
+  box-sizing: border-box;
+  border: 1px dashed rgba(20, 12, 4, 0.35);
+  pointer-events: none;
+}
+
+/* Tray piece placement on the board (z above grid, below placed pieces). */
+.boardDropPreview {
+  position: absolute;
+  pointer-events: none;
+  background: rgba(255, 213, 79, 0.18);
+  border: 2px dashed rgba(255, 213, 79, 0.75);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4) inset;
+}
+
+.boardDropPreview--invalid {
+  background: rgba(255, 85, 85, 0.22);
+  border-color: rgba(255, 85, 85, 0.9);
+}
+
+/* ---------- Tray ---------- */
+.tray {
+  position: relative;
+  margin-top: 0.25rem;
+  background-color: #4a3018;
+  background-image:
+    repeating-linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.07) 0 2px,
+      rgba(255, 255, 255, 0.04) 2px 5px,
+      rgba(0, 0, 0, 0.06) 5px 8px,
+      rgba(255, 255, 255, 0.03) 8px 12px
+    ),
+    linear-gradient(180deg, #563618 0%, #3a2410 100%);
+  border: 3px solid #2b1a0a;
+  border-top: 2px dashed var(--border-bright);
+  border-radius: 4px;
+  box-shadow:
+    inset 0 0 0 2px #6e4624,
+    inset 0 6px 10px rgba(0, 0, 0, 0.45),
+    0 4px 10px rgba(0, 0, 0, 0.45);
+  padding: 0.75rem;
+  min-height: var(--tray-min-h);
+}
+
+.trayLabel {
+  position: absolute;
+  top: -0.7rem;
+  left: 0.75rem;
+  font-family: var(--font-display);
+  font-size: 0.45rem;
+  color: var(--accent-2);
+  background: var(--bg);
+  padding: 0 0.4rem;
+  letter-spacing: 1px;
+}
+
+.trayInner {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: var(--tray-min-h);
+}
+
+.trayEmpty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  font-family: var(--font-display);
+  font-size: 0.5rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 1rem 0;
+}
+
+/* ---------- Pieces ---------- */
+.piece {
+  position: relative;
+  width: var(--piece-w);
+  height: var(--piece-h);
+  background-color: #c08254;
+  background-image:
+    repeating-linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.08) 0 1px,
+      rgba(255, 255, 255, 0.06) 1px 3px,
+      rgba(0, 0, 0, 0.06) 3px 6px,
+      rgba(255, 255, 255, 0.04) 6px 10px
+    ),
+    linear-gradient(160deg, #d3956a 0%, #a86838 55%, #834f24 100%);
+  border: 2px solid #3a230f;
+  border-radius: 3px;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.18),
+    inset 0 -5px 6px rgba(0, 0, 0, 0.4),
+    0 3px 0 rgba(0, 0, 0, 0.4),
+    0 4px 8px rgba(0, 0, 0, 0.45);
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(0, 0, 0, 0.55);
+  font-family: var(--font-display);
+  font-size: 0.4rem;
+  letter-spacing: 1px;
+  transition: transform 220ms cubic-bezier(0.65, 0, 0.35, 1), box-shadow 150ms ease, opacity 150ms ease;
+  will-change: transform;
+}
+
+.piece:hover {
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.22),
+    inset 0 -5px 6px rgba(0, 0, 0, 0.4),
+    0 3px 0 rgba(0, 0, 0, 0.4),
+    0 6px 14px rgba(0, 0, 0, 0.55);
+}
+
+.piece--dragging {
+  cursor: grabbing;
+  transform: scale(1.04);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.25),
+    inset 0 -5px 6px rgba(0, 0, 0, 0.4),
+    0 10px 24px rgba(0, 0, 0, 0.55);
+  z-index: 50;
+  transition: box-shadow 100ms ease;
+}
+
+.piece--placed {
+  cursor: default;
+  pointer-events: none;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.12),
+    inset 0 -5px 6px rgba(0, 0, 0, 0.5),
+    inset 0 3px 4px rgba(255, 255, 255, 0.1),
+    0 1px 0 rgba(0, 0, 0, 0.4),
+    0 2px 4px rgba(0, 0, 0, 0.35);
+}
+
+.piece--invalid {
+  animation: shake 320ms ease;
+}
+
+.piece__label {
+  pointer-events: none;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+
+/* Small rotate button overlay on each piece. */
+.rotateBtn {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1.5px solid #2b1a0a;
+  background: #f3c071;
+  font-family: var(--font-display);
+  font-size: 0.5rem;
+  line-height: 1;
+  color: #2b1a0a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+  z-index: 2;
+}
+
+.rotateBtn:hover {
+  background: #ffd089;
+}
+
+.rotateBtn:active {
+  transform: translateY(1px);
+}
+
+/* Placed pieces sitting on the board. */
+.placedPiece {
+  position: absolute;
+  width: var(--pp-w);
+  height: var(--pp-h);
+  z-index: 5;
+}
+
+/* ---------- Start overlay ---------- */
+.startOverlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 14, 39, 0.86);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  z-index: 90;
+  animation: fadeIn 320ms ease;
+  padding: 1rem;
+}
+
+.startCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 1.5rem 1.75rem;
+  background: var(--bg-panel);
+  border: 3px solid var(--accent);
+  box-shadow:
+    var(--shadow),
+    0 0 30px rgba(255, 121, 198, 0.35),
+    inset 0 0 0 1px rgba(255, 121, 198, 0.18);
+  max-width: 92%;
+  text-align: center;
+}
+
+.startTitle {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  color: var(--accent-2);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-shadow: 0 0 8px rgba(139, 233, 253, 0.45);
+}
+
+.startSubtitle {
+  font-family: var(--font-body);
+  font-size: 1.2rem;
+  color: var(--text);
+  line-height: 1.4;
+}
+
+.startMeta {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--text-dim);
+}
+
+.startTarget {
+  font-family: var(--font-display);
+  color: var(--accent);
+  font-size: 1.05em;
+  padding: 0 0.15rem;
+}
+
+.startDims {
+  font-family: var(--font-display);
+  color: var(--accent-2);
+  font-size: 0.9em;
+}
+
+.startBtn {
+  margin-top: 0.4rem;
+  font-size: 0.7rem;
+  padding: 0.85rem 2rem;
+  letter-spacing: 2px;
+  box-shadow: 0 0 18px rgba(255, 121, 198, 0.4);
+  animation: startPulse 1.4s ease-in-out infinite;
+}
+
+.startHint {
+  font-family: var(--font-display);
+  font-size: 0.42rem;
+  color: var(--text-dim);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-top: 0.25rem;
+}
+
+.startHint kbd {
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  padding: 0 0.35rem;
+  margin: 0 0.1rem;
+  font-family: var(--font-display);
+  font-size: 0.9em;
+  color: var(--text);
+}
+
+/* ---------- Win banner ---------- */
+.winBanner {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.5rem;
+  background: rgba(10, 14, 39, 0.78);
+  backdrop-filter: blur(2px);
+  z-index: 40;
+  animation: fadeIn 320ms ease;
+}
+
+.winBanner__title {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  color: var(--sorted);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-shadow: 0 0 10px rgba(80, 250, 123, 0.7);
+}
+
+.winBanner__sub {
+  font-family: var(--font-display);
+  font-size: 0.5rem;
+  color: var(--accent-2);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* ---------- Animations ---------- */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-4px); }
+  40% { transform: translateX(4px); }
+  60% { transform: translateX(-3px); }
+  80% { transform: translateX(2px); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes startPulse {
+  0%, 100% {
+    box-shadow: 0 0 14px rgba(255, 121, 198, 0.35);
+    transform: translateY(0);
+  }
+  50% {
+    box-shadow: 0 0 24px rgba(255, 121, 198, 0.65);
+    transform: translateY(-2px);
+  }
+}

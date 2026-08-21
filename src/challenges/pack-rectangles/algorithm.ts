@@ -58,11 +58,16 @@ export class PackRectangles extends TracedAlgorithm<PackRectanglesInput, PackRec
       ));
     }
 
-    return evaluateSquares(
+    const result = evaluateSquares(
       this.currentState.containerWidth,
       this.currentState.containerHeight,
       this.currentState.rectWidth,
       this.currentState.rectHeight
     );
+
+    this.currentState.count = result;
+    this.snapshot("result");
+
+    return result;
   }
 }
