@@ -4,6 +4,7 @@ import {
   ensureAudioRunning,
   playFailure,
   playSuccess,
+  playTone,
   playWoodKnock,
   setMuted,
   isMuted,
@@ -179,10 +180,6 @@ export function PackRectanglesScene({
   const [placements, setPlacements] = useState<Placement[]>([]);
   const [heldId, setHeldId] = useState<number | null>(null);
   const [pointer, setPointer] = useState<{ x: number; y: number } | null>(null);
-  const [preview, setPreview] = useState<
-    | { valid: boolean; x: number; y: number; w: number; h: number }
-    | null
-  >(null);
   const [solved, setSolved] = useState(false);
   const [started, setStarted] = useState(false);
 
@@ -200,7 +197,6 @@ export function PackRectanglesScene({
     setPlacements([]);
     setHeldId(null);
     setPointer(null);
-    setPreview(null);
     setSolved(false);
     setStarted(false);
   }, [targetCount, containerWidth, containerHeight, rectWidth, rectHeight]);
@@ -231,85 +227,108 @@ export function PackRectanglesScene({
 
   const boardRef = useRef<HTMLDivElement | null>(null);
 
+  // Pointer id of the finger currently dragging a piece. Used to distinguish
+  // "the dragging pointer" from any other pointer that lands while a piece is
+  // held (which we treat as a rotate trigger).
+  const draggingPointerIdRef = useRef<number | null>(null);
+  // Pointer ids of fingers whose pointerdown we ate for rotate; their pointerup
+  // must also be absorbed so the piece's React pointerup handler doesn't fire
+  // and treat the release as a placement.
+  const rotateOnlyPointersRef = useRef<Set<number>>(new Set());
+
+  // Board's bounding rect in viewport coords. Used by livePreview. Kept in
+  // state (not read directly from the DOM during render) so resizes/scroll
+  // recompute the preview.
+  const [boardRect, setBoardRect] = useState<DOMRect | null>(null);
+
+  useEffect(() => {
+    const update = () => {
+      const board = boardRef.current;
+      if (board) setBoardRect(board.getBoundingClientRect());
+    };
+    update();
+    window.addEventListener("resize", update);
+    window.addEventListener("scroll", update, true);
+    return () => {
+      window.removeEventListener("resize", update);
+      window.removeEventListener("scroll", update, true);
+    };
+  }, [gridW, gridH, cellSize]);
+
+  // ---- Rotate helpers ----------------------------------------------------
+  const rotatePiece = useCallback((pieceId: number) => {
+    setPieces((prev) =>
+      prev.map((p) =>
+        p.id === pieceId && !p.placed ? { ...p, rotated: !p.rotated } : p,
+      ),
+    );
+    void ensureAudioRunning();
+    playTone(660, 70);
+  }, []);
+
+  const onPointerDownRotate = useCallback(
+    (e: React.PointerEvent<HTMLButtonElement>, pieceId: number) => {
+      // Prevent the parent piece's drag from starting.
+      e.stopPropagation();
+      e.preventDefault();
+      rotatePiece(pieceId);
+    },
+    [rotatePiece],
+  );
+
   // ---- Drag handling ----------------------------------------------------
   const onPointerDownPiece = useCallback(
     (e: React.PointerEvent<HTMLDivElement>, pieceId: number) => {
       if (!started) return;
       const piece = pieces.find((p) => p.id === pieceId);
       if (!piece || piece.placed) return;
+      // If a piece is already being dragged by another finger, this pointerdown
+      // is the second finger of a two-finger rotate — don't steal the drag.
+      if (heldId !== null) {
+        e.stopPropagation();
+        e.preventDefault();
+        rotateOnlyPointersRef.current.add(e.pointerId);
+        rotatePiece(heldId);
+        return;
+      }
       void ensureAudioRunning();
       e.preventDefault();
       (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
+      draggingPointerIdRef.current = e.pointerId;
       setHeldId(pieceId);
       setPointer({ x: e.clientX, y: e.clientY });
-      setPreview(null);
     },
-    [pieces, started],
+    [pieces, started, heldId, rotatePiece],
   );
 
   const onPointerMovePiece = useCallback(
     (e: React.PointerEvent<HTMLDivElement>, pieceId: number) => {
       if (heldId !== pieceId) return;
       setPointer({ x: e.clientX, y: e.clientY });
-
-      // Compute preview against the board
-      const board = boardRef.current;
-      if (!board) {
-        setPreview(null);
-        return;
-      }
-      const rect = board.getBoundingClientRect();
-      const piece = pieces.find((p) => p.id === pieceId);
-      if (!piece) return;
-      const dims = rectDims(
-        { rectWidth: pieceCellsW, rectHeight: pieceCellsH },
-        piece.rotated,
-      );
-      const pxW = dims.w * cellSize;
-      const pxH = dims.h * cellSize;
-
-      // Anchor at the centre of the piece under the pointer.
-      const localX = e.clientX - rect.left - pxW / 2;
-      const localY = e.clientY - rect.top - pxH / 2;
-      const cellX = localX / cellSize;
-      const cellY = localY / cellSize;
-
-      const inside =
-        localX >= 0 &&
-        localY >= 0 &&
-        localX + pxW <= rect.width &&
-        localY + pxH <= rect.height;
-
-      if (!inside) {
-        setPreview(null);
-        return;
-      }
-
-      const snap = findSnapTarget(
-        occupied,
-        cellX,
-        cellY,
-        dims.w,
-        dims.h,
-        gridW,
-        gridH,
-      );
-      setPreview({ valid: snap.valid, x: snap.x, y: snap.y, w: dims.w, h: dims.h });
     },
-    [heldId, pieces, cellSize, pieceCellsW, pieceCellsH, occupied, gridW, gridH],
+    [heldId],
   );
 
   const onPointerUpPiece = useCallback(
     (e: React.PointerEvent<HTMLDivElement>, pieceId: number) => {
+      // If this pointer was consumed by the window two-finger rotate listener
+      // (or by onPointerDownPiece above), swallow it — it isn't a placement.
+      if (rotateOnlyPointersRef.current.has(e.pointerId)) {
+        rotateOnlyPointersRef.current.delete(e.pointerId);
+        try {
+          (e.currentTarget as HTMLElement).releasePointerCapture(e.pointerId);
+        } catch {
+          /* no-op */
+        }
+        return;
+      }
       if (heldId !== pieceId) {
         setHeldId(null);
         setPointer(null);
-        setPreview(null);
         return;
       }
       const piece = pieces.find((p) => p.id === pieceId);
-      const board = boardRef.current;
-      const rect = board?.getBoundingClientRect();
+      const rect = boardRect;
 
       if (piece && rect) {
         const dims = rectDims(
@@ -373,32 +392,87 @@ export function PackRectanglesScene({
       } catch {
         /* no-op: already released */
       }
+      draggingPointerIdRef.current = null;
       setHeldId(null);
       setPointer(null);
-      setPreview(null);
     },
-    [heldId, pieces, cellSize, pieceCellsW, pieceCellsH, occupied, gridW, gridH],
+    [heldId, pieces, cellSize, pieceCellsW, pieceCellsH, occupied, gridW, gridH, boardRect],
   );
 
-  // Rotate helpers --------------------------------------------------------
-  const rotatePiece = useCallback((pieceId: number) => {
-    setPieces((prev) =>
-      prev.map((p) =>
-        p.id === pieceId && !p.placed ? { ...p, rotated: !p.rotated } : p,
-      ),
+  // Live preview — derived from current state, so a two-finger rotate updates
+  // the snap box instantly (without waiting for the next pointermove).
+  const heldPiece = heldId != null ? pieces.find((p) => p.id === heldId) : null;
+  const livePreview = useMemo<
+    { valid: boolean; x: number; y: number; w: number; h: number } | null
+  >(() => {
+    if (!heldPiece || !pointer || !boardRect) return null;
+    const dims = rectDims(
+      { rectWidth: pieceCellsW, rectHeight: pieceCellsH },
+      heldPiece.rotated,
     );
-  }, []);
+    const pxW = dims.w * cellSize;
+    const pxH = dims.h * cellSize;
+    const localX = pointer.x - boardRect.left - pxW / 2;
+    const localY = pointer.y - boardRect.top - pxH / 2;
+    const inside =
+      localX >= 0 &&
+      localY >= 0 &&
+      localX + pxW <= boardRect.width &&
+      localY + pxH <= boardRect.height;
+    if (!inside) return null;
+    const snap = findSnapTarget(
+      occupied,
+      localX / cellSize,
+      localY / cellSize,
+      dims.w,
+      dims.h,
+      gridW,
+      gridH,
+    );
+    return {
+      valid: snap.valid,
+      x: snap.x,
+      y: snap.y,
+      w: dims.w,
+      h: dims.h,
+    };
+  }, [heldPiece, pointer, boardRect, cellSize, pieceCellsW, pieceCellsH, gridW, gridH, occupied]);
 
-  const onPointerDownRotate = useCallback(
-    (e: React.PointerEvent<HTMLButtonElement>, pieceId: number) => {
-      // Prevent the parent piece's drag from starting.
-      e.stopPropagation();
+  // Two-finger rotate: while a piece is being dragged, a second pointer
+  // anywhere on the page rotates it. Captured at the window level so it works
+  // regardless of where the second finger lands (board, tray, empty area).
+  useEffect(() => {
+    if (heldId === null) return;
+
+    const onSecondPointerDown = (e: PointerEvent) => {
+      // Ignore the dragging pointer itself.
+      if (e.pointerId === draggingPointerIdRef.current) return;
+      // Don't fight the OS / browser — only treat genuine touch / pen as rotate.
+      if (e.pointerType === "mouse" && e.button !== 0) return;
       e.preventDefault();
-      void ensureAudioRunning();
-      rotatePiece(pieceId);
-    },
-    [rotatePiece],
-  );
+      e.stopPropagation();
+      rotateOnlyPointersRef.current.add(e.pointerId);
+      rotatePiece(heldId);
+    };
+    const onSecondPointerEnd = (e: PointerEvent) => {
+      if (!rotateOnlyPointersRef.current.has(e.pointerId)) return;
+      rotateOnlyPointersRef.current.delete(e.pointerId);
+      e.preventDefault();
+      e.stopPropagation();
+    };
+
+    // Capture phase so we run before any element-bound handler that might
+    // treat the second pointer as the start of a new drag.
+    window.addEventListener("pointerdown", onSecondPointerDown, true);
+    window.addEventListener("pointerup", onSecondPointerEnd, true);
+    window.addEventListener("pointercancel", onSecondPointerEnd, true);
+    return () => {
+      window.removeEventListener("pointerdown", onSecondPointerDown, true);
+      window.removeEventListener("pointerup", onSecondPointerEnd, true);
+      window.removeEventListener("pointercancel", onSecondPointerEnd, true);
+      rotateOnlyPointersRef.current.clear();
+    };
+  }, [heldId, rotatePiece]);
 
   // Keyboard: R rotates the held piece (if any)
   useEffect(() => {
@@ -425,7 +499,8 @@ export function PackRectanglesScene({
     setPlacements([]);
     setHeldId(null);
     setPointer(null);
-    setPreview(null);
+    draggingPointerIdRef.current = null;
+    rotateOnlyPointersRef.current.clear();
     setSolved(false);
     // Keep `started` true: reset = "play again with the same board", no need
     // to re-show the Start overlay.
@@ -451,11 +526,6 @@ export function PackRectanglesScene({
 
   // Tray pieces
   const trayPieces = pieces.filter((p) => !p.placed);
-
-  // For the "currently held" piece we want it to render at the cursor (so it
-  // is clearly being dragged), not at its tray slot. We hide the tray slot
-  // for it and render a floating piece via pointer position.
-  const heldPiece = heldId != null ? pieces.find((p) => p.id === heldId) : null;
 
   return (
     <div className="scene">
@@ -502,14 +572,14 @@ export function PackRectanglesScene({
             </div>
 
             {/* Drop preview (yellow when valid, red when invalid) */}
-            {preview && (
+            {livePreview && (
               <div
-                className={`${styles.boardDropPreview} ${preview.valid ? "" : styles["boardDropPreview--invalid"]}`}
+                className={`${styles.boardDropPreview} ${livePreview.valid ? "" : styles["boardDropPreview--invalid"]}`}
                 style={{
-                  left: preview.x * cellSize,
-                  top: preview.y * cellSize,
-                  width: preview.w * cellSize,
-                  height: preview.h * cellSize,
+                  left: livePreview.x * cellSize,
+                  top: livePreview.y * cellSize,
+                  width: livePreview.w * cellSize,
+                  height: livePreview.h * cellSize,
                 }}
               />
             )}
