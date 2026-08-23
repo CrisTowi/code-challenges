@@ -528,8 +528,28 @@ export function PackRectanglesScene({
   const trayPieces = pieces.filter((p) => !p.placed);
 
   return (
-    <div className="scene">
-      <div className={styles.root} style={sceneStyle}>
+    <div
+      className="scene"
+      style={{
+        width: "fit-content",
+        maxWidth: "100%",
+        marginLeft: "auto",
+        marginRight: "auto",
+        padding: "0.5rem",
+        minHeight: 0,
+      }}
+    >
+      <div
+        className={styles.root}
+        style={{
+          ...sceneStyle,
+          width: "fit-content",
+          maxWidth: "100%",
+          marginLeft: "auto",
+          marginRight: "auto",
+          minHeight: 0,
+        }}
+      >
         <div className={styles.header}>
           <span className={styles.header__title}>▸ pack the board</span>
           <div className={styles.header__chips}>
