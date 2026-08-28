@@ -1,0 +1,368 @@
+{
+  "snapshots": [
+    {
+      "state": {
+        "inputArray": [
+          0,
+          3,
+          2,
+          1,
+          4,
+          0,
+          7
+        ],
+        "odd": [],
+        "even": [],
+        "zeroes": []
+      },
+      "label": "init"
+    },
+    {
+      "state": {
+        "inputArray": [
+          0,
+          3,
+          2,
+          1,
+          4,
+          0,
+          7
+        ],
+        "odd": [],
+        "even": [],
+        "zeroes": []
+      },
+      "label": "loop"
+    },
+    {
+      "state": {
+        "inputArray": [
+          0,
+          3,
+          2,
+          1,
+          4,
+          0,
+          7
+        ],
+        "odd": [],
+        "even": [],
+        "zeroes": [
+          0
+        ]
+      },
+      "label": "addZeroes"
+    },
+    {
+      "state": {
+        "inputArray": [
+          0,
+          3,
+          2,
+          1,
+          4,
+          0,
+          7
+        ],
+        "odd": [],
+        "even": [],
+        "zeroes": [
+          0
+        ]
+      },
+      "label": "loop"
+    },
+    {
+      "state": {
+        "inputArray": [
+          0,
+          3,
+          2,
+          1,
+          4,
+          0,
+          7
+        ],
+        "odd": [
+          3
+        ],
+        "even": [],
+        "zeroes": [
+          0
+        ]
+      },
+      "label": "addOdd"
+    },
+    {
+      "state": {
+        "inputArray": [
+          0,
+          3,
+          2,
+          1,
+          4,
+          0,
+          7
+        ],
+        "odd": [
+          3
+        ],
+        "even": [],
+        "zeroes": [
+          0
+        ]
+      },
+      "label": "loop"
+    },
+    {
+      "state": {
+        "inputArray": [
+          0,
+          3,
+          2,
+          1,
+          4,
+          0,
+          7
+        ],
+        "odd": [
+          3
+        ],
+        "even": [
+          2
+        ],
+        "zeroes": [
+          0
+        ]
+      },
+      "label": "addEven"
+    },
+    {
+      "state": {
+        "inputArray": [
+          0,
+          3,
+          2,
+          1,
+          4,
+          0,
+          7
+        ],
+        "odd": [
+          3
+        ],
+        "even": [
+          2
+        ],
+        "zeroes": [
+          0
+        ]
+      },
+      "label": "loop"
+    },
+    {
+      "state": {
+        "inputArray": [
+          0,
+          3,
+          2,
+          1,
+          4,
+          0,
+          7
+        ],
+        "odd": [
+          3,
+          1
+        ],
+        "even": [
+          2
+        ],
+        "zeroes": [
+          0
+        ]
+      },
+      "label": "addOdd"
+    },
+    {
+      "state": {
+        "inputArray": [
+          0,
+          3,
+          2,
+          1,
+          4,
+          0,
+          7
+        ],
+        "odd": [
+          3,
+          1
+        ],
+        "even": [
+          2
+        ],
+        "zeroes": [
+          0
+        ]
+      },
+      "label": "loop"
+    },
+    {
+      "state": {
+        "inputArray": [
+          0,
+          3,
+          2,
+          1,
+          4,
+          0,
+          7
+        ],
+        "odd": [
+          3,
+          1
+        ],
+        "even": [
+          2,
+          4
+        ],
+        "zeroes": [
+          0
+        ]
+      },
+      "label": "addEven"
+    },
+    {
+      "state": {
+        "inputArray": [
+          0,
+          3,
+          2,
+          1,
+          4,
+          0,
+          7
+        ],
+        "odd": [
+          3,
+          1
+        ],
+        "even": [
+          2,
+          4
+        ],
+        "zeroes": [
+          0
+        ]
+      },
+      "label": "loop"
+    },
+    {
+      "state": {
+        "inputArray": [
+          0,
+          3,
+          2,
+          1,
+          4,
+          0,
+          7
+        ],
+        "odd": [
+          3,
+          1
+        ],
+        "even": [
+          2,
+          4
+        ],
+        "zeroes": [
+          0,
+          0
+        ]
+      },
+      "label": "addZeroes"
+    },
+    {
+      "state": {
+        "inputArray": [
+          0,
+          3,
+          2,
+          1,
+          4,
+          0,
+          7
+        ],
+        "odd": [
+          3,
+          1
+        ],
+        "even": [
+          2,
+          4
+        ],
+        "zeroes": [
+          0,
+          0
+        ]
+      },
+      "label": "loop"
+    },
+    {
+      "state": {
+        "inputArray": [
+          0,
+          3,
+          2,
+          1,
+          4,
+          0,
+          7
+        ],
+        "odd": [
+          3,
+          1,
+          7
+        ],
+        "even": [
+          2,
+          4
+        ],
+        "zeroes": [
+          0,
+          0
+        ]
+      },
+      "label": "addOdd"
+    },
+    {
+      "state": {
+        "inputArray": [
+          0,
+          3,
+          2,
+          1,
+          4,
+          0,
+          7
+        ],
+        "odd": [
+          3,
+          1,
+          7
+        ],
+        "even": [
+          2,
+          4
+        ],
+        "zeroes": [
+          0,
+          0
+        ]
+      },
+      "label": "finishAlgorithm"
+    }
+  ]
+}
