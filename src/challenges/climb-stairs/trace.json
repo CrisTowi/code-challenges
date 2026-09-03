@@ -1,0 +1,67 @@
+{
+  "snapshots": [
+    {
+      "state": {
+        "steps": 1,
+        "total": 0,
+        "path": [],
+        "foundPaths": []
+      },
+      "label": "init"
+    },
+    {
+      "state": {
+        "steps": 1,
+        "total": 0,
+        "path": [
+          1
+        ],
+        "foundPaths": []
+      },
+      "label": "try 1"
+    },
+    {
+      "state": {
+        "steps": 1,
+        "total": 1,
+        "path": [
+          1
+        ],
+        "foundPaths": [
+          [
+            1
+          ]
+        ]
+      },
+      "label": "addingToTotal"
+    },
+    {
+      "state": {
+        "steps": 1,
+        "total": 1,
+        "path": [
+          2
+        ],
+        "foundPaths": [
+          [
+            1
+          ]
+        ]
+      },
+      "label": "try 2"
+    },
+    {
+      "state": {
+        "steps": 1,
+        "total": 1,
+        "path": [],
+        "foundPaths": [
+          [
+            1
+          ]
+        ]
+      },
+      "label": "done"
+    }
+  ]
+}

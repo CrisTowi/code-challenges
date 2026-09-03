@@ -1,0 +1,167 @@
+.sceneContent {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.75rem 1rem 0.5rem;
+  min-height: 440px;
+}
+
+.layout {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.legend {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 0.75rem;
+  font-family: var(--font-display);
+  font-size: 0.5rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.legend__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.6rem;
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+}
+
+.legend__chip--accent {
+  color: var(--accent-2);
+  border-color: var(--accent-2);
+}
+
+.legend__chip--sorted {
+  color: var(--sorted);
+  border-color: var(--sorted);
+}
+
+.treeScroll {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.5rem 0;
+  border-top: 2px dashed var(--border);
+  border-bottom: 2px dashed var(--border);
+  background: rgba(0, 0, 30, 0.4);
+  text-align: center;
+}
+
+.treeSvg {
+  display: inline-block;
+}
+
+.edge {
+  fill: none;
+  stroke: var(--border);
+  stroke-width: 1.5;
+  opacity: 0.7;
+  transition: stroke 200ms ease, opacity 200ms ease;
+}
+
+.edge--active {
+  stroke: var(--accent);
+  stroke-width: 2.5;
+  opacity: 1;
+  filter: drop-shadow(0 0 4px var(--accent));
+}
+
+.edgeLabel {
+  font-family: var(--font-display);
+  font-size: 0.5rem;
+  fill: var(--text-dim);
+  letter-spacing: 1px;
+}
+
+.edge--active + .edgeLabel,
+.edgeLabel {
+  fill: var(--text-dim);
+}
+
+.edge--active ~ .edgeLabel {
+  fill: var(--accent);
+}
+
+.node rect {
+  transition: fill 200ms ease, stroke 200ms ease, filter 200ms ease;
+}
+
+.node--current rect {
+  filter: drop-shadow(0 0 8px var(--accent));
+  stroke-width: 2.5;
+}
+
+.node--leaf rect {
+  filter: drop-shadow(0 0 6px var(--sorted));
+}
+
+.nodeText {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  fill: var(--text);
+}
+
+.nodeSubLabel {
+  font-family: var(--font-display);
+  font-size: 0.4rem;
+  fill: var(--text-dim);
+  letter-spacing: 1px;
+}
+
+.footer {
+  width: 100%;
+  margin-top: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  font-family: var(--font-display);
+  font-size: 0.5rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding-top: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.footer__label {
+  flex: 0 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--text);
+}
+
+.footer__chip {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.55rem;
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+}
+
+.footer__chip--accent {
+  color: var(--accent-2);
+  border-color: var(--accent-2);
+}
+
+.footer__chip--sorted {
+  color: var(--sorted);
+  border-color: var(--sorted);
+}

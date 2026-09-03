@@ -8,7 +8,8 @@ export const challenge: Challenge<ClimbStairsInput, ClimbStairsState> = {
   meta: {
     slug: "climb-stairs",
     title: "Climb Stairs",
-    description: "TODO: describe this challenge in one sentence.",
+    description:
+      "Count the distinct ways to climb n stairs taking 1 or 2 steps at a time. The recursion explores every path and counts the leaves.",
   },
   customInputs,
   Algorithm: ClimbStairs,
