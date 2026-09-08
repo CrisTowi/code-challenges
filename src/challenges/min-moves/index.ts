@@ -8,7 +8,7 @@ export const challenge: Challenge<MinMovesInput, MinMovesState> = {
   meta: {
     slug: "min-moves",
     title: "Min Moves",
-    description: "TODO: describe this challenge in one sentence.",
+    description: "Rotate each digit of a 4-dial lock the minimum number of clicks to reach the goal combination, counting both directions and wrapping 9→0 / 0→9.",
   },
   customInputs,
   Algorithm: MinMoves,
