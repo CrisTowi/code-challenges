@@ -1,0 +1,149 @@
+{
+  "snapshots": [
+    {
+      "state": {
+        "initial": "8051",
+        "goal": "1199",
+        "current": "8051",
+        "total": 0,
+        "directions": []
+      },
+      "label": "init"
+    },
+    {
+      "state": {
+        "initial": "8051",
+        "goal": "1199",
+        "current": "9051",
+        "total": 3,
+        "directions": [
+          "up"
+        ]
+      },
+      "label": "rotate-0-0"
+    },
+    {
+      "state": {
+        "initial": "8051",
+        "goal": "1199",
+        "current": "0051",
+        "total": 3,
+        "directions": [
+          "up"
+        ]
+      },
+      "label": "rotate-0-1"
+    },
+    {
+      "state": {
+        "initial": "8051",
+        "goal": "1199",
+        "current": "1051",
+        "total": 3,
+        "directions": [
+          "up"
+        ]
+      },
+      "label": "rotate-0-2"
+    },
+    {
+      "state": {
+        "initial": "8051",
+        "goal": "1199",
+        "current": "1151",
+        "total": 4,
+        "directions": [
+          "up",
+          "up"
+        ]
+      },
+      "label": "rotate-1-0"
+    },
+    {
+      "state": {
+        "initial": "8051",
+        "goal": "1199",
+        "current": "1161",
+        "total": 8,
+        "directions": [
+          "up",
+          "up",
+          "up"
+        ]
+      },
+      "label": "rotate-2-0"
+    },
+    {
+      "state": {
+        "initial": "8051",
+        "goal": "1199",
+        "current": "1171",
+        "total": 8,
+        "directions": [
+          "up",
+          "up",
+          "up"
+        ]
+      },
+      "label": "rotate-2-1"
+    },
+    {
+      "state": {
+        "initial": "8051",
+        "goal": "1199",
+        "current": "1181",
+        "total": 8,
+        "directions": [
+          "up",
+          "up",
+          "up"
+        ]
+      },
+      "label": "rotate-2-2"
+    },
+    {
+      "state": {
+        "initial": "8051",
+        "goal": "1199",
+        "current": "1191",
+        "total": 8,
+        "directions": [
+          "up",
+          "up",
+          "up"
+        ]
+      },
+      "label": "rotate-2-3"
+    },
+    {
+      "state": {
+        "initial": "8051",
+        "goal": "1199",
+        "current": "1190",
+        "total": 10,
+        "directions": [
+          "up",
+          "up",
+          "up",
+          "down"
+        ]
+      },
+      "label": "rotate-3-0"
+    },
+    {
+      "state": {
+        "initial": "8051",
+        "goal": "1199",
+        "current": "1199",
+        "total": 10,
+        "directions": [
+          "up",
+          "up",
+          "up",
+          "down"
+        ]
+      },
+      "label": "rotate-3-1"
+    }
+  ]
+}

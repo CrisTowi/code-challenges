@@ -17,6 +17,7 @@ if (!slug) {
 }
 
 const challengeFile = join(process.cwd(), "src", "challenges", slug, "index.ts");
+const algorithmFile = join(process.cwd(), "src", "challenges", slug, "algorithm.ts");
 const debugInputsFile = join(process.cwd(), "src", "challenges", slug, "debug-inputs.ts");
 
 if (!existsSync(challengeFile)) {
@@ -26,9 +27,15 @@ if (!existsSync(challengeFile)) {
   process.exit(1);
 }
 
-const mod = await import(challengeFile);
-if (!mod.challenge?.Algorithm) {
-  console.error(`Challenge "${slug}" has no Algorithm export.`);
+const pascal = slug
+  .split("-")
+  .map((s) => s[0].toUpperCase() + s.slice(1))
+  .join("");
+
+const algoMod = await import(algorithmFile);
+const Algorithm = algoMod[pascal];
+if (!Algorithm) {
+  console.error(`Challenge "${slug}" has no class named ${pascal} in algorithm.ts.`);
   process.exit(1);
 }
 
@@ -41,9 +48,7 @@ if (existsSync(debugInputsFile)) {
     process.exit(1);
   }
 } else {
-  inputs = Object.fromEntries(
-    mod.challenge.examples.map((ex: { name: string; input: unknown }) => [ex.name, ex.input]),
-  );
+  inputs = {};
 }
 
 if (!inputName) {
@@ -63,7 +68,7 @@ if (input === undefined) {
   process.exit(1);
 }
 
-const algo = new mod.challenge.Algorithm(input);
+const algo = new Algorithm(input);
 const result = algo.run();
 const trace = algo.getTrace();
 
