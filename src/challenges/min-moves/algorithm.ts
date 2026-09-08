@@ -50,6 +50,10 @@ export class MinMoves extends TracedAlgorithm<MinMovesInput, MinMovesState> {
 
       const direction = this.currentState.directions[i];
       const delta = direction === "up" ? 1 : -1;
+      // Visualization only: step the dial one click at a time so the Scene
+      // can animate the slot-machine wrap (e.g. 8 → 9 → 0 → 1) and the
+      // Player's scrubber can land on each intermediate value.
+      // This is not part of the algorithm's answer — the answer is `total`.
       for (let step = 0; step < compare(currentItem, goalItem); step++) {
         const nextVal = (Number.parseInt(this.currentState.current[i]) + delta + 10) % 10;
         this.currentState.current =
