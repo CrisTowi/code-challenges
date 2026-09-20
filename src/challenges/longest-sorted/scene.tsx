@@ -8,10 +8,6 @@ import {
 import type { LongestSortedState } from "./algorithm";
 import styles from "./scene.module.css";
 
-const CELL_W = 40;
-const CELL_GAP = 4;
-
-const COMPARE_HZ = 523.25;
 const PICK_HZ = 392.0;
 const FAIL_HZ = 196.0;
 const SORTED_HZ = 659.25;
@@ -19,12 +15,8 @@ const UPDATE_HZ = 880.0;
 
 function letterClass(
   isCurrent: boolean,
-  letterIndex: number | null,
-  lastFailedAt: number | null,
-  sortedResult: boolean | null,
   wordStatus: "pending" | "accepted" | "rejected" | undefined,
   isWinner: boolean,
-  j: number,
 ): string {
   const classes = [styles.cell];
 
@@ -35,13 +27,6 @@ function letterClass(
     if (isWinner) classes.push(styles["cell--isWinner"]);
   } else if (isCurrent) {
     classes.push(styles["cell--inCurrent"]);
-    if (sortedResult === false && lastFailedAt != null) {
-      if (j === lastFailedAt) classes.push(styles["cell--failedCurr"]);
-      else if (j === lastFailedAt - 1) classes.push(styles["cell--failedPrev"]);
-    } else if (letterIndex != null) {
-      if (j === letterIndex) classes.push(styles["cell--current"]);
-      else if (j === letterIndex - 1) classes.push(styles["cell--prev"]);
-    }
   } else {
     classes.push(styles["cell--pending"]);
   }
@@ -49,25 +34,23 @@ function letterClass(
   return classes.join(" ");
 }
 
+function deriveWords(input: string): string[] {
+  return input
+    .split(" ")
+    .map((w) => w.replace(/\W/g, ""))
+    .filter((w) => w.length > 0);
+}
+
 export function LongestSortedScene({
   snapshot,
 }: {
   snapshot: Snapshot<LongestSortedState>;
 }) {
-  const {
-    input,
-    words,
-    wordIndex,
-    letterIndex,
-    sortedResult,
-    lastFailedAt,
-    wordStatuses,
-    currentLongest,
-  } = snapshot.state;
+  const { input, wordIndex, wordStatuses, currentLongest } = snapshot.state;
+  const words = deriveWords(input);
   const label = snapshot.label;
   const isDone = label === "done";
   const isInitOrPick = label === "initWords" || label === "pickWord";
-  const isCompare = label === "compare";
   const isNotSorted = label === "notSorted";
   const isSorted = label === "sorted";
   const isLongestUpdate = label === "longestUpdate";
@@ -83,31 +66,16 @@ export function LongestSortedScene({
     void ensureAudioRunning();
 
     if (isInitOrPick) playTone(PICK_HZ, 50);
-    else if (isCompare) playTone(COMPARE_HZ, 55);
     else if (isNotSorted) playTone(FAIL_HZ, 180);
     else if (isSorted) playTone(SORTED_HZ, 80);
     else if (isLongestUpdate) playTone(UPDATE_HZ, 110);
     else if (isDone) playSuccess();
-  }, [label, isInitOrPick, isCompare, isNotSorted, isSorted, isLongestUpdate, isDone]);
-
-  const currentWord = wordIndex != null ? words[wordIndex] : null;
-  const currentLetterChar = currentWord && letterIndex != null ? currentWord[letterIndex] : null;
-  const prevLetterChar =
-    currentWord && letterIndex != null && letterIndex > 0
-      ? currentWord[letterIndex - 1]
-      : null;
-
-  const compareArrowLeft =
-    letterIndex != null
-      ? (letterIndex - 1) * (CELL_W + CELL_GAP) + CELL_W + CELL_GAP / 2
-      : 0;
-  const compareArrowVisible = isCompare && currentWord && letterIndex != null && letterIndex > 0;
+  }, [label, isInitOrPick, isNotSorted, isSorted, isLongestUpdate, isDone]);
 
   const renderWordRow = (word: string, i: number) => {
     const isCurr = isCurrentWord(i);
     const status = wordStatus(i);
     const isWinnerWord = word === currentLongest && currentLongest.length > 0;
-    const showArrowHere = compareArrowVisible && isCurr;
     return (
       <div key={`word-${i}`} className={styles.wordRow}>
         <span className={styles.wordRow__index}>{i}</span>
@@ -115,28 +83,11 @@ export function LongestSortedScene({
           {Array.from(word, (ch, j) => (
             <div
               key={`cell-${i}-${j}`}
-              className={letterClass(
-                isCurr,
-                letterIndex,
-                lastFailedAt,
-                sortedResult,
-                status,
-                isWinnerWord,
-                j,
-              )}
+              className={letterClass(isCurr, status, isWinnerWord)}
             >
               {ch}
             </div>
           ))}
-          {showArrowHere && (
-            <span
-              key={`arrow-${label}-${letterIndex}`}
-              className={styles.compareArrow}
-              style={{ left: `${compareArrowLeft}px` }}
-            >
-              ≤
-            </span>
-          )}
           {status === "accepted" && (
             <span key={`check-${i}`} className={styles.checkBadge}>
               <svg className={styles.badgeIcon} viewBox="0 0 24 24" aria-hidden="true">
@@ -159,17 +110,10 @@ export function LongestSortedScene({
   const showFinalWinner = isDone && currentLongest.length > 0;
 
   const renderFooterChip = () => {
-    if (isCompare && currentWord && letterIndex != null && letterIndex > 0) {
-      return (
-        <span className={styles.footer__chip}>
-          {prevLetterChar} ≤ {currentLetterChar} ✓
-        </span>
-      );
-    }
-    if (isNotSorted && currentWord && lastFailedAt != null && lastFailedAt > 0) {
+    if (isNotSorted) {
       return (
         <span className={`${styles.footer__chip} ${styles["footer__chip--fail"]}`}>
-          {currentWord[lastFailedAt - 1]} &gt; {currentWord[lastFailedAt]} ✗
+          ✗ not sorted
         </span>
       );
     }
@@ -195,9 +139,7 @@ export function LongestSortedScene({
       );
     }
     if (isDone) {
-      return (
-        <span className={styles.footer__chip}>no sorted word found</span>
-      );
+      return <span className={styles.footer__chip}>no sorted word found</span>;
     }
     return <span className={styles.footer__chip}>—</span>;
   };

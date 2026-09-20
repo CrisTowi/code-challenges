@@ -3,17 +3,7 @@
     {
       "state": {
         "input": "The autumn leaves almost glow.",
-        "words": [
-          "The",
-          "autumn",
-          "leaves",
-          "almost",
-          "glow"
-        ],
         "wordIndex": null,
-        "letterIndex": null,
-        "sortedResult": null,
-        "lastFailedAt": null,
         "wordStatuses": [
           "pending",
           "pending",
@@ -28,42 +18,7 @@
     {
       "state": {
         "input": "The autumn leaves almost glow.",
-        "words": [
-          "The",
-          "autumn",
-          "leaves",
-          "almost",
-          "glow"
-        ],
-        "wordIndex": null,
-        "letterIndex": null,
-        "sortedResult": null,
-        "lastFailedAt": null,
-        "wordStatuses": [
-          "pending",
-          "pending",
-          "pending",
-          "pending",
-          "pending"
-        ],
-        "currentLongest": ""
-      },
-      "label": "initWords"
-    },
-    {
-      "state": {
-        "input": "The autumn leaves almost glow.",
-        "words": [
-          "The",
-          "autumn",
-          "leaves",
-          "almost",
-          "glow"
-        ],
         "wordIndex": 0,
-        "letterIndex": null,
-        "sortedResult": null,
-        "lastFailedAt": null,
         "wordStatuses": [
           "pending",
           "pending",
@@ -78,67 +33,7 @@
     {
       "state": {
         "input": "The autumn leaves almost glow.",
-        "words": [
-          "The",
-          "autumn",
-          "leaves",
-          "almost",
-          "glow"
-        ],
         "wordIndex": 0,
-        "letterIndex": 1,
-        "sortedResult": null,
-        "lastFailedAt": null,
-        "wordStatuses": [
-          "pending",
-          "pending",
-          "pending",
-          "pending",
-          "pending"
-        ],
-        "currentLongest": ""
-      },
-      "label": "compare"
-    },
-    {
-      "state": {
-        "input": "The autumn leaves almost glow.",
-        "words": [
-          "The",
-          "autumn",
-          "leaves",
-          "almost",
-          "glow"
-        ],
-        "wordIndex": 0,
-        "letterIndex": 2,
-        "sortedResult": null,
-        "lastFailedAt": null,
-        "wordStatuses": [
-          "pending",
-          "pending",
-          "pending",
-          "pending",
-          "pending"
-        ],
-        "currentLongest": ""
-      },
-      "label": "compare"
-    },
-    {
-      "state": {
-        "input": "The autumn leaves almost glow.",
-        "words": [
-          "The",
-          "autumn",
-          "leaves",
-          "almost",
-          "glow"
-        ],
-        "wordIndex": 0,
-        "letterIndex": 2,
-        "sortedResult": false,
-        "lastFailedAt": 2,
         "wordStatuses": [
           "rejected",
           "pending",
@@ -153,17 +48,7 @@
     {
       "state": {
         "input": "The autumn leaves almost glow.",
-        "words": [
-          "The",
-          "autumn",
-          "leaves",
-          "almost",
-          "glow"
-        ],
         "wordIndex": 1,
-        "letterIndex": null,
-        "sortedResult": null,
-        "lastFailedAt": null,
         "wordStatuses": [
           "rejected",
           "pending",
@@ -178,67 +63,7 @@
     {
       "state": {
         "input": "The autumn leaves almost glow.",
-        "words": [
-          "The",
-          "autumn",
-          "leaves",
-          "almost",
-          "glow"
-        ],
         "wordIndex": 1,
-        "letterIndex": 1,
-        "sortedResult": null,
-        "lastFailedAt": null,
-        "wordStatuses": [
-          "rejected",
-          "pending",
-          "pending",
-          "pending",
-          "pending"
-        ],
-        "currentLongest": ""
-      },
-      "label": "compare"
-    },
-    {
-      "state": {
-        "input": "The autumn leaves almost glow.",
-        "words": [
-          "The",
-          "autumn",
-          "leaves",
-          "almost",
-          "glow"
-        ],
-        "wordIndex": 1,
-        "letterIndex": 2,
-        "sortedResult": null,
-        "lastFailedAt": null,
-        "wordStatuses": [
-          "rejected",
-          "pending",
-          "pending",
-          "pending",
-          "pending"
-        ],
-        "currentLongest": ""
-      },
-      "label": "compare"
-    },
-    {
-      "state": {
-        "input": "The autumn leaves almost glow.",
-        "words": [
-          "The",
-          "autumn",
-          "leaves",
-          "almost",
-          "glow"
-        ],
-        "wordIndex": 1,
-        "letterIndex": 2,
-        "sortedResult": false,
-        "lastFailedAt": 2,
         "wordStatuses": [
           "rejected",
           "rejected",
@@ -253,17 +78,7 @@
     {
       "state": {
         "input": "The autumn leaves almost glow.",
-        "words": [
-          "The",
-          "autumn",
-          "leaves",
-          "almost",
-          "glow"
-        ],
         "wordIndex": 2,
-        "letterIndex": null,
-        "sortedResult": null,
-        "lastFailedAt": null,
         "wordStatuses": [
           "rejected",
           "rejected",
@@ -278,42 +93,7 @@
     {
       "state": {
         "input": "The autumn leaves almost glow.",
-        "words": [
-          "The",
-          "autumn",
-          "leaves",
-          "almost",
-          "glow"
-        ],
         "wordIndex": 2,
-        "letterIndex": 1,
-        "sortedResult": null,
-        "lastFailedAt": null,
-        "wordStatuses": [
-          "rejected",
-          "rejected",
-          "pending",
-          "pending",
-          "pending"
-        ],
-        "currentLongest": ""
-      },
-      "label": "compare"
-    },
-    {
-      "state": {
-        "input": "The autumn leaves almost glow.",
-        "words": [
-          "The",
-          "autumn",
-          "leaves",
-          "almost",
-          "glow"
-        ],
-        "wordIndex": 2,
-        "letterIndex": 1,
-        "sortedResult": false,
-        "lastFailedAt": 1,
         "wordStatuses": [
           "rejected",
           "rejected",
@@ -328,17 +108,7 @@
     {
       "state": {
         "input": "The autumn leaves almost glow.",
-        "words": [
-          "The",
-          "autumn",
-          "leaves",
-          "almost",
-          "glow"
-        ],
         "wordIndex": 3,
-        "letterIndex": null,
-        "sortedResult": null,
-        "lastFailedAt": null,
         "wordStatuses": [
           "rejected",
           "rejected",
@@ -353,142 +123,7 @@
     {
       "state": {
         "input": "The autumn leaves almost glow.",
-        "words": [
-          "The",
-          "autumn",
-          "leaves",
-          "almost",
-          "glow"
-        ],
         "wordIndex": 3,
-        "letterIndex": 1,
-        "sortedResult": null,
-        "lastFailedAt": null,
-        "wordStatuses": [
-          "rejected",
-          "rejected",
-          "rejected",
-          "pending",
-          "pending"
-        ],
-        "currentLongest": ""
-      },
-      "label": "compare"
-    },
-    {
-      "state": {
-        "input": "The autumn leaves almost glow.",
-        "words": [
-          "The",
-          "autumn",
-          "leaves",
-          "almost",
-          "glow"
-        ],
-        "wordIndex": 3,
-        "letterIndex": 2,
-        "sortedResult": null,
-        "lastFailedAt": null,
-        "wordStatuses": [
-          "rejected",
-          "rejected",
-          "rejected",
-          "pending",
-          "pending"
-        ],
-        "currentLongest": ""
-      },
-      "label": "compare"
-    },
-    {
-      "state": {
-        "input": "The autumn leaves almost glow.",
-        "words": [
-          "The",
-          "autumn",
-          "leaves",
-          "almost",
-          "glow"
-        ],
-        "wordIndex": 3,
-        "letterIndex": 3,
-        "sortedResult": null,
-        "lastFailedAt": null,
-        "wordStatuses": [
-          "rejected",
-          "rejected",
-          "rejected",
-          "pending",
-          "pending"
-        ],
-        "currentLongest": ""
-      },
-      "label": "compare"
-    },
-    {
-      "state": {
-        "input": "The autumn leaves almost glow.",
-        "words": [
-          "The",
-          "autumn",
-          "leaves",
-          "almost",
-          "glow"
-        ],
-        "wordIndex": 3,
-        "letterIndex": 4,
-        "sortedResult": null,
-        "lastFailedAt": null,
-        "wordStatuses": [
-          "rejected",
-          "rejected",
-          "rejected",
-          "pending",
-          "pending"
-        ],
-        "currentLongest": ""
-      },
-      "label": "compare"
-    },
-    {
-      "state": {
-        "input": "The autumn leaves almost glow.",
-        "words": [
-          "The",
-          "autumn",
-          "leaves",
-          "almost",
-          "glow"
-        ],
-        "wordIndex": 3,
-        "letterIndex": 5,
-        "sortedResult": null,
-        "lastFailedAt": null,
-        "wordStatuses": [
-          "rejected",
-          "rejected",
-          "rejected",
-          "pending",
-          "pending"
-        ],
-        "currentLongest": ""
-      },
-      "label": "compare"
-    },
-    {
-      "state": {
-        "input": "The autumn leaves almost glow.",
-        "words": [
-          "The",
-          "autumn",
-          "leaves",
-          "almost",
-          "glow"
-        ],
-        "wordIndex": 3,
-        "letterIndex": null,
-        "sortedResult": true,
-        "lastFailedAt": null,
         "wordStatuses": [
           "rejected",
           "rejected",
@@ -503,17 +138,7 @@
     {
       "state": {
         "input": "The autumn leaves almost glow.",
-        "words": [
-          "The",
-          "autumn",
-          "leaves",
-          "almost",
-          "glow"
-        ],
         "wordIndex": 3,
-        "letterIndex": null,
-        "sortedResult": true,
-        "lastFailedAt": null,
         "wordStatuses": [
           "rejected",
           "rejected",
@@ -528,17 +153,7 @@
     {
       "state": {
         "input": "The autumn leaves almost glow.",
-        "words": [
-          "The",
-          "autumn",
-          "leaves",
-          "almost",
-          "glow"
-        ],
         "wordIndex": 4,
-        "letterIndex": null,
-        "sortedResult": null,
-        "lastFailedAt": null,
         "wordStatuses": [
           "rejected",
           "rejected",
@@ -553,92 +168,7 @@
     {
       "state": {
         "input": "The autumn leaves almost glow.",
-        "words": [
-          "The",
-          "autumn",
-          "leaves",
-          "almost",
-          "glow"
-        ],
         "wordIndex": 4,
-        "letterIndex": 1,
-        "sortedResult": null,
-        "lastFailedAt": null,
-        "wordStatuses": [
-          "rejected",
-          "rejected",
-          "rejected",
-          "accepted",
-          "pending"
-        ],
-        "currentLongest": "almost"
-      },
-      "label": "compare"
-    },
-    {
-      "state": {
-        "input": "The autumn leaves almost glow.",
-        "words": [
-          "The",
-          "autumn",
-          "leaves",
-          "almost",
-          "glow"
-        ],
-        "wordIndex": 4,
-        "letterIndex": 2,
-        "sortedResult": null,
-        "lastFailedAt": null,
-        "wordStatuses": [
-          "rejected",
-          "rejected",
-          "rejected",
-          "accepted",
-          "pending"
-        ],
-        "currentLongest": "almost"
-      },
-      "label": "compare"
-    },
-    {
-      "state": {
-        "input": "The autumn leaves almost glow.",
-        "words": [
-          "The",
-          "autumn",
-          "leaves",
-          "almost",
-          "glow"
-        ],
-        "wordIndex": 4,
-        "letterIndex": 3,
-        "sortedResult": null,
-        "lastFailedAt": null,
-        "wordStatuses": [
-          "rejected",
-          "rejected",
-          "rejected",
-          "accepted",
-          "pending"
-        ],
-        "currentLongest": "almost"
-      },
-      "label": "compare"
-    },
-    {
-      "state": {
-        "input": "The autumn leaves almost glow.",
-        "words": [
-          "The",
-          "autumn",
-          "leaves",
-          "almost",
-          "glow"
-        ],
-        "wordIndex": 4,
-        "letterIndex": null,
-        "sortedResult": true,
-        "lastFailedAt": null,
         "wordStatuses": [
           "rejected",
           "rejected",
@@ -653,17 +183,7 @@
     {
       "state": {
         "input": "The autumn leaves almost glow.",
-        "words": [
-          "The",
-          "autumn",
-          "leaves",
-          "almost",
-          "glow"
-        ],
         "wordIndex": null,
-        "letterIndex": null,
-        "sortedResult": null,
-        "lastFailedAt": null,
         "wordStatuses": [
           "rejected",
           "rejected",
