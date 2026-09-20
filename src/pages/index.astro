@@ -22,9 +22,26 @@ const base = import.meta.env.BASE_URL;
 
       <div>
         <div class="subtitle">▸ available challenges</div>
-        <ul class="challenge-list">
+
+        <div class="search">
+          <label class="search__label" for="challenge-search">▸ search</label>
+          <input
+            id="challenge-search"
+            class="search__input"
+            type="search"
+            placeholder="filter by name, description, or slug..."
+            autocomplete="off"
+            spellcheck="false"
+          />
+          <span class="search__count" id="challenge-count"></span>
+        </div>
+
+        <ul class="challenge-list" id="challenge-list">
           {challenges.map((c) => (
-            <li class="challenge-list__item">
+            <li
+              class="challenge-list__item"
+              data-search={`${c.slug} ${c.title} ${c.description}`.toLowerCase()}
+            >
               <a href={`${base}challenges/${c.slug}/`}>
                 <h2>{c.title}</h2>
                 <p>{c.description}</p>
@@ -32,7 +49,38 @@ const base = import.meta.env.BASE_URL;
             </li>
           ))}
         </ul>
+
+        <p class="search__empty" id="challenge-empty" hidden>
+          ▸ no challenges match your search
+        </p>
       </div>
     </main>
+
+    <script>
+      const input = document.getElementById("challenge-search") as HTMLInputElement | null;
+      const items = Array.from(
+        document.querySelectorAll<HTMLLIElement>("#challenge-list .challenge-list__item"),
+      );
+      const empty = document.getElementById("challenge-empty");
+      const count = document.getElementById("challenge-count");
+      const total = items.length;
+
+      function applyFilter() {
+        if (!input || !empty || !count) return;
+        const q = input.value.trim().toLowerCase();
+        let visible = 0;
+        for (const item of items) {
+          const haystack = item.dataset.search ?? "";
+          const match = q === "" || haystack.includes(q);
+          item.hidden = !match;
+          if (match) visible++;
+        }
+        count.textContent = q === "" ? `${total} total` : `${visible} / ${total}`;
+        empty.hidden = visible !== 0 || q === "";
+      }
+
+      input?.addEventListener("input", applyFilter);
+      applyFilter();
+    </script>
   </body>
 </html>

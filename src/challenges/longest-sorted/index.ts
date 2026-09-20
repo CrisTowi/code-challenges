@@ -8,7 +8,7 @@ export const challenge: Challenge<LongestSortedInput, LongestSortedState> = {
   meta: {
     slug: "longest-sorted",
     title: "Longest Sorted",
-    description: "TODO: describe this challenge in one sentence.",
+    description: "Find the longest word in a sentence whose letters appear in alphabetical order (e.g. \"almost\").",
   },
   customInputs,
   Algorithm: LongestSorted,

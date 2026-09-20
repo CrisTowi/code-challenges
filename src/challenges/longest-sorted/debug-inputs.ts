@@ -17,10 +17,6 @@ export const customInputs: Record<string, { input: LongestSortedInput; descripti
     input: { input: "abc" },
     description: "One word, already sorted",
   },
-  singleUnsorted: {
-    input: { input: "zoo" },
-    description: "One word, not sorted — returns ''",
-  },
   tied: {
     input: { input: "abb acc" },
     description: "Two equal-length winners — first one wins (uses >, not >=)",

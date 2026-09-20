@@ -226,9 +226,9 @@ select:hover {
 }
 
 .challenge-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
   list-style: none;
   padding: 0;
   margin: 1.5rem 0 0 0;
@@ -237,11 +237,8 @@ select:hover {
 .challenge-list__item {
   background: var(--bg-panel);
   border: 2px solid var(--border);
-  padding: 1rem;
+  padding: 0.6rem 1rem;
   transition: transform 0.1s ease, border-color 0.1s ease;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
 }
 
 .challenge-list__item:hover {
@@ -251,12 +248,15 @@ select:hover {
 }
 
 .challenge-list__item h2 {
-  margin: 0;
-  font-size: 0.7rem;
+  display: inline-block;
+  margin: 0 0.75rem 0 0;
+  font-size: 0.65rem;
   color: var(--accent-2);
+  vertical-align: baseline;
 }
 
 .challenge-list__item p {
+  display: inline;
   margin: 0;
   color: var(--text-dim);
   font-size: 1rem;
@@ -265,7 +265,63 @@ select:hover {
 .challenge-list__item a {
   border-bottom: none;
   color: inherit;
-  display: block;
+  display: inline;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.search__label {
+  font-family: var(--font-display);
+  font-size: 0.5rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  white-space: nowrap;
+}
+
+.search__input {
+  flex: 1;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  background: var(--bg-elev);
+  color: var(--text);
+  border: 2px solid var(--border);
+  padding: 0.5rem 0.7rem;
+  outline: none;
+  transition: border-color 0.1s ease;
+}
+
+.search__input::placeholder {
+  color: var(--text-dim);
+}
+
+.search__input:focus {
+  border-color: var(--accent-2);
+}
+
+.search__count {
+  font-family: var(--font-display);
+  font-size: 0.5rem;
+  color: var(--text-dim);
+  letter-spacing: 1px;
+  white-space: nowrap;
+  min-width: 6rem;
+  text-align: right;
+}
+
+.search__empty {
+  font-family: var(--font-display);
+  font-size: 0.55rem;
+  color: var(--text-dim);
+  padding: 2rem 0;
+  text-align: center;
+  letter-spacing: 1px;
+  margin: 0;
 }
 
 .scene {
