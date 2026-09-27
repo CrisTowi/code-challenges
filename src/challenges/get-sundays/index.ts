@@ -8,7 +8,7 @@ export const challenge: Challenge<GetSundaysInput, GetSundaysState> = {
   meta: {
     slug: "get-sundays",
     title: "Get Sundays",
-    description: "TODO: describe this challenge in one sentence.",
+    description: "Walk day-by-day through a month (located via Zeller's congruence) and collect every Sunday as a Y-M-D string.",
   },
   customInputs,
   Algorithm: GetSundays,
