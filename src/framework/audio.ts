@@ -84,6 +84,46 @@ export function playSuccess() {
   });
 }
 
+export function playSundayFanfare() {
+  if (muted) return;
+  const audio = getAudioContext();
+  if (audio.state === "suspended") {
+    void audio.resume();
+  }
+  const now = audio.currentTime;
+  const notes: Array<{ freq: number; start: number; dur: number; type: OscillatorType; gain: number }> = [
+    { freq: 523.25, start: 0.00, dur: 0.18, type: "triangle", gain: 0.16 },
+    { freq: 659.25, start: 0.09, dur: 0.18, type: "triangle", gain: 0.16 },
+    { freq: 783.99, start: 0.18, dur: 0.20, type: "triangle", gain: 0.16 },
+    { freq: 1046.50, start: 0.27, dur: 0.42, type: "triangle", gain: 0.18 },
+  ];
+  for (const n of notes) {
+    const osc = audio.createOscillator();
+    const gain = audio.createGain();
+    osc.type = n.type;
+    osc.frequency.value = n.freq;
+    gain.gain.setValueAtTime(0, now + n.start);
+    gain.gain.linearRampToValueAtTime(n.gain, now + n.start + 0.012);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + n.start + n.dur);
+    osc.connect(gain);
+    gain.connect(audio.destination);
+    osc.start(now + n.start);
+    osc.stop(now + n.start + n.dur + 0.03);
+  }
+  const shimmer = audio.createOscillator();
+  const shimmerGain = audio.createGain();
+  shimmer.type = "sine";
+  shimmer.frequency.setValueAtTime(2093.0, now + 0.27);
+  shimmer.frequency.exponentialRampToValueAtTime(2637.0, now + 0.65);
+  shimmerGain.gain.setValueAtTime(0, now + 0.27);
+  shimmerGain.gain.linearRampToValueAtTime(0.05, now + 0.30);
+  shimmerGain.gain.exponentialRampToValueAtTime(0.001, now + 0.65);
+  shimmer.connect(shimmerGain);
+  shimmerGain.connect(audio.destination);
+  shimmer.start(now + 0.27);
+  shimmer.stop(now + 0.70);
+}
+
 export function playWoodKnock() {
   if (muted) return;
   const audio = getAudioContext();

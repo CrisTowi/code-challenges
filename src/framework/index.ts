@@ -6,6 +6,7 @@ export {
   playNoteForValue,
   playTone,
   playSuccess,
+  playSundayFanfare,
   playFailure,
   playWoodKnock,
   valueToFrequency,

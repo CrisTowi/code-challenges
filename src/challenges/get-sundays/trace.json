@@ -1,0 +1,641 @@
+{
+  "snapshots": [
+    {
+      "state": {
+        "year": 2000,
+        "month": 1,
+        "total": 0,
+        "firstDayOfMonth": 0,
+        "daysOnTheMonth": 31,
+        "currentDay": null,
+        "currentDayOfWeek": null,
+        "sundays": []
+      },
+      "label": "init"
+    },
+    {
+      "state": {
+        "year": 2000,
+        "month": 1,
+        "total": 0,
+        "firstDayOfMonth": 0,
+        "daysOnTheMonth": 31,
+        "currentDay": null,
+        "currentDayOfWeek": null,
+        "sundays": []
+      },
+      "label": "calendar"
+    },
+    {
+      "state": {
+        "year": 2000,
+        "month": 1,
+        "total": 0,
+        "firstDayOfMonth": 0,
+        "daysOnTheMonth": 31,
+        "currentDay": 1,
+        "currentDayOfWeek": 0,
+        "sundays": []
+      },
+      "label": "scan"
+    },
+    {
+      "state": {
+        "year": 2000,
+        "month": 1,
+        "total": 0,
+        "firstDayOfMonth": 0,
+        "daysOnTheMonth": 31,
+        "currentDay": 2,
+        "currentDayOfWeek": 1,
+        "sundays": []
+      },
+      "label": "scan"
+    },
+    {
+      "state": {
+        "year": 2000,
+        "month": 1,
+        "total": 1,
+        "firstDayOfMonth": 0,
+        "daysOnTheMonth": 31,
+        "currentDay": 2,
+        "currentDayOfWeek": 1,
+        "sundays": [
+          "2000-1-2"
+        ]
+      },
+      "label": "sunday"
+    },
+    {
+      "state": {
+        "year": 2000,
+        "month": 1,
+        "total": 1,
+        "firstDayOfMonth": 0,
+        "daysOnTheMonth": 31,
+        "currentDay": 3,
+        "currentDayOfWeek": 2,
+        "sundays": [
+          "2000-1-2"
+        ]
+      },
+      "label": "scan"
+    },
+    {
+      "state": {
+        "year": 2000,
+        "month": 1,
+        "total": 1,
+        "firstDayOfMonth": 0,
+        "daysOnTheMonth": 31,
+        "currentDay": 4,
+        "currentDayOfWeek": 3,
+        "sundays": [
+          "2000-1-2"
+        ]
+      },
+      "label": "scan"
+    },
+    {
+      "state": {
+        "year": 2000,
+        "month": 1,
+        "total": 1,
+        "firstDayOfMonth": 0,
+        "daysOnTheMonth": 31,
+        "currentDay": 5,
+        "currentDayOfWeek": 4,
+        "sundays": [
+          "2000-1-2"
+        ]
+      },
+      "label": "scan"
+    },
+    {
+      "state": {
+        "year": 2000,
+        "month": 1,
+        "total": 1,
+        "firstDayOfMonth": 0,
+        "daysOnTheMonth": 31,
+        "currentDay": 6,
+        "currentDayOfWeek": 5,
+        "sundays": [
+          "2000-1-2"
+        ]
+      },
+      "label": "scan"
+    },
+    {
+      "state": {
+        "year": 2000,
+        "month": 1,
+        "total": 1,
+        "firstDayOfMonth": 0,
+        "daysOnTheMonth": 31,
+        "currentDay": 7,
+        "currentDayOfWeek": 6,
+        "sundays": [
+          "2000-1-2"
+        ]
+      },
+      "label": "scan"
+    },
+    {
+      "state": {
+        "year": 2000,
+        "month": 1,
+        "total": 1,
+        "firstDayOfMonth": 0,
+        "daysOnTheMonth": 31,
+        "currentDay": 8,
+        "currentDayOfWeek": 0,
+        "sundays": [
+          "2000-1-2"
+        ]
+      },
+      "label": "scan"
+    },
+    {
+      "state": {
+        "year": 2000,
+        "month": 1,
+        "total": 1,
+        "firstDayOfMonth": 0,
+        "daysOnTheMonth": 31,
+        "currentDay": 9,
+        "currentDayOfWeek": 1,
+        "sundays": [
+          "2000-1-2"
+        ]
+      },
+      "label": "scan"
+    },
+    {
+      "state": {
+        "year": 2000,
+        "month": 1,
+        "total": 2,
+        "firstDayOfMonth": 0,
+        "daysOnTheMonth": 31,
+        "currentDay": 9,
+        "currentDayOfWeek": 1,
+        "sundays": [
+          "2000-1-2",
+          "2000-1-9"
+        ]
+      },
+      "label": "sunday"
+    },
+    {
+      "state": {
+        "year": 2000,
+        "month": 1,
+        "total": 2,
+        "firstDayOfMonth": 0,
+        "daysOnTheMonth": 31,
+        "currentDay": 10,
+        "currentDayOfWeek": 2,
+        "sundays": [
+          "2000-1-2",
+          "2000-1-9"
+        ]
+      },
+      "label": "scan"
+    },
+    {
+      "state": {
+        "year": 2000,
+        "month": 1,
+        "total": 2,
+        "firstDayOfMonth": 0,
+        "daysOnTheMonth": 31,
+        "currentDay": 11,
+        "currentDayOfWeek": 3,
+        "sundays": [
+          "2000-1-2",
+          "2000-1-9"
+        ]
+      },
+      "label": "scan"
+    },
+    {
+      "state": {
+        "year": 2000,
+        "month": 1,
+        "total": 2,
+        "firstDayOfMonth": 0,
+        "daysOnTheMonth": 31,
+        "currentDay": 12,
+        "currentDayOfWeek": 4,
+        "sundays": [
+          "2000-1-2",
+          "2000-1-9"
+        ]
+      },
+      "label": "scan"
+    },
+    {
+      "state": {
+        "year": 2000,
+        "month": 1,
+        "total": 2,
+        "firstDayOfMonth": 0,
+        "daysOnTheMonth": 31,
+        "currentDay": 13,
+        "currentDayOfWeek": 5,
+        "sundays": [
+          "2000-1-2",
+          "2000-1-9"
+        ]
+      },
+      "label": "scan"
+    },
+    {
+      "state": {
+        "year": 2000,
+        "month": 1,
+        "total": 2,
+        "firstDayOfMonth": 0,
+        "daysOnTheMonth": 31,
+        "currentDay": 14,
+        "currentDayOfWeek": 6,
+        "sundays": [
+          "2000-1-2",
+          "2000-1-9"
+        ]
+      },
+      "label": "scan"
+    },
+    {
+      "state": {
+        "year": 2000,
+        "month": 1,
+        "total": 2,
+        "firstDayOfMonth": 0,
+        "daysOnTheMonth": 31,
+        "currentDay": 15,
+        "currentDayOfWeek": 0,
+        "sundays": [
+          "2000-1-2",
+          "2000-1-9"
+        ]
+      },
+      "label": "scan"
+    },
+    {
+      "state": {
+        "year": 2000,
+        "month": 1,
+        "total": 2,
+        "firstDayOfMonth": 0,
+        "daysOnTheMonth": 31,
+        "currentDay": 16,
+        "currentDayOfWeek": 1,
+        "sundays": [
+          "2000-1-2",
+          "2000-1-9"
+        ]
+      },
+      "label": "scan"
+    },
+    {
+      "state": {
+        "year": 2000,
+        "month": 1,
+        "total": 3,
+        "firstDayOfMonth": 0,
+        "daysOnTheMonth": 31,
+        "currentDay": 16,
+        "currentDayOfWeek": 1,
+        "sundays": [
+          "2000-1-2",
+          "2000-1-9",
+          "2000-1-16"
+        ]
+      },
+      "label": "sunday"
+    },
+    {
+      "state": {
+        "year": 2000,
+        "month": 1,
+        "total": 3,
+        "firstDayOfMonth": 0,
+        "daysOnTheMonth": 31,
+        "currentDay": 17,
+        "currentDayOfWeek": 2,
+        "sundays": [
+          "2000-1-2",
+          "2000-1-9",
+          "2000-1-16"
+        ]
+      },
+      "label": "scan"
+    },
+    {
+      "state": {
+        "year": 2000,
+        "month": 1,
+        "total": 3,
+        "firstDayOfMonth": 0,
+        "daysOnTheMonth": 31,
+        "currentDay": 18,
+        "currentDayOfWeek": 3,
+        "sundays": [
+          "2000-1-2",
+          "2000-1-9",
+          "2000-1-16"
+        ]
+      },
+      "label": "scan"
+    },
+    {
+      "state": {
+        "year": 2000,
+        "month": 1,
+        "total": 3,
+        "firstDayOfMonth": 0,
+        "daysOnTheMonth": 31,
+        "currentDay": 19,
+        "currentDayOfWeek": 4,
+        "sundays": [
+          "2000-1-2",
+          "2000-1-9",
+          "2000-1-16"
+        ]
+      },
+      "label": "scan"
+    },
+    {
+      "state": {
+        "year": 2000,
+        "month": 1,
+        "total": 3,
+        "firstDayOfMonth": 0,
+        "daysOnTheMonth": 31,
+        "currentDay": 20,
+        "currentDayOfWeek": 5,
+        "sundays": [
+          "2000-1-2",
+          "2000-1-9",
+          "2000-1-16"
+        ]
+      },
+      "label": "scan"
+    },
+    {
+      "state": {
+        "year": 2000,
+        "month": 1,
+        "total": 3,
+        "firstDayOfMonth": 0,
+        "daysOnTheMonth": 31,
+        "currentDay": 21,
+        "currentDayOfWeek": 6,
+        "sundays": [
+          "2000-1-2",
+          "2000-1-9",
+          "2000-1-16"
+        ]
+      },
+      "label": "scan"
+    },
+    {
+      "state": {
+        "year": 2000,
+        "month": 1,
+        "total": 3,
+        "firstDayOfMonth": 0,
+        "daysOnTheMonth": 31,
+        "currentDay": 22,
+        "currentDayOfWeek": 0,
+        "sundays": [
+          "2000-1-2",
+          "2000-1-9",
+          "2000-1-16"
+        ]
+      },
+      "label": "scan"
+    },
+    {
+      "state": {
+        "year": 2000,
+        "month": 1,
+        "total": 3,
+        "firstDayOfMonth": 0,
+        "daysOnTheMonth": 31,
+        "currentDay": 23,
+        "currentDayOfWeek": 1,
+        "sundays": [
+          "2000-1-2",
+          "2000-1-9",
+          "2000-1-16"
+        ]
+      },
+      "label": "scan"
+    },
+    {
+      "state": {
+        "year": 2000,
+        "month": 1,
+        "total": 4,
+        "firstDayOfMonth": 0,
+        "daysOnTheMonth": 31,
+        "currentDay": 23,
+        "currentDayOfWeek": 1,
+        "sundays": [
+          "2000-1-2",
+          "2000-1-9",
+          "2000-1-16",
+          "2000-1-23"
+        ]
+      },
+      "label": "sunday"
+    },
+    {
+      "state": {
+        "year": 2000,
+        "month": 1,
+        "total": 4,
+        "firstDayOfMonth": 0,
+        "daysOnTheMonth": 31,
+        "currentDay": 24,
+        "currentDayOfWeek": 2,
+        "sundays": [
+          "2000-1-2",
+          "2000-1-9",
+          "2000-1-16",
+          "2000-1-23"
+        ]
+      },
+      "label": "scan"
+    },
+    {
+      "state": {
+        "year": 2000,
+        "month": 1,
+        "total": 4,
+        "firstDayOfMonth": 0,
+        "daysOnTheMonth": 31,
+        "currentDay": 25,
+        "currentDayOfWeek": 3,
+        "sundays": [
+          "2000-1-2",
+          "2000-1-9",
+          "2000-1-16",
+          "2000-1-23"
+        ]
+      },
+      "label": "scan"
+    },
+    {
+      "state": {
+        "year": 2000,
+        "month": 1,
+        "total": 4,
+        "firstDayOfMonth": 0,
+        "daysOnTheMonth": 31,
+        "currentDay": 26,
+        "currentDayOfWeek": 4,
+        "sundays": [
+          "2000-1-2",
+          "2000-1-9",
+          "2000-1-16",
+          "2000-1-23"
+        ]
+      },
+      "label": "scan"
+    },
+    {
+      "state": {
+        "year": 2000,
+        "month": 1,
+        "total": 4,
+        "firstDayOfMonth": 0,
+        "daysOnTheMonth": 31,
+        "currentDay": 27,
+        "currentDayOfWeek": 5,
+        "sundays": [
+          "2000-1-2",
+          "2000-1-9",
+          "2000-1-16",
+          "2000-1-23"
+        ]
+      },
+      "label": "scan"
+    },
+    {
+      "state": {
+        "year": 2000,
+        "month": 1,
+        "total": 4,
+        "firstDayOfMonth": 0,
+        "daysOnTheMonth": 31,
+        "currentDay": 28,
+        "currentDayOfWeek": 6,
+        "sundays": [
+          "2000-1-2",
+          "2000-1-9",
+          "2000-1-16",
+          "2000-1-23"
+        ]
+      },
+      "label": "scan"
+    },
+    {
+      "state": {
+        "year": 2000,
+        "month": 1,
+        "total": 4,
+        "firstDayOfMonth": 0,
+        "daysOnTheMonth": 31,
+        "currentDay": 29,
+        "currentDayOfWeek": 0,
+        "sundays": [
+          "2000-1-2",
+          "2000-1-9",
+          "2000-1-16",
+          "2000-1-23"
+        ]
+      },
+      "label": "scan"
+    },
+    {
+      "state": {
+        "year": 2000,
+        "month": 1,
+        "total": 4,
+        "firstDayOfMonth": 0,
+        "daysOnTheMonth": 31,
+        "currentDay": 30,
+        "currentDayOfWeek": 1,
+        "sundays": [
+          "2000-1-2",
+          "2000-1-9",
+          "2000-1-16",
+          "2000-1-23"
+        ]
+      },
+      "label": "scan"
+    },
+    {
+      "state": {
+        "year": 2000,
+        "month": 1,
+        "total": 5,
+        "firstDayOfMonth": 0,
+        "daysOnTheMonth": 31,
+        "currentDay": 30,
+        "currentDayOfWeek": 1,
+        "sundays": [
+          "2000-1-2",
+          "2000-1-9",
+          "2000-1-16",
+          "2000-1-23",
+          "2000-1-30"
+        ]
+      },
+      "label": "sunday"
+    },
+    {
+      "state": {
+        "year": 2000,
+        "month": 1,
+        "total": 5,
+        "firstDayOfMonth": 0,
+        "daysOnTheMonth": 31,
+        "currentDay": 31,
+        "currentDayOfWeek": 2,
+        "sundays": [
+          "2000-1-2",
+          "2000-1-9",
+          "2000-1-16",
+          "2000-1-23",
+          "2000-1-30"
+        ]
+      },
+      "label": "scan"
+    },
+    {
+      "state": {
+        "year": 2000,
+        "month": 1,
+        "total": 5,
+        "firstDayOfMonth": 0,
+        "daysOnTheMonth": 31,
+        "currentDay": null,
+        "currentDayOfWeek": null,
+        "sundays": [
+          "2000-1-2",
+          "2000-1-9",
+          "2000-1-16",
+          "2000-1-23",
+          "2000-1-30"
+        ]
+      },
+      "label": "done"
+    }
+  ]
+}
