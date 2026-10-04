@@ -8,7 +8,7 @@ export const challenge: Challenge<FirstDropInput, FirstDropState> = {
   meta: {
     slug: "first-drop",
     title: "First Drop",
-    description: "TODO: describe this challenge in one sentence.",
+    description: "For each day, scan forward to find the next day whose temperature drops by at least the given threshold; uses a reverse-iteration BST so every node in the tree is a future day.",
   },
   customInputs,
   Algorithm: FirstDrop,

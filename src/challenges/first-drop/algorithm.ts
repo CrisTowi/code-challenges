@@ -21,6 +21,8 @@ export interface FirstDropState {
   dict: subtreeDictionary;
   daysArray: number[],
   dropNumber: number,
+  currentIndex: number | null,
+  result: number[],
 }
 
 export class FirstDrop extends TracedAlgorithm<FirstDropInput, FirstDropState> {
@@ -30,6 +32,8 @@ export class FirstDrop extends TracedAlgorithm<FirstDropInput, FirstDropState> {
       dict: {},
       daysArray: input.daysArray,
       dropNumber: input.dropNumber,
+      currentIndex: null,
+      result: [],
     } as FirstDropState;
   }
 
@@ -66,7 +70,7 @@ export class FirstDrop extends TracedAlgorithm<FirstDropInput, FirstDropState> {
 
       let newAccum = accum;
       const atLeastDrops = currentNode.key <= (node.key - this.currentState.dropNumber);
-      
+
       if (atLeastDrops) {
         newAccum = Math.min(newAccum, currentNode.originalIndex - node.originalIndex);
       }
@@ -83,6 +87,7 @@ export class FirstDrop extends TracedAlgorithm<FirstDropInput, FirstDropState> {
     }
 
     for (let i = this.currentState.daysArray.length - 1; i >= 0; i--) {
+      this.currentState.currentIndex = i;
       const newNode: Node = {
         originalIndex: i,
         key: this.currentState.daysArray[i],
@@ -98,7 +103,12 @@ export class FirstDrop extends TracedAlgorithm<FirstDropInput, FirstDropState> {
       } else {
         result.unshift(toInsert);
       }
+      this.currentState.result = [...result];
+      this.snapshot("step");
     }
+
+    this.currentState.currentIndex = null;
+    this.snapshot("done");
 
     return result;
   }

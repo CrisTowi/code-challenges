@@ -1,0 +1,317 @@
+{
+  "snapshots": [
+    {
+      "state": {
+        "tree": null,
+        "dict": {},
+        "daysArray": [
+          70,
+          68,
+          72,
+          60,
+          65,
+          55
+        ],
+        "dropNumber": 5,
+        "currentIndex": null,
+        "result": []
+      },
+      "label": "init"
+    },
+    {
+      "state": {
+        "tree": {
+          "originalIndex": 5,
+          "key": 55,
+          "left": null,
+          "right": null
+        },
+        "dict": {},
+        "daysArray": [
+          70,
+          68,
+          72,
+          60,
+          65,
+          55
+        ],
+        "dropNumber": 5,
+        "currentIndex": 5,
+        "result": [
+          0
+        ]
+      },
+      "label": "step"
+    },
+    {
+      "state": {
+        "tree": {
+          "originalIndex": 5,
+          "key": 55,
+          "left": null,
+          "right": {
+            "originalIndex": 4,
+            "key": 65,
+            "left": null,
+            "right": null
+          }
+        },
+        "dict": {},
+        "daysArray": [
+          70,
+          68,
+          72,
+          60,
+          65,
+          55
+        ],
+        "dropNumber": 5,
+        "currentIndex": 4,
+        "result": [
+          1,
+          0
+        ]
+      },
+      "label": "step"
+    },
+    {
+      "state": {
+        "tree": {
+          "originalIndex": 5,
+          "key": 55,
+          "left": null,
+          "right": {
+            "originalIndex": 4,
+            "key": 65,
+            "left": {
+              "originalIndex": 3,
+              "key": 60,
+              "left": null,
+              "right": null
+            },
+            "right": null
+          }
+        },
+        "dict": {},
+        "daysArray": [
+          70,
+          68,
+          72,
+          60,
+          65,
+          55
+        ],
+        "dropNumber": 5,
+        "currentIndex": 3,
+        "result": [
+          2,
+          1,
+          0
+        ]
+      },
+      "label": "step"
+    },
+    {
+      "state": {
+        "tree": {
+          "originalIndex": 5,
+          "key": 55,
+          "left": null,
+          "right": {
+            "originalIndex": 4,
+            "key": 65,
+            "left": {
+              "originalIndex": 3,
+              "key": 60,
+              "left": null,
+              "right": null
+            },
+            "right": {
+              "originalIndex": 2,
+              "key": 72,
+              "left": null,
+              "right": null
+            }
+          }
+        },
+        "dict": {},
+        "daysArray": [
+          70,
+          68,
+          72,
+          60,
+          65,
+          55
+        ],
+        "dropNumber": 5,
+        "currentIndex": 2,
+        "result": [
+          1,
+          2,
+          1,
+          0
+        ]
+      },
+      "label": "step"
+    },
+    {
+      "state": {
+        "tree": {
+          "originalIndex": 5,
+          "key": 55,
+          "left": null,
+          "right": {
+            "originalIndex": 4,
+            "key": 65,
+            "left": {
+              "originalIndex": 3,
+              "key": 60,
+              "left": null,
+              "right": null
+            },
+            "right": {
+              "originalIndex": 2,
+              "key": 72,
+              "left": {
+                "originalIndex": 1,
+                "key": 68,
+                "left": null,
+                "right": null
+              },
+              "right": null
+            }
+          }
+        },
+        "dict": {},
+        "daysArray": [
+          70,
+          68,
+          72,
+          60,
+          65,
+          55
+        ],
+        "dropNumber": 5,
+        "currentIndex": 1,
+        "result": [
+          2,
+          1,
+          2,
+          1,
+          0
+        ]
+      },
+      "label": "step"
+    },
+    {
+      "state": {
+        "tree": {
+          "originalIndex": 5,
+          "key": 55,
+          "left": null,
+          "right": {
+            "originalIndex": 4,
+            "key": 65,
+            "left": {
+              "originalIndex": 3,
+              "key": 60,
+              "left": null,
+              "right": null
+            },
+            "right": {
+              "originalIndex": 2,
+              "key": 72,
+              "left": {
+                "originalIndex": 1,
+                "key": 68,
+                "left": null,
+                "right": {
+                  "originalIndex": 0,
+                  "key": 70,
+                  "left": null,
+                  "right": null
+                }
+              },
+              "right": null
+            }
+          }
+        },
+        "dict": {},
+        "daysArray": [
+          70,
+          68,
+          72,
+          60,
+          65,
+          55
+        ],
+        "dropNumber": 5,
+        "currentIndex": 0,
+        "result": [
+          3,
+          2,
+          1,
+          2,
+          1,
+          0
+        ]
+      },
+      "label": "step"
+    },
+    {
+      "state": {
+        "tree": {
+          "originalIndex": 5,
+          "key": 55,
+          "left": null,
+          "right": {
+            "originalIndex": 4,
+            "key": 65,
+            "left": {
+              "originalIndex": 3,
+              "key": 60,
+              "left": null,
+              "right": null
+            },
+            "right": {
+              "originalIndex": 2,
+              "key": 72,
+              "left": {
+                "originalIndex": 1,
+                "key": 68,
+                "left": null,
+                "right": {
+                  "originalIndex": 0,
+                  "key": 70,
+                  "left": null,
+                  "right": null
+                }
+              },
+              "right": null
+            }
+          }
+        },
+        "dict": {},
+        "daysArray": [
+          70,
+          68,
+          72,
+          60,
+          65,
+          55
+        ],
+        "dropNumber": 5,
+        "currentIndex": null,
+        "result": [
+          3,
+          2,
+          1,
+          2,
+          1,
+          0
+        ]
+      },
+      "label": "done"
+    }
+  ]
+}
