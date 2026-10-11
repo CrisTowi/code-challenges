@@ -416,6 +416,9 @@ select:hover {
   color: var(--accent-2);
   text-transform: uppercase;
   letter-spacing: 1px;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .levels__desc {
