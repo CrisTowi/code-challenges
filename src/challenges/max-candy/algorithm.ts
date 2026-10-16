@@ -6,20 +6,24 @@ export interface MaxCandyInput {
 
 export interface MaxCandyState {
   input: number[];
+  // viz-only: start
   kidPosition: number | null;
   collectedHouses: number[];
   totalCandies: number;
   phase: "init" | "walking" | "done";
+  // viz-only: end
 }
 
 export class MaxCandy extends TracedAlgorithm<MaxCandyInput, MaxCandyState> {
   protected initialState(input: MaxCandyInput): MaxCandyState {
     return {
       input: input.input,
+      // viz-only: start
       kidPosition: null,
       collectedHouses: [],
       totalCandies: 0,
       phase: "init",
+      // viz-only: end
     };
   }
 
@@ -40,7 +44,7 @@ export class MaxCandy extends TracedAlgorithm<MaxCandyInput, MaxCandyState> {
       max = Math.max(max, _calculateMaxCandy(0, i));
     }
 
-    // Reconstruct optimal path for visualization using DP
+    // viz-only: start — reconstruct the optimal path and emit snapshots for the scene
     const n = this.currentState.input.length;
     const dp = new Array(n + 2).fill(0);
     for (let i = n - 1; i >= 0; i--) {
@@ -66,6 +70,7 @@ export class MaxCandy extends TracedAlgorithm<MaxCandyInput, MaxCandyState> {
     }
     this.currentState.phase = "done";
     this.snapshot("done");
+    // viz-only: end
 
     return max;
   }
