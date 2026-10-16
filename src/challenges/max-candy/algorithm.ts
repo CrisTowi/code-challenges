@@ -6,13 +6,21 @@ export interface MaxCandyInput {
 
 export interface MaxCandyState {
   input: number[];
+  kidPosition: number | null;
+  collectedHouses: number[];
+  totalCandies: number;
+  phase: "init" | "walking" | "done";
 }
 
 export class MaxCandy extends TracedAlgorithm<MaxCandyInput, MaxCandyState> {
   protected initialState(input: MaxCandyInput): MaxCandyState {
     return {
-      input: input.input
-    } as MaxCandyState;
+      input: input.input,
+      kidPosition: null,
+      collectedHouses: [],
+      totalCandies: 0,
+      phase: "init",
+    };
   }
 
   run(): number {
@@ -31,6 +39,33 @@ export class MaxCandy extends TracedAlgorithm<MaxCandyInput, MaxCandyState> {
     for (let i = 0; i < this.currentState.input.length; i++) {
       max = Math.max(max, _calculateMaxCandy(0, i));
     }
+
+    // Reconstruct optimal path for visualization using DP
+    const n = this.currentState.input.length;
+    const dp = new Array(n + 2).fill(0);
+    for (let i = n - 1; i >= 0; i--) {
+      dp[i] = Math.max(dp[i + 1], this.currentState.input[i] + dp[i + 2]);
+    }
+    const path: number[] = [];
+    let pos = 0;
+    while (pos < n) {
+      if (this.currentState.input[pos] + dp[pos + 2] >= dp[pos + 1]) {
+        path.push(pos);
+        pos += 2;
+      } else {
+        pos += 1;
+      }
+    }
+
+    this.currentState.phase = "walking";
+    for (const houseIdx of path) {
+      this.currentState.kidPosition = houseIdx;
+      this.currentState.collectedHouses = [...this.currentState.collectedHouses, houseIdx];
+      this.currentState.totalCandies += this.currentState.input[houseIdx];
+      this.snapshot("visit");
+    }
+    this.currentState.phase = "done";
+    this.snapshot("done");
 
     return max;
   }

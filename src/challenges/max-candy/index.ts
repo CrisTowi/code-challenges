@@ -8,7 +8,7 @@ export const challenge: Challenge<MaxCandyInput, MaxCandyState> = {
   meta: {
     slug: "max-candy",
     title: "Max Candy",
-    description: "TODO: describe this challenge in one sentence.",
+    description: "Collect the most candy from a row of houses without visiting two adjacent ones.",
   },
   customInputs,
   Algorithm: MaxCandy,
