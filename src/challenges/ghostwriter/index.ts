@@ -1,0 +1,29 @@
+import { runAndTrace } from "@framework";
+import type { Challenge, Trace } from "@framework";
+import { Ghostwriter, type GhostwriterInput, type GhostwriterState } from "./algorithm";
+import { GhostwriterScene } from "./scene";
+import { customInputs } from "./debug-inputs";
+
+export const challenge: Challenge<GhostwriterInput, GhostwriterState> = {
+  meta: {
+    slug: "ghostwriter",
+    title: "Ghostwriter",
+    description: "TODO: describe this challenge in one sentence.",
+  },
+  customInputs,
+  Algorithm: Ghostwriter,
+  Scene: GhostwriterScene,
+};
+
+function firstInput(): GhostwriterInput {
+  const first = Object.values(customInputs)[0];
+  if (!first) throw new Error("ghostwriter: no customInputs defined");
+  return first.input;
+}
+
+export function runDefault(): Trace<GhostwriterState> {
+  return runAndTrace(Ghostwriter, firstInput());
+}
+
+export { Ghostwriter, GhostwriterScene, customInputs };
+export type { GhostwriterInput, GhostwriterState };
