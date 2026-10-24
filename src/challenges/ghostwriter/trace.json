@@ -1,0 +1,100 @@
+{
+  "snapshots": [
+    {
+      "state": {
+        "word": "ghost",
+        "stack": [],
+        "index": null,
+        "op": "init",
+        "affected": null
+      },
+      "label": "init"
+    },
+    {
+      "state": {
+        "word": "ghost",
+        "stack": [
+          "g"
+        ],
+        "index": 0,
+        "op": "type",
+        "affected": "g"
+      },
+      "label": "type"
+    },
+    {
+      "state": {
+        "word": "ghost",
+        "stack": [
+          "g",
+          "h"
+        ],
+        "index": 1,
+        "op": "type",
+        "affected": "h"
+      },
+      "label": "type"
+    },
+    {
+      "state": {
+        "word": "ghost",
+        "stack": [
+          "g",
+          "h",
+          "o"
+        ],
+        "index": 2,
+        "op": "type",
+        "affected": "o"
+      },
+      "label": "type"
+    },
+    {
+      "state": {
+        "word": "ghost",
+        "stack": [
+          "g",
+          "h",
+          "o",
+          "s"
+        ],
+        "index": 3,
+        "op": "type",
+        "affected": "s"
+      },
+      "label": "type"
+    },
+    {
+      "state": {
+        "word": "ghost",
+        "stack": [
+          "g",
+          "h",
+          "o",
+          "s",
+          "t"
+        ],
+        "index": 4,
+        "op": "type",
+        "affected": "t"
+      },
+      "label": "type"
+    },
+    {
+      "state": {
+        "word": "ghost",
+        "stack": [
+          "g",
+          "h",
+          "o",
+          "s",
+          "t"
+        ],
+        "index": null,
+        "op": "done",
+        "affected": null
+      },
+      "label": "done"
+    }
+  ]
+}
