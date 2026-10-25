@@ -8,7 +8,7 @@ export const challenge: Challenge<GhostwriterInput, GhostwriterState> = {
   meta: {
     slug: "ghostwriter",
     title: "Ghostwriter",
-    description: "TODO: describe this challenge in one sentence.",
+    description: "A ghost types a word one key at a time: '#' erases the last letter and '~' echoes it. What ends up on the page?",
   },
   customInputs,
   Algorithm: Ghostwriter,
