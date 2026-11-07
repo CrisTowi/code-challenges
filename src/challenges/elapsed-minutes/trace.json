@@ -1,0 +1,116 @@
+{
+  "snapshots": [
+    {
+      "state": {
+        "log": [
+          "00:50",
+          "01:10",
+          "01:50",
+          "01:10",
+          "02:10"
+        ],
+        "index": null,
+        "elapsed": 0,
+        "stepMinutes": null,
+        "phase": "init"
+      },
+      "label": "init"
+    },
+    {
+      "state": {
+        "log": [
+          "00:50",
+          "01:10",
+          "01:50",
+          "01:10",
+          "02:10"
+        ],
+        "index": 0,
+        "elapsed": 20,
+        "stepMinutes": 20,
+        "phase": "falling"
+      },
+      "label": "falling"
+    },
+    {
+      "state": {
+        "log": [
+          "00:50",
+          "01:10",
+          "01:50",
+          "01:10",
+          "02:10"
+        ],
+        "index": 1,
+        "elapsed": 60,
+        "stepMinutes": 40,
+        "phase": "falling"
+      },
+      "label": "falling"
+    },
+    {
+      "state": {
+        "log": [
+          "00:50",
+          "01:10",
+          "01:50",
+          "01:10",
+          "02:10"
+        ],
+        "index": 2,
+        "elapsed": 60,
+        "stepMinutes": null,
+        "phase": "confused"
+      },
+      "label": "confused"
+    },
+    {
+      "state": {
+        "log": [
+          "00:50",
+          "01:10",
+          "01:50",
+          "01:10",
+          "02:10"
+        ],
+        "index": 2,
+        "elapsed": 80,
+        "stepMinutes": 20,
+        "phase": "falling"
+      },
+      "label": "falling"
+    },
+    {
+      "state": {
+        "log": [
+          "00:50",
+          "01:10",
+          "01:50",
+          "01:10",
+          "02:10"
+        ],
+        "index": 3,
+        "elapsed": 140,
+        "stepMinutes": 60,
+        "phase": "falling"
+      },
+      "label": "falling"
+    },
+    {
+      "state": {
+        "log": [
+          "00:50",
+          "01:10",
+          "01:50",
+          "01:10",
+          "02:10"
+        ],
+        "index": null,
+        "elapsed": 140,
+        "stepMinutes": 60,
+        "phase": "done"
+      },
+      "label": "done"
+    }
+  ]
+}

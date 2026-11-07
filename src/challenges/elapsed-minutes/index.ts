@@ -8,7 +8,7 @@ export const challenge: Challenge<ElapsedMinutesInput, ElapsedMinutesState> = {
   meta: {
     slug: "elapsed-minutes",
     title: "Elapsed Minutes",
-    description: "TODO: describe this challenge in one sentence.",
+    description: "Add up the real minutes between clock readings, even when the clock falls back an hour.",
   },
   customInputs,
   Algorithm: ElapsedMinutes,
