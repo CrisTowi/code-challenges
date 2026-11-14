@@ -1,0 +1,97 @@
+{
+  "snapshots": [
+    {
+      "state": {
+        "input": [
+          2,
+          7,
+          9,
+          3,
+          1
+        ],
+        "kidPosition": null,
+        "collectedHouses": [],
+        "totalCandies": 0,
+        "phase": "init"
+      },
+      "label": "init"
+    },
+    {
+      "state": {
+        "input": [
+          2,
+          7,
+          9,
+          3,
+          1
+        ],
+        "kidPosition": 0,
+        "collectedHouses": [
+          0
+        ],
+        "totalCandies": 2,
+        "phase": "walking"
+      },
+      "label": "visit"
+    },
+    {
+      "state": {
+        "input": [
+          2,
+          7,
+          9,
+          3,
+          1
+        ],
+        "kidPosition": 2,
+        "collectedHouses": [
+          0,
+          2
+        ],
+        "totalCandies": 11,
+        "phase": "walking"
+      },
+      "label": "visit"
+    },
+    {
+      "state": {
+        "input": [
+          2,
+          7,
+          9,
+          3,
+          1
+        ],
+        "kidPosition": 4,
+        "collectedHouses": [
+          0,
+          2,
+          4
+        ],
+        "totalCandies": 12,
+        "phase": "walking"
+      },
+      "label": "visit"
+    },
+    {
+      "state": {
+        "input": [
+          2,
+          7,
+          9,
+          3,
+          1
+        ],
+        "kidPosition": 4,
+        "collectedHouses": [
+          0,
+          2,
+          4
+        ],
+        "totalCandies": 12,
+        "phase": "done"
+      },
+      "label": "done"
+    }
+  ]
+}
