@@ -8,7 +8,7 @@ export const challenge: Challenge<ComebackRoundInput, ComebackRoundState> = {
   meta: {
     slug: "comeback-round",
     title: "Comeback Round",
-    description: "TODO: describe this challenge in one sentence.",
+    description: "Race the rounds to find the champion, then replay them backward to see how long their winning lead had held.",
   },
   customInputs,
   Algorithm: ComebackRound,
