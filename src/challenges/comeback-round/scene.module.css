@@ -44,6 +44,7 @@
 
 .counters {
   display: flex;
+  flex-wrap: wrap;
   gap: 0.5rem;
 }
 
@@ -140,7 +141,7 @@
   background: rgba(11, 8, 32, 0.78);
   border: 1px solid rgba(232, 121, 249, 0.6);
   box-shadow: 3px 3px 0 #000;
-  z-index: 2;
+  z-index: 3;
 }
 
 .towerTitle {
@@ -355,6 +356,30 @@
 
 .wheelSpin {
   animation: bounce 0.18s ease-in-out infinite alternate;
+}
+
+.scarf {
+  transform-box: fill-box;
+  transform-origin: right center;
+  animation: scarfWave 0.9s ease-in-out infinite;
+}
+
+.scarfFast {
+  animation-duration: 0.3s;
+}
+
+.cheerArms {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  animation: cheerWave 0.5s ease-in-out infinite alternate;
+}
+
+.headShake {
+  animation: headShake 0.45s ease-in-out infinite;
+}
+
+.headBounce {
+  animation: headBounce 0.5s ease-in-out infinite alternate;
 }
 
 /* ── replay overlay ─────────────────────────────────────────────────────────── */
@@ -615,6 +640,133 @@
   outline-offset: 3px;
 }
 
+/* ── 2D | 3D view ────────────────────────────────────────────────────────────── */
+
+.viewToggle {
+  display: flex;
+  border: 1px solid #e879f9;
+}
+
+.viewBtn {
+  padding: 0.3rem 0.55rem;
+  font-family: var(--font-display);
+  font-size: 0.45rem;
+  letter-spacing: 1px;
+  color: #f0abfc;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.viewBtnOn {
+  color: #0b0820;
+  background: #e879f9;
+}
+
+.viewBtn:focus-visible {
+  outline: 2px solid #22d3ee;
+  outline-offset: 2px;
+}
+
+.stage3d {
+  height: 400px;
+}
+
+.canvasWrap {
+  position: absolute;
+  inset: 0;
+  touch-action: none;
+}
+
+.loading3d {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 0.6rem;
+  letter-spacing: 3px;
+  color: #f0abfc;
+  animation: blink 0.9s steps(2) infinite;
+}
+
+/* In 3D the podium and confetti are real geometry: keep only the banner and button. */
+.overlay3d {
+  justify-content: space-between;
+  padding: 1rem 0 1.2rem;
+  background: none;
+  backdrop-filter: none;
+  pointer-events: none;
+}
+
+.overlay3d > * {
+  pointer-events: auto;
+}
+
+.labels3d {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.label3d {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  opacity: 0;
+  will-change: transform;
+  transition: opacity 0.2s;
+}
+
+.overlayClear {
+  justify-content: flex-start;
+  padding-top: 2.4rem;
+  background: rgba(11, 5, 36, 0.25);
+  backdrop-filter: none;
+}
+
+.overlayClear .tieSub {
+  padding: 0.2rem 0.5rem;
+  background: rgba(11, 8, 32, 0.85);
+}
+
+.tag3d {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0 0.3rem;
+  font-family: var(--font-display);
+  font-size: 0.42rem;
+  color: #0b0820;
+  background: var(--c);
+  box-shadow: 2px 2px 0 #000;
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+}
+
+.tag3d b {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: normal;
+}
+
+.popup3d {
+  font-family: var(--font-display);
+  font-size: 0.6rem;
+  color: #fde047;
+  text-shadow: 2px 2px 0 #000;
+  animation: popUp 1.1s ease-out forwards;
+  pointer-events: none;
+}
+
 /* ── lap strip ──────────────────────────────────────────────────────────────── */
 
 .strip {
@@ -779,6 +931,27 @@
   50% { box-shadow: 3px 3px 0 #000, 0 0 26px rgba(250, 204, 21, 0.95); }
 }
 
+@keyframes scarfWave {
+  0%, 100% { transform: skewY(0deg) scaleX(1); }
+  50% { transform: skewY(-8deg) scaleX(1.08); }
+}
+
+@keyframes cheerWave {
+  from { transform: rotate(-6deg); }
+  to { transform: rotate(6deg); }
+}
+
+@keyframes headShake {
+  0%, 100% { translate: 0 0; }
+  25% { translate: -0.8px 0.4px; }
+  75% { translate: 0.8px 0.4px; }
+}
+
+@keyframes headBounce {
+  from { translate: 0 0; }
+  to { translate: 0 -1.2px; }
+}
+
 @keyframes confetti {
   from { transform: translateY(0) rotate(0); opacity: 1; }
   to { transform: translateY(420px) rotate(540deg); opacity: 0.2; }
@@ -794,6 +967,7 @@
   .tieTitle, .checkerBanner { font-size: 0.75rem; letter-spacing: 2px; }
   .tieSub { font-size: 0.45rem; }
   .doneVal { font-size: 2rem; }
+  .stage3d { height: 320px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

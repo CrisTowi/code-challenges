@@ -1,9 +1,9 @@
-import { useEffect, useMemo } from "react";
+import { Suspense, lazy, useEffect, useMemo, useState } from "react";
 import type { Snapshot } from "@framework";
 import { getAudioContext, isMuted, playTone } from "@framework/audio";
 import { ComebackRound, type ComebackRoundState } from "./algorithm";
 import styles from "./scene.module.css";
-import { Kart, Mountains, Podium, Sun, kartColor, kartName } from "./hud";
+import { Kart, Mountains, Podium, Sun, kartColor, kartName, type Mood } from "./hud";
 
 // ─── helpers (display only) ───────────────────────────────────────────────────
 
@@ -67,6 +67,28 @@ const FANFARE = [523.25, 659.25, 783.99, 1046.5, 783.99, 1046.5];
 const playFanfare = () => FANFARE.forEach((f, i) => sweep("square", f, f * 1.001, i === 5 ? 0.55 : 0.14, 0.05, i * 0.12));
 const playDone = () => [392, 523.25, 659.25].forEach((f) => sweep("triangle", f, f, 0.9, 0.05));
 
+// The 3D stage pulls in three.js, so it's only downloaded when someone switches to it.
+const Stage3D = lazy(() => import("./scene3d"));
+
+type View = "2d" | "3d";
+const VIEW_KEY = "comeback-round:view";
+
+function readView(): View {
+  try {
+    return localStorage.getItem(VIEW_KEY) === "3d" ? "3d" : "2d";
+  } catch {
+    return "2d";
+  }
+}
+
+function prefersLowFx() {
+  try {
+    return window.matchMedia("(prefers-reduced-motion: reduce)").matches || window.innerWidth < 520;
+  } catch {
+    return false;
+  }
+}
+
 // ─── player control (drives the shared Player's own buttons) ──────────────────
 
 function playerButton(match: (b: HTMLButtonElement) => boolean): HTMLButtonElement | undefined {
@@ -86,6 +108,17 @@ function startReplay() {
 export function ComebackRoundScene({ snapshot }: { snapshot: Snapshot<ComebackRoundState> }) {
   const { rounds, index, totals, phase, winner, result, soleLeader } = snapshot.state;
   const roundsKey = JSON.stringify(rounds);
+  const [view, setView] = useState<View>(readView);
+  const chooseView = (v: View) => {
+    setView(v);
+    try {
+      localStorage.setItem(VIEW_KEY, v);
+    } catch {
+      /* storage unavailable: keep the choice for this visit only */
+    }
+  };
+  const is3d = view === "3d";
+  const lowFx = useMemo(prefersLowFx, []);
   const n = rounds.length;
   const players = totals.length;
 
@@ -128,6 +161,14 @@ export function ComebackRoundScene({ snapshot }: { snapshot: Snapshot<ComebackRo
   const currentChip = isReplay && index !== null ? chips[index] : null;
   const checked = isReplay || isDone ? winner : null;
 
+  // Driver moods: the champion celebrates, a lost lead or a shared photo finish gets a sad face.
+  const moods: Mood[] = totals.map((_, k) => {
+    if ((isFinish || isDone) && champion === k) return "cheer";
+    if (isReplay && checked === k && currentChip === "lost") return "sad";
+    if (isTie && leaders.includes(k)) return "sad";
+    return "race";
+  });
+
   // ── sound per step ──
   useEffect(() => {
     if (isLap) playEngine(index ?? 0);
@@ -152,7 +193,7 @@ export function ComebackRoundScene({ snapshot }: { snapshot: Snapshot<ComebackRo
         tag: `LAP ${index + 1}`,
         text: (
           <>
-            Recursion goes one level deeper: <code>curr + rounds[{index}]</code>. {lead}.
+              Recursion goes one level deeper: <code>curr + rounds[{index}]</code>. {lead}.
           </>
         ),
       };
@@ -209,6 +250,18 @@ export function ComebackRoundScene({ snapshot }: { snapshot: Snapshot<ComebackRo
           <span className={styles.season}>SEASON 2026</span>
         </div>
         <div className={styles.counters}>
+          <div className={styles.viewToggle} role="group" aria-label="view">
+            {(["2d", "3d"] as const).map((v) => (
+              <button
+                key={v}
+                className={`${styles.viewBtn} ${view === v ? styles.viewBtnOn : ""}`}
+                aria-pressed={view === v}
+                onClick={() => chooseView(v)}
+              >
+                {v.toUpperCase()}
+              </button>
+            ))}
+          </div>
           <div className={styles.counter}>
             <span className={styles.counterLabel}>LAP</span>
             <span className={styles.counterVal}>
@@ -223,55 +276,75 @@ export function ComebackRoundScene({ snapshot }: { snapshot: Snapshot<ComebackRo
       </div>
 
       {/* ── stage ── */}
-      <div className={`${styles.stage} ${isReplay ? styles.stageReplay : ""} ${isTie ? styles.stageFlash : ""}`}>
-        <div className={styles.sky}>
-          <Sun />
-          <Mountains />
-          <div className={styles.tower}>
-            <div className={styles.towerTitle}>POS</div>
-            {order.slice(0, 5).map((k, pos) => (
-              <div key={k} className={styles.towerRow} style={{ ["--c" as string]: kartColor(k) }}>
-                <span className={styles.towerPos}>{pos + 1}</span>
-                <span className={styles.towerName}>{kartName(k)}</span>
-                <span className={styles.towerPts}>{totals[k]}</span>
-                {leaders.length === 1 && leaders[0] === k && phase !== "init" && <span className={styles.crown}>♛</span>}
-                {leaders.length > 1 && leaders.includes(k) && phase !== "init" && <span className={styles.tieChip}>TIE</span>}
-              </div>
-            ))}
+      <div className={`${styles.stage} ${is3d ? styles.stage3d : ""} ${isReplay ? styles.stageReplay : ""} ${isTie ? styles.stageFlash : ""}`}>
+        <div className={styles.tower}>
+          <div className={styles.towerTitle}>POS</div>
+          {order.slice(0, 5).map((k, pos) => (
+            <div key={k} className={styles.towerRow} style={{ ["--c" as string]: kartColor(k) }}>
+              <span className={styles.towerPos}>{pos + 1}</span>
+              <span className={styles.towerName}>{kartName(k)}</span>
+              <span className={styles.towerPts}>{totals[k]}</span>
+              {leaders.length === 1 && leaders[0] === k && phase !== "init" && <span className={styles.crown}>♛</span>}
+              {leaders.length > 1 && leaders.includes(k) && phase !== "init" && <span className={styles.tieChip}>TIE</span>}
+            </div>
+          ))}
+        </div>
+
+        {is3d ? (
+          <Suspense fallback={<div className={styles.loading3d}>LOADING TRACK…</div>}>
+            <Stage3D
+              totals={totals}
+              trackMax={trackMax}
+              phase={phase}
+              index={index}
+              leader={leaders.length === 1 && phase !== "init" ? leaders[0] : null}
+              checked={checked}
+              roundPoints={roundPoints}
+              order={order}
+              moods={moods}
+              lowFx={lowFx}
+            />
+          </Suspense>
+        ) : (
+          <>
+          <div className={styles.sky}>
+            <Sun />
+            <Mountains />
           </div>
-        </div>
 
-        <div className={styles.floor}>
-          <div className={`${styles.grid} ${gridMode}`} />
-        </div>
+          <div className={styles.floor}>
+            <div className={`${styles.grid} ${gridMode}`} />
+          </div>
 
-        <div className={styles.track}>
-          <div className={styles.startLine} />
-          <div className={styles.finishLine} />
-          {totals.map((t, k) => {
-            const pct = t / trackMax;
-            const isChecked = checked === k;
-            const isLeader = leaders.length === 1 && leaders[0] === k && phase !== "init";
-            return (
-              <div key={k} className={styles.lane} style={{ ["--c" as string]: kartColor(k) }}>
-                <span className={styles.laneTag}>{k + 1}</span>
-                {isChecked && <div className={styles.ghostTrail} style={{ width: `calc(${pct} * (84% - 96px))` }} />}
-                <div
-                  className={`${styles.kart} ${isChecked ? styles.kartChecked : ""} ${isLeader ? styles.kartLeader : ""}`}
-                  style={{ left: `calc(8% + ${pct} * (84% - 96px))` }}
-                >
-                  {roundPoints && roundPoints[k] > 0 && (
-                    <span key={`${index}-${k}`} className={styles.popup}>
-                      +{roundPoints[k]}
-                    </span>
-                  )}
-                  <Kart index={k} boost={isLap && !!roundPoints && roundPoints[k] > 0} />
-                  <span className={styles.kartScore}>{t}</span>
+          <div className={styles.track}>
+            <div className={styles.startLine} />
+            <div className={styles.finishLine} />
+            {totals.map((t, k) => {
+              const pct = t / trackMax;
+              const isChecked = checked === k;
+              const isLeader = leaders.length === 1 && leaders[0] === k && phase !== "init";
+              return (
+                <div key={k} className={styles.lane} style={{ ["--c" as string]: kartColor(k) }}>
+                  <span className={styles.laneTag}>{k + 1}</span>
+                  {isChecked && <div className={styles.ghostTrail} style={{ width: `calc(${pct} * (84% - 96px))` }} />}
+                  <div
+                    className={`${styles.kart} ${isChecked ? styles.kartChecked : ""} ${isLeader ? styles.kartLeader : ""}`}
+                    style={{ left: `calc(8% + ${pct} * (84% - 96px))` }}
+                  >
+                    {roundPoints && roundPoints[k] > 0 && (
+                      <span key={`${index}-${k}`} className={styles.popup}>
+                        +{roundPoints[k]}
+                      </span>
+                    )}
+                    <Kart index={k} boost={isLap && !!roundPoints && roundPoints[k] > 0} mood={moods[k]} />
+                    <span className={styles.kartScore}>{t}</span>
+                  </div>
                 </div>
-              </div>
-            );
-          })}
-        </div>
+              );
+            })}
+          </div>
+          </>
+        )}
 
         {/* ── overlays ── */}
         {isReplay && (
@@ -292,13 +365,13 @@ export function ComebackRoundScene({ snapshot }: { snapshot: Snapshot<ComebackRo
         )}
 
         {isFinish && winner !== null && (
-          <div className={styles.finishOverlay}>
+          <div className={`${styles.finishOverlay} ${is3d ? styles.overlay3d : ""}`}>
             <div className={styles.checkerBanner}>FINISH!</div>
-            <Podium order={order} totals={totals} />
+            {!is3d && <Podium order={order} totals={totals} />}
             <button className={styles.calcButton} onClick={startReplay}>
               ◄◄ CALCULATE RESULT
             </button>
-            <div className={styles.confetti}>
+            <div className={styles.confetti} hidden={is3d}>
               {Array.from({ length: 28 }, (_, i) => (
                 <i
                   key={i}
@@ -315,7 +388,7 @@ export function ComebackRoundScene({ snapshot }: { snapshot: Snapshot<ComebackRo
         )}
 
         {isTie && (
-          <div className={styles.tieOverlay}>
+          <div className={`${styles.tieOverlay} ${is3d ? styles.overlayClear : ""}`}>
             <div className={styles.tieTitle}>PHOTO FINISH</div>
             <div className={styles.tieSub}>NO SOLE WINNER → −1</div>
           </div>
